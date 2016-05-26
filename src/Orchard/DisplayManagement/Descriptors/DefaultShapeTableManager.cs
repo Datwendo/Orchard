@@ -68,7 +68,9 @@ namespace Orchard.DisplayManagement.Descriptors {
                     foreach(var alteration in alterations.Where(a => a.ShapeType == descriptor.ShapeType).ToList()) {
                         var local = new ShapeDescriptor { ShapeType = descriptor.ShapeType };
                         alteration.Alter(local);
-                        descriptor.BindingSources.Add(local.BindingSource);
+                        if (local.BindingSource == null)
+                            Logger.Debug("local.BindingSource: shapeType: {0}",descriptor.ShapeType);
+                        else descriptor.BindingSources.Add(local.BindingSource);
                     }
                 }
 
