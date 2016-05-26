@@ -44,7 +44,7 @@ namespace Orchard.Search.Services {
             }
 
             var totalCount = searchBuilder.Count();
-            if (pageSize != null)
+            if (pageSize != null && pageSize != 0 )
                 searchBuilder = searchBuilder
                     .Slice((page > 0 ? page - 1 : 0) * (int)pageSize, (int)pageSize);
 
