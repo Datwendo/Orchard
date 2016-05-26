@@ -25,12 +25,18 @@ namespace Orchard.Localization.Services {
 
         public virtual string[] MonthNames {
             get {
+                // patch CS 01/2016
+                if (!char.IsUpper(DateTimeFormat.MonthNames[0][0]))
+                    return ConvertoToTitleCase(DateTimeFormat.MonthNames);
                 return DateTimeFormat.MonthNames;
             }
         }
 
         public virtual string[] MonthNamesGenitive {
             get {
+                // patch CS 01/2016
+                if (!char.IsUpper(DateTimeFormat.MonthGenitiveNames[0][0]))
+                    return ConvertoToTitleCase(DateTimeFormat.MonthGenitiveNames);
                 return DateTimeFormat.MonthGenitiveNames;
             }
         }
@@ -49,9 +55,24 @@ namespace Orchard.Localization.Services {
 
         public virtual string[] DayNames {
             get {
+                // patch CS 01/2016
+                if (!char.IsUpper(DateTimeFormat.DayNames[0][0]))
+                    return ConvertoToTitleCase(DateTimeFormat.DayNames);
                 return DateTimeFormat.DayNames;
             }
         }
+        // patch CS 01/2016
+        private string[] ConvertoToTitleCase(string[] arrayToConvert)
+        {
+            for (int i = 0; i < arrayToConvert.Length; i++)
+            {
+                arrayToConvert[i] = CurrentCulture.TextInfo.ToTitleCase(arrayToConvert[i]);
+            }
+
+            return arrayToConvert;
+        }
+        // end patch CS 01/2016
+
 
         public virtual string[] DayNamesShort {
             get {
