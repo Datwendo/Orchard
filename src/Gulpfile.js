@@ -11,7 +11,7 @@ var fs = require("fs"),
     sourcemaps = require("gulp-sourcemaps"),
     less = require("gulp-less"),
     cssnano = require("gulp-cssnano"),
-    sass = require("gulp-sass"),
+    //sass = require("gulp-sass"),
     typescript = require("gulp-typescript"),
     uglify = require("gulp-uglify"),
     rename = require("gulp-rename"),
@@ -149,9 +149,6 @@ function buildCssPipeline(assetGroup, doConcat, doRebuild) {
                 }))))
         .pipe(plumber())
         .pipe(gulpif("*.less", less()))
-        .pipe(gulpif("*.scss", sass({
-        	precision: 10
-        })))
         .pipe(gulpif(doConcat, concat(assetGroup.outputFileName)))
         .pipe(cssnano({
             autoprefixer: { browsers: ["last 2 versions"] },
@@ -177,9 +174,9 @@ function buildCssPipeline(assetGroup, doConcat, doRebuild) {
         .pipe(plumber())
         .pipe(gulpif(generateSourceMaps, sourcemaps.init()))
         .pipe(gulpif("*.less", less()))
-        .pipe(gulpif("*.scss", sass({
+        /*.pipe(gulpif("*.scss", sass({
         	precision: 10
-        })))
+        })))*/
         .pipe(gulpif(doConcat, concat(assetGroup.outputFileName)))
         .pipe(header(
             "/*\n" +
