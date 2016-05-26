@@ -2,6 +2,7 @@
 @using Orchard.Core.Contents;
 @using Orchard.Core.Contents.Settings
 @{
+    Script.Require("jQuery").AtFoot();
     ContentItem contentItem = Model.ContentItem;
     var draftable = contentItem.TypeDefinition.Settings.GetModel<ContentTypeSettings>().Draftable;
 }
@@ -19,7 +20,7 @@
         }
     }
 </div>
-
+@using (Script.Foot()) {
 <script type="text/javascript">
     //<![CDATA[
     // update the returnUrl from javascript to get the main window's location
@@ -32,3 +33,4 @@
     });
     //]]>
 </script>
+}
