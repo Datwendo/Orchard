@@ -2,10 +2,6 @@
 
 namespace Orchard.Environment.Extensions.Models {
     public class ExtensionDescriptor {
-        public ExtensionDescriptor() {
-            LifecycleStatus = LifecycleStatus.Production;
-        }
-
         /// <summary>
         /// Virtual path base, "~/Themes", "~/Modules", or "~/Core"
         /// </summary>
@@ -34,10 +30,11 @@ namespace Orchard.Environment.Extensions.Models {
         public string Tags { get; set; }
         public string AntiForgery { get; set; }
         public string Zones { get; set; }
+        public string Layers { get; set; }
+        public string LayerZones { get; set; }
         public string BaseTheme { get; set; }
         public string SessionState { get; set; }
         public LifecycleStatus LifecycleStatus { get; set; }
-
         public IEnumerable<FeatureDescriptor> Features { get; set; }
     }
 }

@@ -27,7 +27,7 @@ namespace Orchard.Widgets.Drivers {
         }
 
         protected override DriverResult Editor(WidgetPart widgetPart, dynamic shapeHelper) {
-            widgetPart.AvailableZones = _widgetsService.GetZones();
+            widgetPart.AvailableZones = _widgetsService.GetAllZones();
             widgetPart.AvailableLayers = _widgetsService.GetLayers();
 
             var results = new List<DriverResult> {
@@ -59,16 +59,6 @@ namespace Orchard.Widgets.Drivers {
                 }
             }
 
-            if (!String.IsNullOrEmpty(widgetPart.CssClasses)) {
-                var classNames = widgetPart.CssClasses.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-                for (var i = 0; i < classNames.Length; i++) {
-                    classNames[i] = classNames[i].Trim().HtmlClassify();
-                }
-
-                widgetPart.CssClasses = String.Join(" ", classNames);
-            }
-
             _widgetsService.MakeRoomForWidgetPosition(widgetPart);
 
             return Editor(widgetPart, shapeHelper);
@@ -80,20 +70,30 @@ namespace Orchard.Widgets.Drivers {
                 return;
             }
 
-            context.ImportAttribute(part.PartDefinition.Name, "Title", x => part.Title = x);
-            context.ImportAttribute(part.PartDefinition.Name, "Position", x => part.Position = x);
-            context.ImportAttribute(part.PartDefinition.Name, "Zone", x => part.Zone = x);
-            context.ImportAttribute(part.PartDefinition.Name, "RenderTitle", x => {
-                if (!string.IsNullOrWhiteSpace(x)) {
-                    part.RenderTitle = Convert.ToBoolean(x);
-                }
-            });
-            context.ImportAttribute(part.PartDefinition.Name, "Name", x => part.Name = x);
-            context.ImportAttribute(part.PartDefinition.Name, "Title", x => {
-                if (!String.IsNullOrWhiteSpace(x))
-                    part.Title = x;
-            });
-            context.ImportAttribute(part.PartDefinition.Name, "CssClasses", x => part.CssClasses = x);
+            var title = context.Attribute(part.PartDefinition.Name, "Title");
+            if (title != null) {
+                part.Title = title;
+            }
+
+            var position = context.Attribute(part.PartDefinition.Name, "Position");
+            if (position != null) {
+                part.Position = position;
+            }
+
+            var zone = context.Attribute(part.PartDefinition.Name, "Zone");
+            if (zone != null) {
+                part.Zone = zone;
+            }
+
+            var renderTitle = context.Attribute(part.PartDefinition.Name, "RenderTitle");
+            if (!string.IsNullOrWhiteSpace(renderTitle)) {
+                part.RenderTitle = Convert.ToBoolean(renderTitle);
+            }
+
+            var name = context.Attribute(part.PartDefinition.Name, "Name");
+            if (name != null) {
+                part.Name = name;
+            }
         }
 
         protected override void Exporting(WidgetPart part, ContentManagement.Handlers.ExportContentContext context) {
@@ -102,7 +102,6 @@ namespace Orchard.Widgets.Drivers {
             context.Element(part.PartDefinition.Name).SetAttributeValue("Zone", part.Zone);
             context.Element(part.PartDefinition.Name).SetAttributeValue("RenderTitle", part.RenderTitle);
             context.Element(part.PartDefinition.Name).SetAttributeValue("Name", part.Name);
-            context.Element(part.PartDefinition.Name).SetAttributeValue("CssClasses", part.CssClasses);
         }
     }
 }

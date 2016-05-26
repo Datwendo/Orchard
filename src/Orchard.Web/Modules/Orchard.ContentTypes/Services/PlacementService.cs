@@ -10,8 +10,10 @@ using Orchard.ContentTypes.Settings;
 using Orchard.DisplayManagement;
 using Orchard.DisplayManagement.Descriptors;
 using Orchard.Environment.Extensions;
+using Orchard.Environment.Extensions.Models;
 using Orchard.FileSystems.VirtualPath;
 using Orchard.Logging;
+using Orchard.Services;
 using Orchard.Themes.Services;
 using Orchard.UI.Zones;
 
@@ -34,6 +36,7 @@ namespace Orchard.ContentTypes.Services {
         private readonly IEnumerable<IContentFieldDriver> _contentFieldDrivers;
         private readonly IVirtualPathProvider _virtualPathProvider;
         private readonly IWorkContextAccessor _workContextAccessor;
+        private readonly IJsonConverter _jsonConverter;
 
         public PlacementService(
             IContentManager contentManager,
@@ -45,7 +48,8 @@ namespace Orchard.ContentTypes.Services {
             IEnumerable<IContentPartDriver> contentPartDrivers,
             IEnumerable<IContentFieldDriver> contentFieldDrivers,
             IVirtualPathProvider virtualPathProvider,
-            IWorkContextAccessor workContextAccessor
+            IWorkContextAccessor workContextAccessor,
+            IJsonConverter jsonConverter
             ) 
         {
             _contentManager = contentManager;
@@ -58,6 +62,7 @@ namespace Orchard.ContentTypes.Services {
             _contentFieldDrivers = contentFieldDrivers;
             _virtualPathProvider = virtualPathProvider;
             _workContextAccessor = workContextAccessor;
+            _jsonConverter = jsonConverter;
 
             Logger = NullLogger.Instance;
         }
@@ -129,6 +134,37 @@ namespace Orchard.ContentTypes.Services {
             }
         }
 
+        // CS 25/5
+        public IEnumerable<DriverResultPlacement> GetFrontEditorPlacement(string contentType) {
+            var content = _contentManager.New(contentType);
+
+            dynamic itemShape = CreateItemShape("Content_FrontEdit");
+            itemShape.ContentItem = content;
+
+            var context = new BuildFrontEditorContext(itemShape, content, String.Empty, _shapeFactory);
+            BindPlacement(context, null, "Content");
+
+            var placementSettings = new List<DriverResultPlacement>();
+
+            _contentPartDrivers.Invoke(driver => {
+                var result = driver.BuildFrontEditor(context);
+                if (result != null) {
+                    placementSettings.AddRange(ExtractPlacement(result, context));
+                }
+            }, Logger);
+
+            _contentFieldDrivers.Invoke(driver => {
+                var result = driver.BuildFrontEditorShape(context);
+                if (result != null) {
+                    placementSettings.AddRange(ExtractPlacement(result, context));
+                }
+            }, Logger);
+
+            foreach (var placementSetting in placementSettings) {
+                yield return placementSetting;
+            }
+        }
+
         public IEnumerable<string> GetZones() {
             var theme = _siteThemeService.GetSiteTheme();
             IEnumerable<string> zones = new List<string>();
@@ -151,6 +187,54 @@ namespace Orchard.ContentTypes.Services {
                         .ToList();
             }
 
+            return zones;
+        }
+
+        public IEnumerable<string> GetThemeZones(ExtensionDescriptor theme,string layer) {
+            IEnumerable<string> zones = new List<string>();
+            IEnumerable<string> layers = string.IsNullOrEmpty(theme.Layers) ? Enumerable.Empty<string>() : theme.Layers.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (!string.IsNullOrEmpty(layer)
+                && !string.IsNullOrEmpty(theme.Layers)
+                && layers.Contains(layer, StringComparer.InvariantCultureIgnoreCase)) {
+                Dictionary<string, string> layerZones = _jsonConverter.Deserialize<Dictionary<string, string>>(theme.LayerZones);
+                if (layerZones.ContainsKey(layer)) {
+                    var value = layerZones[layer];
+                    zones = value.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                        .Select(x => x.Trim())
+                        .Distinct()
+                        .ToList();
+                }
+            }
+            else if (string.IsNullOrEmpty(layer)
+                || string.IsNullOrEmpty(theme.Layers)
+                || !layers.Contains(layer, StringComparer.InvariantCultureIgnoreCase)) {
+                // get the zones for this theme
+                if (theme.Zones != null)
+                    zones = theme.Zones.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                        .Select(x => x.Trim())
+                        .Distinct()
+                        .ToList();
+            }
+            return zones;
+        }
+
+
+        public IEnumerable<string> GetZones(string layer) {
+            var theme = _siteThemeService.GetSiteTheme();
+            string baseTheme = theme.BaseTheme;
+            IEnumerable<string> zones = new List<string>();
+            // if this theme has no zones defined then walk the BaseTheme chain until we hit a theme which defines zones
+            do {
+                zones = GetThemeZones(theme, layer);
+                if (!zones.Any()) {
+                    if (!string.IsNullOrEmpty(baseTheme)) {
+                        theme = _extensionManager.GetExtension(baseTheme);
+                        baseTheme = theme != null ? theme.BaseTheme : null;
+                    }
+                    else theme = null;
+                }
+            } while (!zones.Any() && theme != null );
             return zones;
         }
 
@@ -191,6 +275,12 @@ namespace Orchard.ContentTypes.Services {
                 if(context is BuildDisplayContext) {
                     var newContext = new BuildDisplayContext(itemShape, content, "Detail", "", context.New);
                     BindPlacement(newContext, "Detail", "Content");
+                    contentShapeResult.Apply(newContext);
+                }
+                // CS 25/5
+                else if (context is BuildFrontEditorContext) {
+                    var newContext = new BuildFrontEditorContext(itemShape, content, "", context.New);
+                    BindPlacement(newContext, null, "Content");
                     contentShapeResult.Apply(newContext);
                 }
                 else {
