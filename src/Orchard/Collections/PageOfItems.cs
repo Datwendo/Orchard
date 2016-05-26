@@ -20,7 +20,7 @@ namespace Orchard.Collections {
             get { return (PageNumber - 1)*PageSize + 1; }
         }
         public int EndPosition {
-            get { return PageNumber * PageSize > TotalItemCount ? TotalItemCount : PageNumber * PageSize; }
+            get { return PageSize == 0 || (PageNumber * PageSize > TotalItemCount) ? TotalItemCount : PageNumber * PageSize; }
         }
 
         #endregion
