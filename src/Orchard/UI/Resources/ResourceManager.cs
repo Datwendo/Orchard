@@ -15,7 +15,7 @@ namespace Orchard.UI.Resources {
         private readonly Dictionary<Tuple<String, String>, RequireSettings> _required = new Dictionary<Tuple<String, String>, RequireSettings>();
         private readonly List<LinkEntry> _links = new List<LinkEntry>();
         private readonly Dictionary<string, MetaEntry> _metas = new Dictionary<string, MetaEntry> {
-            { "generator", new MetaEntry { Content = "Orchard", Name = "generator" } }
+            //{ "generator", new MetaEntry { Content = "OrchardFork", Name = "generator" } }
         };
         private readonly Dictionary<string, IList<ResourceRequiredContext>> _builtResources = new Dictionary<string, IList<ResourceRequiredContext>>(StringComparer.OrdinalIgnoreCase);
         private readonly IEnumerable<Meta<IResourceManifestProvider>> _providers;
