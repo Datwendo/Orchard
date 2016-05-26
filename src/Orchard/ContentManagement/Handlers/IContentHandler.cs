@@ -32,6 +32,10 @@
         void BuildDisplay(BuildDisplayContext context);
         void BuildEditor(BuildEditorContext context);
         void UpdateEditor(UpdateEditorContext context);
+        // CS 25/5
+        void BuildFrontEditor(BuildFrontEditorContext context);
+        // CS 25/5
+        void UpdateFrontEditor(UpdateFrontEditorContext context);
         void Restoring(RestoreContentContext context);
         void Restored(RestoreContentContext context);
         void Destroying(DestroyContentContext context);

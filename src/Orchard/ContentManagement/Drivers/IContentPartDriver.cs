@@ -7,6 +7,10 @@ namespace Orchard.ContentManagement.Drivers {
         DriverResult BuildDisplay(BuildDisplayContext context);
         DriverResult BuildEditor(BuildEditorContext context);
         DriverResult UpdateEditor(UpdateEditorContext context);
+        // CS 25/05
+        DriverResult BuildFrontEditor(BuildFrontEditorContext context);
+        // CS 25/05
+        DriverResult UpdateFrontEditor(UpdateFrontEditorContext context);
         void Importing(ImportContentContext context);
         void Imported(ImportContentContext context);
         void ImportCompleted(ImportContentContext context);

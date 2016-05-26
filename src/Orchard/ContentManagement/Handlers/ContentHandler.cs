@@ -146,7 +146,14 @@ namespace Orchard.ContentManagement.Handlers {
         protected void OnUpdateEditorShape<TPart>(Action<UpdateEditorContext, TPart> handler) where TPart : class, IContent {
             Filters.Add(new InlineTemplateFilter<TPart> { OnUpdateEditorShape = handler });
         }
-
+        // CS 25/5
+        protected void OnGetFrontEditorShape<TPart>(Action<BuildFrontEditorContext, TPart> handler) where TPart : class, IContent {
+            Filters.Add(new InlineTemplateFilter<TPart> { OnGetFrontEditorShape = handler });
+        }
+        // CS 25/5
+        protected void OnUpdateFrontEditorShape<TPart>(Action<UpdateFrontEditorContext, TPart> handler) where TPart : class, IContent {
+            Filters.Add(new InlineTemplateFilter<TPart> { OnUpdateFrontEditorShape = handler });
+        }
         class InlineStorageFilter<TPart> : StorageFilterBase<TPart> where TPart : class, IContent {
             public Action<ActivatedContentContext, TPart> OnActivated { get; set; }
             public Action<InitializingContentContext, TPart> OnInitializing { get; set; }
@@ -288,6 +295,10 @@ namespace Orchard.ContentManagement.Handlers {
             public Action<BuildDisplayContext, TPart> OnGetDisplayShape { get; set; }
             public Action<BuildEditorContext, TPart> OnGetEditorShape { get; set; }
             public Action<UpdateEditorContext, TPart> OnUpdateEditorShape { get; set; }
+            // CS 25/5
+            public Action<BuildFrontEditorContext, TPart> OnGetFrontEditorShape { get; set; }
+            // CS 25/5
+            public Action<UpdateFrontEditorContext, TPart> OnUpdateFrontEditorShape { get; set; }
             protected override void GetContentItemMetadata(GetContentItemMetadataContext context, TPart instance) {
                 if (OnGetItemMetadata != null) OnGetItemMetadata(context, instance);
             }
@@ -299,6 +310,14 @@ namespace Orchard.ContentManagement.Handlers {
             }
             protected override void UpdateEditorShape(UpdateEditorContext context, TPart instance) {
                 if (OnUpdateEditorShape != null) OnUpdateEditorShape(context, instance);
+            }
+            // CS 25/5
+            protected override void BuildFrontEditorShape(BuildFrontEditorContext context, TPart instance) {
+                if (OnGetFrontEditorShape != null) OnGetFrontEditorShape(context, instance);
+            }
+            // CS 25/5
+            protected override void UpdateFrontEditorShape(UpdateFrontEditorContext context, TPart instance) {
+                if (OnUpdateFrontEditorShape != null) OnUpdateFrontEditorShape(context, instance);
             }
         }
 
@@ -508,6 +527,19 @@ namespace Orchard.ContentManagement.Handlers {
                 filter.UpdateEditorShape(context);
             UpdateEditorShape(context);
         }
+        // CS 25/5
+        void IContentHandler.BuildFrontEditor(BuildFrontEditorContext context) {
+            foreach (var filter in Filters.OfType<IContentTemplateFilter>())
+                filter.BuildFrontEditorShape(context);
+            BuildFrontEditorShape(context);
+        }
+        // CS 25/5
+        void IContentHandler.UpdateFrontEditor(UpdateFrontEditorContext context) {
+            foreach (var filter in Filters.OfType<IContentTemplateFilter>())
+                filter.UpdateFrontEditorShape(context);
+            UpdateFrontEditorShape(context);
+        }
+
 
         protected virtual void Activating(ActivatingContentContext context) { }
         protected virtual void Activated(ActivatedContentContext context) { }
@@ -555,5 +587,9 @@ namespace Orchard.ContentManagement.Handlers {
         protected virtual void BuildDisplayShape(BuildDisplayContext context) { }
         protected virtual void BuildEditorShape(BuildEditorContext context) { }
         protected virtual void UpdateEditorShape(UpdateEditorContext context) { }
+        // CS 25/5
+        protected virtual void BuildFrontEditorShape(BuildFrontEditorContext context) { }
+        // CS 25/5
+        protected virtual void UpdateFrontEditorShape(UpdateFrontEditorContext context) { }
     }
 }

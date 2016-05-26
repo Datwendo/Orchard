@@ -36,5 +36,9 @@
         public virtual void BuildDisplay(BuildDisplayContext context) {}
         public virtual void BuildEditor(BuildEditorContext context) {}
         public virtual void UpdateEditor(UpdateEditorContext context) {}
+        // CS 25/5
+        public virtual void BuildFrontEditor(BuildFrontEditorContext context) { }
+        // CS 25/5
+        public virtual void UpdateFrontEditor(UpdateFrontEditorContext context) { }
     }
 }

@@ -63,7 +63,41 @@ namespace Orchard.ContentManagement.Drivers {
                 return editor;
             }, context.Logger);
         }
+        // CS 25/5
+        DriverResult IContentFieldDriver.BuildFrontEditorShape(BuildFrontEditorContext context) {
+            return Process(context.ContentItem, (part, field) => {
+                DriverResult result = FrontEditor(part, field, context.New);
 
+                if (result != null) {
+                    result.ContentPart = part;
+                    result.ContentField = field;
+                }
+
+                return result;
+            }, context.Logger);
+        }
+        // CS 25/5
+        DriverResult IContentFieldDriver.UpdateFrontEditorShape(UpdateFrontEditorContext context) {
+            return Process(context.ContentItem, (part, field) => {
+                // Checking if the editor needs to be updated (e.g. if any of the shapes were not hidden).
+                DriverResult editor = FrontEditor(part, field, context.New);
+                IEnumerable<ContentShapeResult> contentShapeResults = editor.GetShapeResults();
+
+                if (contentShapeResults.Any(contentShapeResult =>
+                    contentShapeResult == null || contentShapeResult.WasDisplayed(context))) {
+                    DriverResult result = FrontEditor(part, field, context.Updater, context.New);
+
+                    if (result != null) {
+                        result.ContentPart = part;
+                        result.ContentField = field;
+                    }
+
+                    return result;
+                }
+
+                return editor;
+            }, context.Logger);
+        }
         void IContentFieldDriver.Importing(ImportContentContext context) {
             Process(context.ContentItem, (part, field) => Importing(part, field, context), context.Logger);
         }
@@ -120,7 +154,10 @@ namespace Orchard.ContentManagement.Drivers {
         protected virtual DriverResult Display(ContentPart part, TField field, string displayType, dynamic shapeHelper) { return null; }
         protected virtual DriverResult Editor(ContentPart part, TField field, dynamic shapeHelper) { return null; }
         protected virtual DriverResult Editor(ContentPart part, TField field, IUpdateModel updater, dynamic shapeHelper) { return null; }
-        
+        // CS 25/5 default to Editor (???)
+        protected virtual DriverResult FrontEditor(ContentPart part, TField field, dynamic shapeHelper) { return Editor(part,field,shapeHelper); }
+        // CS 25/5 default to Editor (???)
+        protected virtual DriverResult FrontEditor(ContentPart part, TField field, IUpdateModel updater, dynamic shapeHelper) { return Editor(part,field,updater,shapeHelper); }
         protected virtual void Importing(ContentPart part, TField field, ImportContentContext context) { }
         protected virtual void Imported(ContentPart part, TField field, ImportContentContext context) { }
         protected virtual void ImportCompleted(ContentPart part, TField field, ImportContentContext context) { }

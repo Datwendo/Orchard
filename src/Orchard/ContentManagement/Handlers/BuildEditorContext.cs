@@ -6,4 +6,10 @@ namespace Orchard.ContentManagement.Handlers {
             : base(model, content, groupId, shapeFactory) {
         }
     }
+    // CS 25/5
+    public class BuildFrontEditorContext : BuildShapeContext {
+        public BuildFrontEditorContext(IShape model, IContent content, string groupId, IShapeFactory shapeFactory)
+            : base(model, content, groupId, shapeFactory) {
+        }
+    }
 }

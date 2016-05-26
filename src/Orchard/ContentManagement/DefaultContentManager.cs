@@ -706,6 +706,22 @@ namespace Orchard.ContentManagement {
 
             return result;
         }
+        // CS 25/5
+        public dynamic BuildFrontEditor(IContent content, string groupId = "") {
+            return _contentDisplay.Value.BuildFrontEditor(content, groupId);
+        }
+        // CS 25/5
+        public dynamic UpdateFrontEditor(IContent content, IUpdateModel updater, string groupId = "") {
+            var context = new UpdateContentContext(content.ContentItem);
+
+            Handlers.Invoke(handler => handler.Updating(context), Logger);
+
+            var result = _contentDisplay.Value.UpdateFrontEditor(content, updater, groupId);
+
+            Handlers.Invoke(handler => handler.Updated(context), Logger);
+
+            return result;
+        }
 
         public void Clear() {
         }

@@ -24,6 +24,11 @@ namespace Orchard.ContentManagement.Drivers {
             var templateShape = context.New.EditorTemplate(TemplateName: TemplateName, Model: Model, Prefix: Prefix);
             context.Shape.Zones[Zone].Add(templateShape, Position);
         }
+        // CS 25/5
+        public override void Apply(BuildFrontEditorContext context) {
+            var templateShape = context.New.FrontEditorTemplate(TemplateName: TemplateName, Model: Model, Prefix: Prefix);
+            context.Shape.Zones[Zone].Add(templateShape, Position);
+        }
 
         public ContentTemplateResult Location(string zone) {
             Zone = zone;

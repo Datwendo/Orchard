@@ -67,6 +67,33 @@ namespace Orchard.Layouts.Services {
             return context.Shape;
         }
 
+        // CS 25/5
+        public dynamic BuildFrontEditor(ContentPart part, string groupId) {
+            var context = BuildFrontEditorContext(part, groupId);
+            var drivers = GetPartDrivers(part.PartDefinition.Name);
+
+            drivers.Invoke(driver => {
+                var result = driver.BuildFrontEditor(context);
+                if (result != null)
+                    result.Apply(context);
+            }, Logger);
+
+            return context.Shape;
+        }
+        // CS 25/5
+        public dynamic UpdateFrontEditor(ContentPart part, IUpdateModel updater, string groupInfoId) {
+            var context = UpdateFrontEditorContext(part, updater, groupInfoId);
+            var drivers = GetPartDrivers(part.PartDefinition.Name);
+
+            drivers.Invoke(driver => {
+                var result = driver.UpdateFrontEditor(context);
+                if (result != null)
+                    result.Apply(context);
+            }, Logger);
+
+            return context.Shape;
+        }
+
         private IEnumerable<IContentPartDriver> GetPartDrivers(string partName) {
             return _contentPartDrivers.Where(x => GetPartOfDriver(x.GetType().BaseType).Name == partName);
         }

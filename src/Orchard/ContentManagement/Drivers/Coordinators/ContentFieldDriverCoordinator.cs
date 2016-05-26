@@ -74,6 +74,24 @@ namespace Orchard.ContentManagement.Drivers.Coordinators {
                     result.Apply(context);
             }, Logger);
         }
+        //CS 25/5
+        public override void BuildFrontEditor(BuildFrontEditorContext context) {
+            _drivers.Invoke(driver => {
+                context.Logger = Logger;
+                var result = driver.BuildFrontEditorShape(context);
+                if (result != null)
+                    result.Apply(context);
+            }, Logger);
+        }
+        //CS 25/5
+        public override void UpdateFrontEditor(UpdateFrontEditorContext context) {
+            _drivers.Invoke(driver => {
+                context.Logger = Logger;
+                var result = driver.UpdateFrontEditorShape(context);
+                if (result != null)
+                    result.Apply(context);
+            }, Logger);
+        }
 
         public override void Importing(ImportContentContext context) {
             context.Logger = Logger;

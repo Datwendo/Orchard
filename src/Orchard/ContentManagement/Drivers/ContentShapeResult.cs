@@ -97,6 +97,10 @@ namespace Orchard.ContentManagement.Drivers {
                 parentShape.Zones[zone].Add(newShape, position);
             }
         }
+        // CS 25/5
+        public override void Apply(BuildFrontEditorContext context) {
+            ApplyImplementation(context, null);
+        }
 
         public ContentShapeResult Location(string zone) {
             _defaultLocation = zone;
@@ -130,6 +134,40 @@ namespace Orchard.ContentManagement.Drivers {
         }
 
         public bool WasDisplayed(UpdateEditorContext context) {
+            ShapeDescriptor descriptor;
+            if (context.ShapeTable.Descriptors.TryGetValue(_shapeType, out descriptor)) {
+                var placementContext = new ShapePlacementContext {
+                    Content = context.ContentItem,
+                    ContentType = context.ContentItem.ContentType,
+                    Differentiator = _differentiator,
+                    DisplayType = null,
+                    Path = context.Path
+                };
+
+                var placementInfo = descriptor.Placement(placementContext);
+
+                var location = placementInfo.Location;
+
+                if (String.IsNullOrEmpty(location) || location == "-") {
+                    return false;
+                }
+
+                var editorGroup = _groupId;
+                if (String.IsNullOrEmpty(editorGroup)) {
+                    editorGroup = placementInfo.GetGroup() ?? "";
+                }
+
+                var contextGroup = context.GroupId ?? "";
+
+                if (!String.Equals(editorGroup, contextGroup, StringComparison.OrdinalIgnoreCase)) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+        // CS 25/5
+        public bool WasDisplayed(UpdateFrontEditorContext context) {
             ShapeDescriptor descriptor;
             if (context.ShapeTable.Descriptors.TryGetValue(_shapeType, out descriptor)) {
                 var placementContext = new ShapePlacementContext {

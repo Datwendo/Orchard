@@ -283,7 +283,7 @@ namespace Orchard.Core.Shapes {
         [Shape]
         public void ContentZone(dynamic Display, dynamic Shape, TextWriter Output) {
             var unordered = ((IEnumerable<dynamic>)Shape).ToArray();
-            var tabbed = unordered.GroupBy(x => (string)x.Metadata.Tab);
+            var tabbed = unordered.Where(x => x.Metadata.Tab != null ).GroupBy(x => (string)x.Metadata.Tab);
 
             if (tabbed.Count() > 1) {
                 foreach (var tab in tabbed) {
@@ -803,7 +803,11 @@ namespace Orchard.Core.Shapes {
         public void EditorTemplate(HtmlHelper Html, TextWriter Output, string TemplateName, object Model, string Prefix) {
             RenderInternal(Html, Output, "EditorTemplates/" + TemplateName, Model, Prefix);
         }
-
+        // CS 25/5
+        [Shape]
+        public void FrontEditorTemplate(HtmlHelper Html, TextWriter Output, string TemplateName, object Model, string Prefix) {
+            RenderInternal(Html, Output, "FrontEditorTemplates/" + TemplateName, Model, Prefix);
+        }
         [Shape]
         public void DefinitionTemplate(HtmlHelper Html, TextWriter Output, string TemplateName, object Model, string Prefix) {
             RenderInternal(Html, Output, "DefinitionTemplates/" + TemplateName, Model, Prefix);

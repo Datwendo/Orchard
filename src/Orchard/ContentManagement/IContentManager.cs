@@ -139,12 +139,20 @@ namespace Orchard.ContentManagement {
         /// <param name="groupId">Id of the editor group (stored in the content item's metadata)</param>
         /// <returns>The updated editor shape</returns>
         dynamic UpdateEditor(IContent content, IUpdateModel updater, string groupId = "");
+        // CS 25/5
+        dynamic BuildFrontEditor(IContent content, string groupId = "");
+        // CS 25/5
+        dynamic UpdateFrontEditor(IContent content, IUpdateModel updater, string groupId = "");
     }
 
     public interface IContentDisplay : IDependency {
         dynamic BuildDisplay(IContent content, string displayType = "", string groupId = "");
         dynamic BuildEditor(IContent content, string groupId = "");
         dynamic UpdateEditor(IContent content, IUpdateModel updater, string groupId = "");
+        // CS 25/5
+        dynamic BuildFrontEditor(IContent content, string groupId = "");
+        // CS 25/5
+        dynamic UpdateFrontEditor(IContent content, IUpdateModel updater, string groupId = "");
     }
 
     public class VersionOptions {

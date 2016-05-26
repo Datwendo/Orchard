@@ -100,6 +100,50 @@ namespace Orchard.Layouts.Services {
 
             return context;
         }
+        // CS 25/5
+        public BuildFrontEditorContext BuildFrontEditorContext(IContent content, string groupId) {
+            var contentTypeDefinition = content.ContentItem.TypeDefinition;
+            string stereotype;
+            if (!contentTypeDefinition.Settings.TryGetValue("Stereotype", out stereotype))
+                stereotype = DefaultStereotype;
+
+            var actualShapeType = stereotype + "_FrontEdit";
+            var itemShape = CreateItemShape(actualShapeType);
+
+            itemShape.ContentItem = content.ContentItem;
+
+            // Adding an alternate for [Stereotype]_FrontEdit__[ContentType] e.g. Content-Menu.Edit.
+            ((IShape)itemShape).Metadata.Alternates.Add(actualShapeType + "__" + content.ContentItem.ContentType);
+
+            var context = new BuildFrontEditorContext(itemShape, content, groupId, _shapeFactory);
+            BindPlacement(context, null, stereotype);
+
+            return context;
+        }
+        // CS 25/5
+        public UpdateFrontEditorContext UpdateFrontEditorContext(IContent content, IUpdateModel updater, string groupInfoId) {
+            var contentTypeDefinition = content.ContentItem.TypeDefinition;
+            string stereotype;
+            if (!contentTypeDefinition.Settings.TryGetValue("Stereotype", out stereotype))
+                stereotype = DefaultStereotype;
+
+            var actualShapeType = stereotype + "_FrontEdit";
+            var itemShape = CreateItemShape(actualShapeType);
+
+            itemShape.ContentItem = content.ContentItem;
+
+            var workContext = _workContextAccessor.GetContext(_requestContext.HttpContext);
+            var theme = workContext.CurrentTheme;
+            var shapeTable = _shapeTableLocator.Value.Lookup(theme.Id);
+
+            // Adding an alternate for [Stereotype]_FrontEdit__[ContentType] e.g. Content-Menu.Edit.
+            ((IShape)itemShape).Metadata.Alternates.Add(actualShapeType + "__" + content.ContentItem.ContentType);
+
+            var context = new UpdateFrontEditorContext(itemShape, content, updater, groupInfoId, _shapeFactory, shapeTable, GetPath());
+            BindPlacement(context, null, stereotype);
+
+            return context;
+        }
 
         private dynamic CreateItemShape(string actualShapeType) {
             return _shapeFactory.Create(actualShapeType, Arguments.Empty(), () => new ZoneHolding(() => _shapeFactory.Create("ContentZone", Arguments.Empty())));

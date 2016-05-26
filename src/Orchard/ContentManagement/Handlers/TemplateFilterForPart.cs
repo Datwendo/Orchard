@@ -51,5 +51,23 @@ namespace Orchard.ContentManagement.Handlers {
             context.Updater.TryUpdateModel(templatePart, _prefix, null, null);
             BuildEditorShape(context, part);
         }
+        // CS 25/5
+        protected override void BuildFrontEditorShape(BuildFrontEditorContext context, ContentPart part) {
+            if (!string.Equals(_groupId, context.GroupId, StringComparison.OrdinalIgnoreCase))
+                return;
+
+            var templatePart = part.As<TPart>();
+            var templateShape = context.New.FrontEditorTemplate(TemplateName: _templateName, Model: templatePart, Prefix: _prefix);
+            context.Shape.Zones[_location].Add(templateShape, _position);
+        }
+        // CS 25/5
+        protected override void UpdateFrontEditorShape(UpdateFrontEditorContext context, ContentPart part) {
+            if (!string.Equals(_groupId, context.GroupId, StringComparison.OrdinalIgnoreCase))
+                return;
+
+            var templatePart = part.As<TPart>();
+            context.Updater.TryUpdateModel(templatePart, _prefix, null, null);
+            BuildFrontEditorShape(context, part);
+        }
     }
 }
