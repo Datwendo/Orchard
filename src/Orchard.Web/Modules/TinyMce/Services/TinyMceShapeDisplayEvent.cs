@@ -28,9 +28,13 @@ namespace TinyMce.Services {
         }
 
         public override void Displaying(ShapeDisplayingContext context) {
-            if (String.CompareOrdinal(context.ShapeMetadata.Type, "Body_Editor") != 0) {
+            if (String.CompareOrdinal(context.ShapeMetadata.Type, "Body_Editor") != 0
+                // CS 28/5
+                && String.CompareOrdinal(context.ShapeMetadata.Type, "Body_FrontEditor") != 0
+                ) {
                 return;
             }
+
 
             if (!String.Equals(context.Shape.EditorFlavor, "html", StringComparison.InvariantCultureIgnoreCase)) {
                 return;

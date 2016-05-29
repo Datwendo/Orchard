@@ -167,10 +167,10 @@ namespace Orchard.ContentManagement.Drivers {
         protected virtual DriverResult Display(TContent part, string displayType, dynamic shapeHelper) { return null; }
         protected virtual DriverResult Editor(TContent part, dynamic shapeHelper) { return null; }
         protected virtual DriverResult Editor(TContent part, IUpdateModel updater, dynamic shapeHelper) { return null; }
-        // CS 25/5 default to Editor (To test ???)
-        protected virtual DriverResult FrontEditor(TContent part, dynamic shapeHelper) { return Editor(part,shapeHelper); }
-        // CS 25/5 default to Editor (To test ???)
-        protected virtual DriverResult FrontEditor(TContent part, IUpdateModel updater, dynamic shapeHelper) { return Editor(part, updater, shapeHelper); }
+        // CS 25/5 
+        protected virtual DriverResult FrontEditor(TContent part, dynamic shapeHelper) { return null; }
+        // CS 25/5 
+        protected virtual DriverResult FrontEditor(TContent part, IUpdateModel updater, dynamic shapeHelper) { return null; }
         protected virtual void Importing(TContent part, ImportContentContext context) { }
         protected virtual void Imported(TContent part, ImportContentContext context) { }
         protected virtual void ImportCompleted(TContent part, ImportContentContext context) { }

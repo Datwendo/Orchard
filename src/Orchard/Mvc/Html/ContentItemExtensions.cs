@@ -113,6 +113,71 @@ namespace Orchard.Mvc.Html {
                 metadata.EditorRouteValues.Merge(additionalRouteValues),
                 new RouteValueDictionary(htmlAttributes));
         }
+        // CS 27/5
+        public static MvcHtmlString ItemFrontEditLinkWithReturnUrl(this HtmlHelper html, string linkText, IContent content) {
+            return html.ItemFrontEditLink(linkText, content, new { ReturnUrl = html.ViewContext.HttpContext.Request.RawUrl });
+        }
+        // CS 27/5
+        public static MvcHtmlString ItemFrontEditLink(this HtmlHelper html, string linkText, IContent content) {
+            return html.ItemFrontEditLink(linkText, content, null);
+        }
+        // CS 27/5
+        public static MvcHtmlString ItemFrontEditLink(this HtmlHelper html, string linkText, IContent content, object additionalRouteValues) {
+            var metadata = content.ContentItem.ContentManager.GetItemMetadata(content);
+            if (metadata.FrontEditorRouteValues == null)
+                return null;
+
+            return html.ActionLink(
+                NonNullOrEmpty(linkText, metadata.DisplayText, content.ContentItem.TypeDefinition.DisplayName),
+                Convert.ToString(metadata.FrontEditorRouteValues["action"]),
+                metadata.FrontEditorRouteValues.Merge(additionalRouteValues));
+        }
+        // CS 27/5
+        public static MvcHtmlString ItemFrontEditLink(this HtmlHelper html, string linkText, IContent content, object additionalRouteValues, object htmlAttributes = null) {
+            var metadata = content.ContentItem.ContentManager.GetItemMetadata(content);
+            if (metadata.FrontEditorRouteValues == null)
+                return null;
+
+            return html.ActionLink(
+                NonNullOrEmpty(linkText, metadata.DisplayText, content.ContentItem.TypeDefinition.DisplayName),
+                Convert.ToString(metadata.FrontEditorRouteValues["action"]),
+                metadata.FrontEditorRouteValues.Merge(additionalRouteValues),
+                new RouteValueDictionary(htmlAttributes));
+        }
+
+        // CS 27/5 
+        // NOTE: All the create need a sampling content to work. 
+        // Because the creation has potentially no such content you must create a new contentitem usin Contentmanager.New(contentType) to use them 
+        public static MvcHtmlString ItemFrontCreateLinkWithReturnUrl(this HtmlHelper html, string linkText, IContent content) {
+            return html.ItemFrontCreateLink(linkText, content, new { ReturnUrl = html.ViewContext.HttpContext.Request.RawUrl });
+        }
+        // CS 27/5
+        public static MvcHtmlString ItemFrontCreateLink(this HtmlHelper html, string linkText, IContent content) {
+            return html.ItemFrontCreateLink(linkText, content, null);
+        }
+        // CS 27/5
+        public static MvcHtmlString ItemFrontCreateLink(this HtmlHelper html, string linkText, IContent content, object additionalRouteValues) {
+            var metadata = content.ContentItem.ContentManager.GetItemMetadata(content);
+            if (metadata.FrontCreateRouteValues == null)
+                return null;
+
+            return html.ActionLink(
+                NonNullOrEmpty(linkText, metadata.DisplayText, content.ContentItem.TypeDefinition.DisplayName),
+                Convert.ToString(metadata.FrontCreateRouteValues["action"]),
+                metadata.FrontCreateRouteValues.Merge(additionalRouteValues));
+        }
+        // CS 27/5
+        public static MvcHtmlString ItemFrontCreateLink(this HtmlHelper html, string linkText, IContent content, object additionalRouteValues, object htmlAttributes = null) {
+            var metadata = content.ContentItem.ContentManager.GetItemMetadata(content);
+            if (metadata.FrontCreateRouteValues == null)
+                return null;
+
+            return html.ActionLink(
+                NonNullOrEmpty(linkText, metadata.DisplayText, content.ContentItem.TypeDefinition.DisplayName),
+                Convert.ToString(metadata.FrontCreateRouteValues["action"]),
+                metadata.FrontCreateRouteValues.Merge(additionalRouteValues),
+                new RouteValueDictionary(htmlAttributes));
+        }
 
         public static MvcHtmlString ItemAdminLink(this HtmlHelper html, IContent content) {
             return ItemAdminLink(html, null, content);
@@ -133,6 +198,27 @@ namespace Orchard.Mvc.Html {
                 metadata.AdminRouteValues.Merge(additionalRouteValues));
         }
 
+        // CS 27/5
+        public static MvcHtmlString ItemFrontAdminLink(this HtmlHelper html, IContent content) {
+            return ItemFrontAdminLink(html, null, content);
+        }
+        // CS 27/5
+        public static MvcHtmlString ItemFrontAdminLink(this HtmlHelper html, string linkText, IContent content) {
+            return html.ItemFrontAdminLink(linkText, content, null);
+        }
+        // CS 27/5
+        public static MvcHtmlString ItemFrontAdminLink(this HtmlHelper html, string linkText, IContent content, object additionalRouteValues) {
+            var metadata = content.ContentItem.ContentManager.GetItemMetadata(content);
+            if (metadata.FrontAdminRouteValues == null)
+                return null;
+
+            return html.ActionLink(
+                NonNullOrEmpty(linkText, metadata.DisplayText, content.ContentItem.TypeDefinition.DisplayName),
+                Convert.ToString(metadata.FrontAdminRouteValues["action"]),
+                metadata.FrontAdminRouteValues.Merge(additionalRouteValues));
+        }
+
+
         public static string ItemEditUrl(this UrlHelper urlHelper, IContent content, object additionalRouteValues = null) {
             var metadata = content.ContentItem.ContentManager.GetItemMetadata(content);
             if (metadata.EditorRouteValues == null)
@@ -147,6 +233,21 @@ namespace Orchard.Mvc.Html {
             var metadata = content.ContentItem.ContentManager.GetItemMetadata(content);
             return metadata.AdminRouteValues == null ? null : urlHelper.RouteUrl(metadata.AdminRouteValues.Merge(additionalRouteValues ?? new { }));
         }
+        // CS 27/5
+        public static string ItemFrontEditUrl(this UrlHelper urlHelper, IContent content, object additionalRouteValues = null) {
+            var metadata = content.ContentItem.ContentManager.GetItemMetadata(content);
+            if (metadata.FrontEditorRouteValues == null)
+                return null;
+
+            return urlHelper.Action(
+                Convert.ToString(metadata.FrontEditorRouteValues["action"]),
+                metadata.FrontEditorRouteValues.Merge(additionalRouteValues ?? new { }));
+        }
+        // CS 27/5
+        public static string ItemFrontAdminUrl(this UrlHelper urlHelper, IContent content, object additionalRouteValues = null) {
+            var metadata = content.ContentItem.ContentManager.GetItemMetadata(content);
+            return metadata.FrontAdminRouteValues == null ? null : urlHelper.RouteUrl(metadata.FrontAdminRouteValues.Merge(additionalRouteValues ?? new { }));
+        }
 
         private static string NonNullOrEmpty(params string[] values) {
             foreach (var value in values) {
@@ -158,6 +259,14 @@ namespace Orchard.Mvc.Html {
 
         public static MvcHtmlString ItemEditLink(this HtmlHelper html, IContent content) {
             return ItemEditLink(html, null, content);
+        }
+        // CS 27/5
+        public static MvcHtmlString ItemFrontEditLink(this HtmlHelper html, IContent content) {
+            return ItemFrontEditLink(html, null, content);
+        }
+        // CS 27/5
+        public static MvcHtmlString ItemFrontCreateLink(this HtmlHelper html, IContent content) {
+            return ItemFrontCreateLink(html, null, content);
         }
     }
 }

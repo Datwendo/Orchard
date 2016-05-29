@@ -47,7 +47,25 @@ namespace Orchard.ContentManagement.Drivers {
                 result.Apply(context);
             }
         }
+        // CS 28/5
+        public override void Apply(BuildFrontEditorContext context) {
+            foreach (var result in _results) {
 
+                // copy the ContentPart which was used to render this result to its children
+                // so they can assign it to the concrete shapes
+                if (result.ContentPart == null && ContentPart != null) {
+                    result.ContentPart = ContentPart;
+                }
+
+                // copy the ContentField which was used to render this result to its children
+                // so they can assign it to the concrete shapes
+                if (result.ContentField == null && ContentField != null) {
+                    result.ContentField = ContentField;
+                }
+
+                result.Apply(context);
+            }
+        }
         public IEnumerable<DriverResult> GetResults() {
             return _results;
         } 

@@ -18,6 +18,8 @@ namespace Orchard.ContentManagement {
         // CS 25/5
         public RouteValueDictionary FrontEditorRouteValues { get; set; }
         public RouteValueDictionary CreateRouteValues { get; set; }
+        // CS 27/5
+        public RouteValueDictionary FrontCreateRouteValues { get; set; }
         public RouteValueDictionary RemoveRouteValues { get; set; }
         public RouteValueDictionary AdminRouteValues {
             get { return _adminRouteValues ?? EditorRouteValues; }

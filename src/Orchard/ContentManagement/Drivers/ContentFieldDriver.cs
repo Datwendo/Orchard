@@ -168,10 +168,10 @@ namespace Orchard.ContentManagement.Drivers {
         protected virtual DriverResult Display(ContentPart part, TField field, string displayType, dynamic shapeHelper) { return null; }
         protected virtual DriverResult Editor(ContentPart part, TField field, dynamic shapeHelper) { return null; }
         protected virtual DriverResult Editor(ContentPart part, TField field, IUpdateModel updater, dynamic shapeHelper) { return null; }
-        // CS 25/5 default to Editor (???)
-        protected virtual DriverResult FrontEditor(ContentPart part, TField field, dynamic shapeHelper) { return Editor(part,field,shapeHelper); }
-        // CS 25/5 default to Editor (???)
-        protected virtual DriverResult FrontEditor(ContentPart part, TField field, IUpdateModel updater, dynamic shapeHelper) { return Editor(part,field,updater,shapeHelper); }
+        // CS 25/5 
+        protected virtual DriverResult FrontEditor(ContentPart part, TField field, dynamic shapeHelper) { return null; }
+        // CS 25/5 
+        protected virtual DriverResult FrontEditor(ContentPart part, TField field, IUpdateModel updater, dynamic shapeHelper) { return null; }
         protected virtual void Importing(ContentPart part, TField field, ImportContentContext context) { }
         protected virtual void Imported(ContentPart part, TField field, ImportContentContext context) { }
         protected virtual void ImportCompleted(ContentPart part, TField field, ImportContentContext context) { }
