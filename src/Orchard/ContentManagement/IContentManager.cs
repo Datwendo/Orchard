@@ -140,9 +140,9 @@ namespace Orchard.ContentManagement {
         /// <returns>The updated editor shape</returns>
         dynamic UpdateEditor(IContent content, IUpdateModel updater, string groupId = "");
         // CS 25/5
-        dynamic BuildFrontEditor(IContent content, string groupId = "");
+        dynamic BuildFrontEditor(IContent content, string editType = "", string groupId = "");
         // CS 25/5
-        dynamic UpdateFrontEditor(IContent content, IUpdateModel updater, string groupId = "");
+        dynamic UpdateFrontEditor(IContent content, IUpdateModel updater, string editType = "", string groupId = "");
     }
 
     public interface IContentDisplay : IDependency {
@@ -150,9 +150,9 @@ namespace Orchard.ContentManagement {
         dynamic BuildEditor(IContent content, string groupId = "");
         dynamic UpdateEditor(IContent content, IUpdateModel updater, string groupId = "");
         // CS 25/5
-        dynamic BuildFrontEditor(IContent content, string groupId = "");
+        dynamic BuildFrontEditor(IContent content, string editType = "", string groupId = "");
         // CS 25/5
-        dynamic UpdateFrontEditor(IContent content, IUpdateModel updater, string groupId = "");
+        dynamic UpdateFrontEditor(IContent content, IUpdateModel updater, string editType = "", string groupId = "");
     }
 
     public class VersionOptions {

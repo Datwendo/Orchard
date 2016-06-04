@@ -114,37 +114,43 @@ namespace Orchard.ContentManagement {
             return context.Shape;
         }
         // CS 25/5
-        public dynamic BuildFrontEditor(IContent content, string groupId) {
+        public dynamic BuildFrontEditor(IContent content, string editType,string groupId) {
             var contentTypeDefinition = content.ContentItem.TypeDefinition;
             string stereotype;
             if (!contentTypeDefinition.Settings.TryGetValue("Stereotype", out stereotype))
                 stereotype = "Content";
 
             var actualShapeType = stereotype + "_FrontEdit";
+            var actualEditType = string.IsNullOrWhiteSpace(editType) ? "" /*"Detail"*/ : editType;
 
             dynamic itemShape = CreateItemShape(actualShapeType);
             itemShape.ContentItem = content.ContentItem;
 
-            // adding an alternate for [Stereotype]_FrontEdit__[ContentType] e.g. Content-Menu.Edit
+            // adding an alternate for [Stereotype]_FrontEdit__[ContentType] e.g. Content.FrontEdit-Menu
             ((IShape)itemShape).Metadata.Alternates.Add(actualShapeType + "__" + content.ContentItem.ContentType);
+            // adding an alternate for [Stereotype]_FrontEdit_[EditType] e.g. Content.FrontEdit.Write
+            ((IShape)itemShape).Metadata.Alternates.Add(actualShapeType + "_" + actualEditType);
+            // adding an alternate for [Stereotype]_FrontEdit__[ContentType]_[EditType] e.g. Content.FrontEdit-Menu.Write
+            ((IShape)itemShape).Metadata.Alternates.Add(actualShapeType + "__" + content.ContentItem.ContentType + "_" + actualEditType);
 
-            var context = new BuildFrontEditorContext(itemShape, content, groupId, _shapeFactory);
+            var context = new BuildFrontEditorContext(itemShape, content,actualEditType, groupId, _shapeFactory);
             var workContext = _workContextAccessor.GetContext(_requestContext.HttpContext);
             context.Layout = workContext.Layout;
-            BindPlacement(context, null, stereotype);
+            BindPlacement(context, actualEditType, stereotype);
 
             _handlers.Value.Invoke(handler => handler.BuildFrontEditor(context), Logger);
 
             return context.Shape;
         }
         // CS 25/5
-        public dynamic UpdateFrontEditor(IContent content, IUpdateModel updater, string groupInfoId) {
+        public dynamic UpdateFrontEditor(IContent content, IUpdateModel updater, string editType, string groupInfoId) {
             var contentTypeDefinition = content.ContentItem.TypeDefinition;
             string stereotype;
             if (!contentTypeDefinition.Settings.TryGetValue("Stereotype", out stereotype))
                 stereotype = "Content";
 
             var actualShapeType = stereotype + "_FrontEdit";
+            var actualEditType = string.IsNullOrWhiteSpace(editType) ? "" /*"Detail"*/ : editType;
 
             dynamic itemShape = CreateItemShape(actualShapeType);
             itemShape.ContentItem = content.ContentItem;
@@ -154,12 +160,16 @@ namespace Orchard.ContentManagement {
             var theme = workContext.CurrentTheme;
             var shapeTable = _shapeTableLocator.Value.Lookup(theme.Id);
 
-            // adding an alternate for [Stereotype]_FrontEdit__[ContentType] e.g. Content-Menu.Edit
+            // adding an alternate for [Stereotype]_FrontEdit__[ContentType] e.g. Content.FrontEdit-Menu
             ((IShape)itemShape).Metadata.Alternates.Add(actualShapeType + "__" + content.ContentItem.ContentType);
+            // adding an alternate for [Stereotype]_FrontEdit_[EditType] e.g. Content.FrontEdit.Write
+            ((IShape)itemShape).Metadata.Alternates.Add(actualShapeType + "_" + actualEditType);
+            // adding an alternate for [Stereotype]_FrontEdit__[ContentType]_[EditType] e.g. Content.FrontEdit-Menu.Write
+            ((IShape)itemShape).Metadata.Alternates.Add(actualShapeType + "__" + content.ContentItem.ContentType + "_" + actualEditType);
 
-            var context = new UpdateFrontEditorContext(itemShape, content, updater, groupInfoId, _shapeFactory, shapeTable, GetPath());
+            var context = new UpdateFrontEditorContext(itemShape, content, updater, editType, groupInfoId, _shapeFactory, shapeTable, GetPath());
             context.Layout = workContext.Layout;
-            BindPlacement(context, null, stereotype);
+            BindPlacement(context, actualEditType, stereotype);
 
             _handlers.Value.Invoke(handler => handler.UpdateFrontEditor(context), Logger);
 
@@ -183,7 +193,8 @@ namespace Orchard.ContentManagement {
                         Content = context.ContentItem,
                         ContentType = context.ContentItem.ContentType,
                         Stereotype = stereotype,
-                        DisplayType = displayType,
+                        DisplayType = (context is BuildFrontEditorContext) ? null:displayType,
+                        EditType = (context is BuildFrontEditorContext) ? displayType:null,
                         Differentiator = differentiator,
                         Path = GetPath()
                     };

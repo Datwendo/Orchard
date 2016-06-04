@@ -56,14 +56,38 @@ namespace Orchard.Fields.Drivers {
             return ContentShape("Fields_Boolean_Edit", GetDifferentiator(field, part),
                 () => shapeHelper.EditorTemplate(TemplateName: TemplateName, Model: field, Prefix: GetPrefix(field, part)));
         }
+        // CS 3/6
+        protected override DriverResult FrontEditor(ContentPart part, BooleanField field, string editType, dynamic shapeHelper) {
+            return ContentShape("Fields_Boolean_FrontEdit", GetDifferentiator(field, part),
+                () => {
+                    if (part.IsNew()) {
+                        var settings = field.PartFieldDefinition.Settings.GetModel<BooleanFieldSettings>();
+                        field.Value = settings.DefaultValue;
+                    }
+                    return shapeHelper.FrontEditorTemplate(TemplateName: TemplateName, Model: field, Prefix: GetPrefix(field, part));
+                });
+        }
+        // CS 3/6
+        protected override DriverResult FrontEditor(ContentPart part, BooleanField field, string editType, IUpdateModel updater, dynamic shapeHelper) {
+            if (updater.TryUpdateModel(field, GetPrefix(field, part), null, null)) {
+                var settings = field.PartFieldDefinition.Settings.GetModel<BooleanFieldSettings>();
+
+                if (!settings.Optional && !field.Value.HasValue) {
+                    updater.AddModelError(field.Name, T("The field {0} is mandatory.", T(field.DisplayName)));
+                }
+            }
+
+            return ContentShape("Fields_Boolean_FrontEdit", GetDifferentiator(field, part),
+                () => shapeHelper.FrontEditorTemplate(TemplateName: TemplateName, Model: field, Prefix: GetPrefix(field, part)));
+        }
 
         protected override void Importing(ContentPart part, BooleanField field, ImportContentContext context) {
             context.ImportAttribute(field.FieldDefinition.Name + "." + field.Name, "Value", v => field.Value = bool.Parse(v));
         }
 
         protected override void Exporting(ContentPart part, BooleanField field, ExportContentContext context) {
-			if (field.Value.HasValue)
-				context.Element(field.FieldDefinition.Name + "." + field.Name).SetAttributeValue("Value", field.Value);
+            if (field.Value.HasValue)
+                context.Element(field.FieldDefinition.Name + "." + field.Name).SetAttributeValue("Value", field.Value);
         }
 
         protected override void Cloning(ContentPart part, BooleanField originalField, BooleanField cloneField, CloneContentContext context) {

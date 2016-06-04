@@ -74,5 +74,52 @@ namespace Orchard.Core.Common.OwnerEditor {
                     return model;
                 });
         }
+        // CS 3/6
+        protected override DriverResult FrontEditor(CommonPart part, string editType, dynamic shapeHelper) {
+            return FrontEditor(part, editType, null, shapeHelper);
+        }
+        // CS 3/6
+        protected override DriverResult FrontEditor(CommonPart part, string editType, IUpdateModel updater, dynamic shapeHelper) {
+            var currentUser = _authenticationService.GetAuthenticatedUser();
+            if (!_authorizationService.TryCheckAccess(StandardPermissions.SiteOwner, currentUser, part)) {
+                return null;
+            }
+
+
+            var settings = part.TypePartDefinition.Settings.GetModel<OwnerEditorSettings>();
+            if (!settings.ShowOwnerEditor) {
+                if (part.Owner == null) {
+                    part.Owner = currentUser;
+                }
+                return null;
+            }
+
+            return ContentShape(
+                "Parts_Common_Owner_FrontEdit",
+                () => {
+                    OwnerEditorViewModel model = shapeHelper.Parts_Common_Owner_FrontEdit(typeof(OwnerEditorViewModel));
+
+                    if (part.Owner != null) {
+                        model.Owner = part.Owner.UserName;
+                    }
+
+                    if (updater != null) {
+                        var priorOwner = model.Owner;
+                        updater.TryUpdateModel(model, Prefix, null, null);
+
+                        if (model.Owner != null && model.Owner != priorOwner) {
+                            var newOwner = _membershipService.GetUser(model.Owner);
+                            if (newOwner == null) {
+                                updater.AddModelError("OwnerEditor.Owner", T("Invalid user name"));
+                            }
+                            else {
+                                part.Owner = newOwner;
+                            }
+                        }
+                    }
+                    return model;
+                });
+        }
+
     }
 }

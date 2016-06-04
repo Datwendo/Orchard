@@ -84,7 +84,8 @@ namespace Orchard.ContentManagement.Drivers {
                 return null;
             }
 
-            DriverResult result = FrontEditor(part, context.New);
+            // CS 30/5
+            DriverResult result = FrontEditor(part,context.EditType, context.New);
 
             if (result != null) {
                 result.ContentPart = part;
@@ -101,12 +102,14 @@ namespace Orchard.ContentManagement.Drivers {
             }
 
             // Checking if the editor needs to be updated (e.g. if any of the shapes were not hidden).
-            DriverResult editor = FrontEditor(part, context.New);
+            // CS 30/5
+            DriverResult editor = FrontEditor(part,context.EditType, context.New);
             IEnumerable<ContentShapeResult> contentShapeResults = editor.GetShapeResults();
 
             if (contentShapeResults.Any(contentShapeResult =>
                 contentShapeResult == null || contentShapeResult.WasDisplayed(context))) {
-                DriverResult result = FrontEditor(part, context.Updater, context.New);
+                // CS 30/5
+                DriverResult result = FrontEditor(part,context.EditType, context.Updater, context.New);
 
                 if (result != null) {
                     result.ContentPart = part;
@@ -168,9 +171,9 @@ namespace Orchard.ContentManagement.Drivers {
         protected virtual DriverResult Editor(TContent part, dynamic shapeHelper) { return null; }
         protected virtual DriverResult Editor(TContent part, IUpdateModel updater, dynamic shapeHelper) { return null; }
         // CS 25/5 
-        protected virtual DriverResult FrontEditor(TContent part, dynamic shapeHelper) { return null; }
+        protected virtual DriverResult FrontEditor(TContent part, string editType, dynamic shapeHelper) { return null; }
         // CS 25/5 
-        protected virtual DriverResult FrontEditor(TContent part, IUpdateModel updater, dynamic shapeHelper) { return null; }
+        protected virtual DriverResult FrontEditor(TContent part, string editType, IUpdateModel updater, dynamic shapeHelper) { return null; }
         protected virtual void Importing(TContent part, ImportContentContext context) { }
         protected virtual void Imported(TContent part, ImportContentContext context) { }
         protected virtual void ImportCompleted(TContent part, ImportContentContext context) { }

@@ -37,6 +37,19 @@ namespace Orchard.Core.Title.Drivers {
 
             return Editor(part, shapeHelper);
         }
+        // CS 3/6 
+        protected override DriverResult FrontEditor(TitlePart part, string editType, dynamic shapeHelper) {
+
+            return ContentShape("Parts_Title_FrontEdit",
+                () => shapeHelper.FrontEditorTemplate(TemplateName: TemplateName, Model: part, Prefix: Prefix));
+        }
+
+        // CS 3/6 
+        protected override DriverResult FrontEditor(TitlePart part, string editType, IUpdateModel updater, dynamic shapeHelper) {
+            updater.TryUpdateModel(part, Prefix, null, null);
+
+            return FrontEditor(part, editType, shapeHelper);
+        }
 
         protected override void Importing(TitlePart part, ImportContentContext context) {
             // Don't do anything if the tag is not specified.

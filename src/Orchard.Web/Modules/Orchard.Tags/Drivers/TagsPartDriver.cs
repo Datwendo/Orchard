@@ -14,6 +14,7 @@ namespace Orchard.Tags.Drivers {
     public class TagsPartDriver : ContentPartDriver<TagsPart> {
         public static readonly char[] DisalowedChars =  { '<', '>', '*', '%', ':', '&', '\\', '"', '|', '/' };
         private const string TemplateName = "Parts/Tags";
+        private const string FrontTemplateName = "Parts.Tags";
         private readonly ITagService _tagService;
         private readonly INotifier _notifier;
 
@@ -61,6 +62,36 @@ namespace Orchard.Tags.Drivers {
 
             return ContentShape("Parts_Tags_Edit",
                     () => shapeHelper.EditorTemplate(TemplateName: TemplateName, Model: model, Prefix: Prefix));
+        }
+        // CS 3/6
+        protected override DriverResult FrontEditor(TagsPart part, string editType, dynamic shapeHelper) {
+            return ContentShape("Parts_Tags_FrontEdit",
+                    () => shapeHelper.FrontEditorTemplate(TemplateName: FrontTemplateName, Model: BuildEditorViewModel(part), Prefix: Prefix));
+        }
+
+        // CS 3/6
+        protected override DriverResult FrontEditor(TagsPart part, string editType, IUpdateModel updater, dynamic shapeHelper) {
+            var model = new EditTagsViewModel();
+            updater.TryUpdateModel(model, Prefix, null, null);
+
+            var tagNames = TagHelpers.ParseCommaSeparatedTagNames(model.Tags);
+
+            // as the tag names are used in the route directly, prevent them from having ASP.NET disallowed chars
+            // c.f., http://www.hanselman.com/blog/ExperimentsInWackinessAllowingPercentsAnglebracketsAndOtherNaughtyThingsInTheASPNETIISRequestURL.aspx
+
+            var disallowedTags = tagNames.Where(x => DisalowedChars.Intersect(x).Any()).ToList();
+
+            if (disallowedTags.Any()) {
+                _notifier.Warning(T("The tags \"{0}\" could not be added because they contain forbidden chars: {1}", String.Join(", ", disallowedTags), String.Join(", ", DisalowedChars)));
+                tagNames = tagNames.Where(x => !disallowedTags.Contains(x)).ToList();
+            }
+
+            if (part.ContentItem.Id != 0) {
+                _tagService.UpdateTagsForContentItem(part.ContentItem, tagNames);
+            }
+
+            return ContentShape("Parts_Tags_FrontEdit",
+                    () => shapeHelper.FrontEditorTemplate(TemplateName: FrontTemplateName, Model: model, Prefix: Prefix));
         }
 
         private static EditTagsViewModel BuildEditorViewModel(TagsPart part) {

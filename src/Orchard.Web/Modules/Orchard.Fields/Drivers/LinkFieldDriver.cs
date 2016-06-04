@@ -63,6 +63,38 @@ namespace Orchard.Fields.Drivers {
 
             return Editor(part, field, shapeHelper);
         }
+        // CS 3/6
+        protected override DriverResult FrontEditor(ContentPart part, LinkField field, string editType, dynamic shapeHelper) {
+            return ContentShape("Fields_Link_FrontEdit", GetDifferentiator(field, part),
+                () => {
+                    if (part.IsNew()) {
+                        var settings = field.PartFieldDefinition.Settings.GetModel<LinkFieldSettings>();
+                        field.Value = settings.DefaultValue;
+                        field.Text = settings.TextDefaultValue;
+                    }
+                    return shapeHelper.FrontEditorTemplate(TemplateName: TemplateName, Model: field, Prefix: GetPrefix(field, part));
+                });
+        }
+
+        // CS 3/6
+        protected override DriverResult FrontEditor(ContentPart part, LinkField field, string editType, IUpdateModel updater, dynamic shapeHelper) {
+            if (updater.TryUpdateModel(field, GetPrefix(field, part), null, null)) {
+                var settings = field.PartFieldDefinition.Settings.GetModel<LinkFieldSettings>();
+
+                if (settings.Required && String.IsNullOrWhiteSpace(field.Value)) {
+                    updater.AddModelError(GetPrefix(field, part), T("Url is required for {0}", field.DisplayName));
+                }
+                else if (!String.IsNullOrWhiteSpace(field.Value) && !Uri.IsWellFormedUriString(field.Value, UriKind.RelativeOrAbsolute)) {
+                    updater.AddModelError(GetPrefix(field, part), T("{0} is an invalid url.", field.Value));
+                }
+                else if (settings.LinkTextMode == LinkTextMode.Required && String.IsNullOrWhiteSpace(field.Text)) {
+                    updater.AddModelError(GetPrefix(field, part), T("Text is required for {0}.", field.DisplayName));
+                }
+            }
+
+            return FrontEditor(part, field, editType, shapeHelper);
+        }
+
 
         protected override void Importing(ContentPart part, LinkField field, ImportContentContext context) {
             context.ImportAttribute(field.FieldDefinition.Name + "." + field.Name, "Text", v => field.Text = v);

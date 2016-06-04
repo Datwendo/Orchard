@@ -102,6 +102,22 @@ namespace Orchard.Taxonomies.Drivers {
 
             return Editor(termPart, shapeHelper);
         }
+        // CS 3/6
+        protected override DriverResult FrontEditor(TermPart part, string editType, dynamic shapeHelper) {
+            return ContentShape("Parts_Taxonomies_Term_Fields_FrontEdit",
+                    () => shapeHelper.FrontEditorTemplate(TemplateName: "Parts/Taxonomies.Term.Fields", Model: part, Prefix: Prefix));
+        }
+        // CS 3/6
+        protected override DriverResult FrontEditor(TermPart termPart, string editType, IUpdateModel updater, dynamic shapeHelper) {
+            if (updater.TryUpdateModel(termPart, Prefix, null, null)) {
+                var existing = _taxonomyService.GetTermByName(termPart.TaxonomyId, termPart.Name);
+                if (existing != null && existing.Record != termPart.Record && existing.Container.ContentItem.Record == termPart.Container.ContentItem.Record) {
+                    updater.AddModelError("Name", T("The term {0} already exists at this level", termPart.Name));
+                }
+            }
+
+            return FrontEditor(termPart, editType, shapeHelper);
+        }
 
         protected override void Exporting(TermPart part, ExportContentContext context) {
             context.Element(part.PartDefinition.Name).SetAttributeValue("Count", part.Count);

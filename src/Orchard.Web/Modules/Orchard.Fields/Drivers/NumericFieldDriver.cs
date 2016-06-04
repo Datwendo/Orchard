@@ -100,7 +100,68 @@ namespace Orchard.Fields.Drivers {
 
             return Editor(part, field, shapeHelper);
         }
+        // CS 3/6
+        protected override DriverResult FrontEditor(ContentPart part, NumericField field, string editType, dynamic shapeHelper) {
+            return ContentShape("Fields_Numeric_FrontEdit", GetDifferentiator(field, part),
+                () => {
+                    var settings = field.PartFieldDefinition.Settings.GetModel<NumericFieldSettings>();
+                    var value = part.IsNew() ? settings.DefaultValue : Convert.ToString(field.Value, _cultureInfo.Value);
 
+                    var model = new NumericFieldViewModel {
+                        Field = field,
+                        Settings = settings,
+                        Value = value
+                    };
+
+                    return shapeHelper.FrontEditorTemplate(TemplateName: TemplateName, Model: model, Prefix: GetPrefix(field, part));
+                });
+        }
+
+        // CS 3/6
+        protected override DriverResult FrontEditor(ContentPart part, NumericField field, string editType, IUpdateModel updater, dynamic shapeHelper) {
+            var viewModel = new NumericFieldViewModel();
+
+            if (updater.TryUpdateModel(viewModel, GetPrefix(field, part), null, null)) {
+                Decimal value;
+
+                var settings = field.PartFieldDefinition.Settings.GetModel<NumericFieldSettings>();
+
+                field.Value = null;
+
+                if (String.IsNullOrWhiteSpace(viewModel.Value)) {
+                    if (settings.Required) {
+                        updater.AddModelError(GetPrefix(field, part), T("The field {0} is mandatory.", T(field.DisplayName)));
+                    }
+                }
+                else if (!Decimal.TryParse(viewModel.Value, NumberStyles.Any, _cultureInfo.Value, out value)) {
+                    updater.AddModelError(GetPrefix(field, part), T("{0} is an invalid number", field.DisplayName));
+                }
+                else {
+
+                    field.Value = value;
+
+                    if (settings.Minimum.HasValue && value < settings.Minimum.Value) {
+                        updater.AddModelError(GetPrefix(field, part), T("The value must be greater than {0}", settings.Minimum.Value));
+                    }
+
+                    if (settings.Maximum.HasValue && value > settings.Maximum.Value) {
+                        updater.AddModelError(GetPrefix(field, part), T("The value must be less than {0}", settings.Maximum.Value));
+                    }
+
+                    // checking the number of decimals
+                    if (Math.Round(value, settings.Scale) != value) {
+                        if (settings.Scale == 0) {
+                            updater.AddModelError(GetPrefix(field, part), T("The field {0} must be an integer", field.DisplayName));
+                        }
+                        else {
+                            updater.AddModelError(GetPrefix(field, part), T("Invalid number of digits for {0}, max allowed: {1}", field.DisplayName, settings.Scale));
+                        }
+                    }
+                }
+            }
+
+            return FrontEditor(part, field, editType, shapeHelper);
+        }
         protected override void Importing(ContentPart part, NumericField field, ImportContentContext context) {
             context.ImportAttribute(field.FieldDefinition.Name + "." + field.Name, "Value", v => field.Value = decimal.Parse(v, CultureInfo.InvariantCulture), () => field.Value = (decimal?)null);
         }

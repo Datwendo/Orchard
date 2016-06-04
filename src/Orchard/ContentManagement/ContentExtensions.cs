@@ -199,9 +199,22 @@ namespace Orchard.ContentManagement {
             return manager.UpdateEditor(content, updater);
         }
 
+        // CS 30/5
+        public static TContent BuildFrontEditorShape<TContent>(this IContentManager manager, int id,string editType = "") where TContent : class, IContent {
+            var content = manager.Get<TContent>(id);
+            if (content == null)
+                return null;
+            return manager.BuildFrontEditor(content,editType);
 
+        }
 
-
+        public static TContent UpdateEditorShape<TContent>(this IContentManager manager, int id, IUpdateModel updater, string editType = "") where TContent : class, IContent {
+            var content = manager.Get<TContent>(id);
+            if (content == null)
+                return null;
+            return manager.UpdateEditor(content, updater,editType);
+        }
+        
         /* Aggregate item/part type casting extension methods */
 
         public static bool Is<T>(this IContent content) {

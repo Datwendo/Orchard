@@ -170,12 +170,29 @@
     <Compile Include="ViewModels\NumericFieldViewModel.cs" />
     <Compile Include="ViewModels\DateTimeFieldViewModel.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Views\FrontEditorTemplates\Fields\Boolean.Edit.cshtml" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Fields\Input.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\FrontEditorTemplates\Fields\DateTime.Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\FrontEditorTemplates\Fields\Enumeration.Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\FrontEditorTemplates\Fields\Input.Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\FrontEditorTemplates\Fields\Link.Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\FrontEditorTemplates\Fields\Numeric.Edit.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

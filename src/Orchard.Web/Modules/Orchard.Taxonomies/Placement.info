@@ -1,7 +1,8 @@
 ﻿<Placement>
   <!-- Location of field edition -->
   <Place Fields_TaxonomyField_Edit="Content:9"/>
-  
+  <Place Fields_TaxonomyField_FrontEdit="-"/>
+
   <!-- Display terms in front-end summaries -->
   <Match DisplayType="Summary">
     <Place Fields_TaxonomyField="Content:after"/>
@@ -19,7 +20,8 @@
   
   <!-- Display in admin -->
   <Place Parts_Taxonomies_Term_Fields="Content:2"/>
-  
+  <Place Parts_Taxonomies_Term_Fields_FrontEdit="Content:2"/>
+
   <!-- New Shapes -->
   <Place Parts_TaxonomyPart="Content:5" />
   <Place Parts_TermPart="Content:5" />

@@ -27,8 +27,20 @@ namespace Orchard.Core.Common.Services {
                     .Where(x => !String.IsNullOrWhiteSpace(x))
                     .Select(x => x[0].ToString(CultureInfo.InvariantCulture).ToUpper() + x.Substring(1))
                     .Select(x => x.CamelFriendly());
+                // CS 28/5 3/6
+                //if (!flavors.Any()) {
+                var flavors2 = shapeTable.Bindings.Keys
+                        .Where(x => x.StartsWith("Body_FrontEditor__", StringComparison.OrdinalIgnoreCase))
+                        .Select(x => x.Substring("Body_FrontEditor__".Length))
+                        .Where(x => !String.IsNullOrWhiteSpace(x))
+                        .Select(x => x[0].ToString(CultureInfo.InvariantCulture).ToUpper() + x.Substring(1))
+                        .Select(x => x.CamelFriendly());
+                //}
 
-                return flavors.ToList();
+                var lst = flavors.ToList();
+                if ( flavors2.Any())
+                    lst.AddRange(flavors2);
+                return lst;
             });
         }
     }

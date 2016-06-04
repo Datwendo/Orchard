@@ -115,6 +115,8 @@ namespace Orchard.DisplayManagement.Descriptors {
         public string ContentType { get; set; }
         public string Stereotype { get; set; }
         public string DisplayType { get; set; }
+        // CS 30/5
+        public string EditType { get; set; }
         public string Differentiator { get; set; }
         public string Path { get; set; }
         public string Source { get; set; }

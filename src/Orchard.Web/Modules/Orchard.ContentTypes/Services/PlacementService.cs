@@ -81,7 +81,7 @@ namespace Orchard.ContentTypes.Services {
             var workContext = _workContextAccessor.GetContext(_requestContext.HttpContext);
             context.Layout = workContext.Layout;
 
-            BindPlacement(context, actualDisplayType, "Content");
+            BindPlacement(context, actualDisplayType,null, "Content");
 
             var placementSettings = new List<DriverResultPlacement>();
 
@@ -111,7 +111,7 @@ namespace Orchard.ContentTypes.Services {
             itemShape.ContentItem = content;
             
             var context = new BuildEditorContext(itemShape, content, String.Empty, _shapeFactory);
-            BindPlacement(context, null, "Content");
+            BindPlacement(context, null,null, "Content");
 
             var placementSettings = new List<DriverResultPlacement>();
 
@@ -135,14 +135,15 @@ namespace Orchard.ContentTypes.Services {
         }
 
         // CS 25/5
-        public IEnumerable<DriverResultPlacement> GetFrontEditorPlacement(string contentType) {
+        public IEnumerable<DriverResultPlacement> GetFrontEditorPlacement(string contentType,string editType) {
             var content = _contentManager.New(contentType);
 
             dynamic itemShape = CreateItemShape("Content_FrontEdit");
             itemShape.ContentItem = content;
+            itemShape.Metadata.EditType = editType;
 
-            var context = new BuildFrontEditorContext(itemShape, content, String.Empty, _shapeFactory);
-            BindPlacement(context, null, "Content");
+            var context = new BuildFrontEditorContext(itemShape, content, editType, String.Empty, _shapeFactory);
+            BindPlacement(context, null, editType, "Content");
 
             var placementSettings = new List<DriverResultPlacement>();
 
@@ -268,24 +269,24 @@ namespace Orchard.ContentTypes.Services {
                 }
 
                 var content = _contentManager.New(context.ContentItem.ContentType);
-
-                dynamic itemShape = CreateItemShape("Content_Edit");
+                // CS 29/5
+                dynamic itemShape = (context is BuildFrontEditorContext) ? CreateItemShape("Content_FrontEdit") : CreateItemShape("Content_Edit");
                 itemShape.ContentItem = content;
 
                 if(context is BuildDisplayContext) {
                     var newContext = new BuildDisplayContext(itemShape, content, "Detail", "", context.New);
-                    BindPlacement(newContext, "Detail", "Content");
+                    BindPlacement(newContext, "Detail",null, "Content");
                     contentShapeResult.Apply(newContext);
                 }
                 // CS 25/5
                 else if (context is BuildFrontEditorContext) {
-                    var newContext = new BuildFrontEditorContext(itemShape, content, "", context.New);
-                    BindPlacement(newContext, null, "Content");
+                    var newContext = new BuildFrontEditorContext(itemShape, content, ((BuildFrontEditorContext)context).EditType, "", context.New);
+                    BindPlacement(newContext, null,string.Empty, "Content");
                     contentShapeResult.Apply(newContext);
                 }
                 else {
                     var newContext = new BuildEditorContext(itemShape, content, "", context.New);
-                    BindPlacement(newContext, null, "Content");
+                    BindPlacement(newContext, null, null,"Content");
                     contentShapeResult.Apply(newContext);
                 }
 
@@ -309,7 +310,7 @@ namespace Orchard.ContentTypes.Services {
             return zoneHolding;
         }
 
-        private void BindPlacement(BuildShapeContext context, string displayType, string stereotype) {
+        private void BindPlacement(BuildShapeContext context, string displayType, string editType, string stereotype) {
             context.FindPlacement = (partShapeType, differentiator, defaultLocation) => {
 
                 var theme = _siteThemeService.GetSiteTheme();
@@ -324,6 +325,7 @@ namespace Orchard.ContentTypes.Services {
                         ContentType = context.ContentItem.ContentType,
                         Stereotype = stereotype,
                         DisplayType = displayType,
+                        EditType = editType, 
                         Differentiator = differentiator,
                         Path = VirtualPathUtility.AppendTrailingSlash(_virtualPathProvider.ToAppRelative(request.Path)) // get the current app-relative path, i.e. ~/my-blog/foo
                     };

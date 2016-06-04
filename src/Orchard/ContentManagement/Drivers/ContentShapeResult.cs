@@ -63,6 +63,7 @@ namespace Orchard.ContentManagement.Drivers {
 
             ShapeMetadata newShapeMetadata = newShape.Metadata;
             newShapeMetadata.Prefix = _prefix;
+            // DisplayType is used for Display and FrontEdit Contexts
             newShapeMetadata.DisplayType = displayType;
             newShapeMetadata.PlacementSource = placement.Source;
             newShapeMetadata.Tab = placement.GetTab();
@@ -141,6 +142,7 @@ namespace Orchard.ContentManagement.Drivers {
                     ContentType = context.ContentItem.ContentType,
                     Differentiator = _differentiator,
                     DisplayType = null,
+                    EditType = null,
                     Path = context.Path
                 };
 
@@ -175,6 +177,7 @@ namespace Orchard.ContentManagement.Drivers {
                     ContentType = context.ContentItem.ContentType,
                     Differentiator = _differentiator,
                     DisplayType = null,
+                    EditType = context.EditType,
                     Path = context.Path
                 };
 

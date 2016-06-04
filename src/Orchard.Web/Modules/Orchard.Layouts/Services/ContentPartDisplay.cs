@@ -68,10 +68,9 @@ namespace Orchard.Layouts.Services {
         }
 
         // CS 25/5
-        public dynamic BuildFrontEditor(ContentPart part, string groupId) {
-            var context = BuildFrontEditorContext(part, groupId);
+        public dynamic BuildFrontEditor(ContentPart part, string editType, string groupId) {
+            var context = BuildFrontEditorContext(part, editType, groupId);
             var drivers = GetPartDrivers(part.PartDefinition.Name);
-
             drivers.Invoke(driver => {
                 var result = driver.BuildFrontEditor(context);
                 if (result != null)
@@ -81,10 +80,9 @@ namespace Orchard.Layouts.Services {
             return context.Shape;
         }
         // CS 25/5
-        public dynamic UpdateFrontEditor(ContentPart part, IUpdateModel updater, string groupInfoId) {
-            var context = UpdateFrontEditorContext(part, updater, groupInfoId);
+        public dynamic UpdateFrontEditor(ContentPart part, IUpdateModel updater, string editType, string groupInfoId) {
+            var context = UpdateFrontEditorContext(part, updater, editType, groupInfoId);
             var drivers = GetPartDrivers(part.PartDefinition.Name);
-
             drivers.Invoke(driver => {
                 var result = driver.UpdateFrontEditor(context);
                 if (result != null)

@@ -145,6 +145,59 @@ namespace Orchard.Core.Containers.Drivers {
                 return shapeHelper.EditorTemplate(TemplateName: "Container", Model: model, Prefix: "Container");
             });
         }
+        // CS 3/6
+        protected override DriverResult FrontEditor(ContainerPart part, string editType, dynamic shapeHelper) {
+            if (!_contentDefinitionManager.ListTypeDefinitions().Any(typeDefinition => typeDefinition.Parts.Any(partDefinition => partDefinition.PartDefinition.Name == "ContainablePart"))) {
+                _orchardServices.Notifier.Warning(T("There are no content types in the system with a Containable part attached. Consider adding a Containable part to some content type, existing or new, in order to relate items to this (Container enabled) item."));
+            }
+            return FrontEditor(part, editType, (IUpdateModel)null, shapeHelper);
+        }
+        // CS 3/6
+        protected override DriverResult FrontEditor(ContainerPart part, string editType, IUpdateModel updater, dynamic shapeHelper) {
+            return ContentShape("Parts_Container_FrontEdit", () => {
+                if (!part.ContainerSettings.DisplayContainerEditor) {
+                    return null;
+                }
+
+                var containables = !part.ContainerSettings.RestrictItemContentTypes ? _containerService.GetContainableTypes().ToList() : new List<ContentTypeDefinition>(0);
+                var model = new ContainerViewModel {
+                    AdminMenuPosition = part.AdminMenuPosition,
+                    AdminMenuText = part.AdminMenuText,
+                    AdminMenuImageSet = part.AdminMenuImageSet,
+                    ItemsShown = part.ItemsShown,
+                    PageSize = part.PageSize,
+                    Paginated = part.Paginated,
+                    SelectedItemContentTypes = part.ItemContentTypes.Select(x => x.Name).ToList(),
+                    ShowOnAdminMenu = part.ShowOnAdminMenu,
+                    AvailableItemContentTypes = containables,
+                    RestrictItemContentTypes = part.ContainerSettings.RestrictItemContentTypes,
+                    EnablePositioning = part.Record.EnablePositioning,
+                    OverrideEnablePositioning = part.ContainerSettings.EnablePositioning == null
+                };
+
+                if (updater != null) {
+                    if (updater.TryUpdateModel(model, "Container", null, new[] { "OverrideEnablePositioning" })) {
+                        part.AdminMenuPosition = model.AdminMenuPosition;
+                        part.AdminMenuText = model.AdminMenuText;
+                        part.AdminMenuImageSet = model.AdminMenuImageSet;
+                        part.ItemsShown = model.ItemsShown;
+                        part.PageSize = model.PageSize;
+                        part.Paginated = model.Paginated;
+                        part.ShowOnAdminMenu = model.ShowOnAdminMenu;
+
+                        if (!part.ContainerSettings.RestrictItemContentTypes) {
+                            part.ItemContentTypes = _contentDefinitionManager.ListTypeDefinitions().Where(x => model.SelectedItemContentTypes.Contains(x.Name));
+                        }
+
+                        if (model.OverrideEnablePositioning) {
+                            part.Record.EnablePositioning = model.EnablePositioning;
+                        }
+                    }
+                }
+
+                return shapeHelper.FrontEditorTemplate(TemplateName: "Container", Model: model, Prefix: "Container");
+            });
+        }
 
         protected override void Importing(ContainerPart part, ImportContentContext context) {
             // Don't do anything if the tag is not specified.

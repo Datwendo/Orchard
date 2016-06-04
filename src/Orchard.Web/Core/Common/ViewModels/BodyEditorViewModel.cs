@@ -16,5 +16,7 @@ namespace Orchard.Core.Common.ViewModels {
 
         public string EditorFlavor { get; set; }
         public string AddMediaPath { get; set; }
+        // CS 1/6
+        public string EditType { get; set; }
     }
 }

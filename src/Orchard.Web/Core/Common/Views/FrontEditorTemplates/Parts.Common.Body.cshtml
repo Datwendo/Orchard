@@ -1,0 +1,8 @@
+﻿@using Orchard.Core.Common.ViewModels
+@model BodyEditorViewModel
+<fieldset>
+    <label>@T("Body")</label>
+    @Display.Body_FrontEditor(Text: Model.Text, EditorFlavor: Model.EditorFlavor,
+        Required: false, AutoFocus: false, ContentItem: Model.BodyPart.ContentItem, AddMediaPath: Model.AddMediaPath) @* bug fix *@
+    @Html.ValidationMessageFor(m => m.Text)
+</fieldset>

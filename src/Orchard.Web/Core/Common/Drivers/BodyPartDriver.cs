@@ -48,7 +48,7 @@ namespace Orchard.Core.Common.Drivers {
         }
 
         protected override DriverResult Editor(BodyPart part, dynamic shapeHelper) {
-            var model = BuildEditorViewModel(part,_requestContext);
+            var model = BuildEditorViewModel(part, _requestContext);
             return ContentShape("Parts_Common_Body_Edit",
                                 () => shapeHelper.EditorTemplate(TemplateName: TemplateName, Model: model, Prefix: Prefix));
         }
@@ -57,8 +57,22 @@ namespace Orchard.Core.Common.Drivers {
             var model = BuildEditorViewModel(part, _requestContext);
             updater.TryUpdateModel(model, Prefix, null, null);
 
-            return ContentShape("Parts_Common_Body_Edit", 
+            return ContentShape("Parts_Common_Body_Edit",
                                 () => shapeHelper.EditorTemplate(TemplateName: TemplateName, Model: model, Prefix: Prefix));
+        }
+        // CS 3/6
+        protected override DriverResult FrontEditor(BodyPart part, string editType, dynamic shapeHelper) {
+            var model = BuildEditorViewModel(part, _requestContext);
+            return ContentShape("Parts_Common_Body_FrontEdit",
+                                () => shapeHelper.FrontEditorTemplate(TemplateName: TemplateName, Model: model, Prefix: Prefix));
+        }
+        // CS 3/6
+        protected override DriverResult FrontEditor(BodyPart part, string editType, IUpdateModel updater, dynamic shapeHelper) {
+            var model = BuildEditorViewModel(part, _requestContext);
+            updater.TryUpdateModel(model, Prefix, null, null);
+
+            return ContentShape("Parts_Common_Body_FrontEdit",
+                                () => shapeHelper.FrontEditorTemplate(TemplateName: TemplateName, Model: model, Prefix: Prefix));
         }
 
         protected override void Importing(BodyPart part, ContentManagement.Handlers.ImportContentContext context) {

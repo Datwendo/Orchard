@@ -1,5 +1,6 @@
 using Orchard.DisplayManagement;
 using Orchard.DisplayManagement.Descriptors;
+using System.Collections.Generic;
 
 namespace Orchard.ContentManagement.Handlers {
     public class UpdateEditorContext : BuildEditorContext {
@@ -19,12 +20,13 @@ namespace Orchard.ContentManagement.Handlers {
     // CS 25/5
     public class UpdateFrontEditorContext : BuildFrontEditorContext {
 
-        public UpdateFrontEditorContext(IShape model, IContent content, IUpdateModel updater, string groupInfoId, IShapeFactory shapeFactory, ShapeTable shapeTable, string path)
-            : base(model, content, groupInfoId, shapeFactory) {
+        public UpdateFrontEditorContext(IShape model, IContent content, IUpdateModel updater, string editType, string groupInfoId, IShapeFactory shapeFactory, ShapeTable shapeTable, string path)
+            : base(model, content, editType, groupInfoId, shapeFactory) {
 
             ShapeTable = shapeTable;
             Updater = updater;
             Path = path;
+
         }
 
         public IUpdateModel Updater { get; private set; }

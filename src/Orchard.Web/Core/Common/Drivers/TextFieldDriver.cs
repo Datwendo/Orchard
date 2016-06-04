@@ -75,6 +75,40 @@ namespace Orchard.Core.Common.Drivers {
 
             return Editor(part, field, shapeHelper);
         }
+        // CS 3/6
+        protected override DriverResult FrontEditor(ContentPart part, TextField field, string editType, dynamic shapeHelper) {
+            return ContentShape("Fields_Common_Text_FrontEdit", GetDifferentiator(field, part),
+                () => {
+                    var settings = field.PartFieldDefinition.Settings.GetModel<TextFieldSettings>();
+                    var text = part.IsNew() ? settings.DefaultValue : field.Value;
+
+                    var viewModel = new TextFieldDriverViewModel {
+                        Field = field,
+                        Text = text,
+                        Settings = settings,
+                        ContentItem = part.ContentItem
+                    };
+
+                    return shapeHelper.FrontEditorTemplate(TemplateName: "Fields.Common.Text.FrontEdit", Model: viewModel, Prefix: GetPrefix(field, part));
+                });
+        }
+        // CS 3/6
+        protected override DriverResult FrontEditor(ContentPart part, TextField field, string editType, IUpdateModel updater, dynamic shapeHelper) {
+
+            var viewModel = new TextFieldDriverViewModel();
+
+            if (updater.TryUpdateModel(viewModel, GetPrefix(field, part), null, null)) {
+                var settings = field.PartFieldDefinition.Settings.GetModel<TextFieldSettings>();
+
+                field.Value = viewModel.Text;
+
+                if (settings.Required && String.IsNullOrWhiteSpace(field.Value)) {
+                    updater.AddModelError("Text", T("The field {0} is mandatory", T(field.DisplayName)));
+                }
+            }
+
+            return FrontEditor(part, field, editType, shapeHelper);
+        }
 
         protected override void Importing(ContentPart part, TextField field, ImportContentContext context) {
             var importedText = context.Attribute(field.FieldDefinition.Name + "." + field.Name, "Text");

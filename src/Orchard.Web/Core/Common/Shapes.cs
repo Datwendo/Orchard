@@ -20,6 +20,12 @@ namespace Orchard.Core.Common {
                     string flavor = displaying.Shape.EditorFlavor;
                     displaying.ShapeMetadata.Alternates.Add("Body_Editor__" + flavor);
                 });
+            // CS 28/5
+            builder.Describe("Body_FrontEditor")
+                .OnDisplaying(displaying => {
+                    string flavor = displaying.Shape.EditorFlavor;
+                    displaying.ShapeMetadata.Alternates.Add("Body_FrontEditor__" + flavor);
+                });
         }
 
         [Shape]

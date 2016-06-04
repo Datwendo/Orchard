@@ -108,6 +108,44 @@ namespace Orchard.PublishLater.Drivers {
             return ContentShape("Parts_PublishLater_Edit",
                                 () => shapeHelper.EditorTemplate(TemplateName: TemplateName, Model: model, Prefix: Prefix));
         }
+        // CS 3/6
+        protected override DriverResult FrontEditor(PublishLaterPart part, string editType, dynamic shapeHelper) {
+            var model = BuildViewModelFromPart(part);
+
+            return ContentShape("Parts_PublishLater_FrontEdit",
+                                () => shapeHelper.FrontEditorTemplate(TemplateName: TemplateName, Model: model, Prefix: Prefix));
+        }
+        // CS 3/6
+        protected override DriverResult FrontEditor(PublishLaterPart part, string editType, IUpdateModel updater, dynamic shapeHelper) {
+            var model = BuildViewModelFromPart(part);
+
+            updater.TryUpdateModel(model, Prefix, null, null);
+            var httpContext = _httpContextAccessor.Current();
+            if (httpContext.Request.Form["submit.Save"] == "submit.PublishLater") {
+                if (!String.IsNullOrWhiteSpace(model.Editor.Date) && !String.IsNullOrWhiteSpace(model.Editor.Time)) {
+                    try {
+                        var utcDateTime = _dateLocalizationServices.ConvertFromLocalizedString(model.Editor.Date, model.Editor.Time);
+                        if (utcDateTime.HasValue) {
+                            if (utcDateTime.Value < _clock.UtcNow) {
+                                updater.AddModelError("ScheduledPublishUtcDate", T("You cannot schedule a publishing date in the past."));
+                            }
+                            else {
+                                _publishLaterService.Publish(model.ContentItem, utcDateTime.Value);
+                            }
+                        }
+                    }
+                    catch (FormatException) {
+                        updater.AddModelError(Prefix, T("'{0} {1}' could not be parsed as a valid date and time.", model.Editor.Date, model.Editor.Time));
+                    }
+                }
+                else {
+                    updater.AddModelError(Prefix, T("Both the date and time need to be specified for when this is to be published. If you don't want to schedule publishing then click Save or Publish Now."));
+                }
+            }
+
+            return ContentShape("Parts_PublishLater_FrontEdit",
+                                () => shapeHelper.FrontEditorTemplate(TemplateName: TemplateName, Model: model, Prefix: Prefix));
+        }
 
         protected override void Importing(PublishLaterPart part, ImportContentContext context) {
             // Don't do anything if the tag is not specified.

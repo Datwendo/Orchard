@@ -55,6 +55,30 @@ namespace Orchard.Fields.Drivers {
 
             return Editor(part, field, shapeHelper);
         }
+        // CS 3/6
+        protected override DriverResult FrontEditor(ContentPart part, InputField field, string editType, dynamic shapeHelper) {
+            return ContentShape("Fields_Input_FrontEdit", GetDifferentiator(field, part),
+                () => {
+                    if (part.IsNew()) {
+                        var settings = field.PartFieldDefinition.Settings.GetModel<InputFieldSettings>();
+                        field.Value = settings.DefaultValue;
+                    }
+                    return shapeHelper.FrontEditorTemplate(TemplateName: TemplateName, Model: field, Prefix: GetPrefix(field, part));
+                });
+        }
+
+        // CS 3/6
+        protected override DriverResult FrontEditor(ContentPart part, InputField field, string editType, IUpdateModel updater, dynamic shapeHelper) {
+            if (updater.TryUpdateModel(field, GetPrefix(field, part), null, null)) {
+                var settings = field.PartFieldDefinition.Settings.GetModel<InputFieldSettings>();
+
+                if (settings.Required && String.IsNullOrWhiteSpace(field.Value)) {
+                    updater.AddModelError(GetPrefix(field, part), T("The field {0} is mandatory.", T(field.DisplayName)));
+                }
+            }
+
+            return FrontEditor(part, field, editType, shapeHelper);
+        }
 
         protected override void Importing(ContentPart part, InputField field, ImportContentContext context) {
             context.ImportAttribute(field.FieldDefinition.Name + "." + field.Name, "Value", v => field.Value = v);

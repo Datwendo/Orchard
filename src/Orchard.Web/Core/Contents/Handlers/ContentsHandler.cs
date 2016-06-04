@@ -12,6 +12,7 @@ namespace Orchard.Core.Contents.Handlers {
                     {"Id", context.ContentItem.ContentType}
                 };
             }
+
             if (context.Metadata.EditorRouteValues == null) {
                 context.Metadata.EditorRouteValues = new RouteValueDictionary {
                     {"Area", "Contents"},
@@ -20,6 +21,24 @@ namespace Orchard.Core.Contents.Handlers {
                     {"Id", context.ContentItem.Id}
                 };
             }
+            /* Include this in your contentItem handlers for FrontCretion/Edition
+            if (context.Metadata.FrontCreateRouteValues == null) {
+                context.Metadata.FrontCreateRouteValues = new RouteValueDictionary {
+                    {"Area", "Contents"},
+                    {"Controller", "FrontAdmin"},
+                    {"Action", "Create"},
+                    {"Id", context.ContentItem.ContentType}
+                };
+            }
+
+            if (context.Metadata.FrontEditorRouteValues == null) {
+                context.Metadata.FrontEditorRouteValues = new RouteValueDictionary {
+                    {"Area", "Contents"},
+                    {"Controller", "FrontAdmin"},
+                    {"Action", "Edit"},
+                    {"Id", context.ContentItem.Id}
+                };
+            }*/
             if (context.Metadata.DisplayRouteValues == null) {
                 context.Metadata.DisplayRouteValues = new RouteValueDictionary {
                     {"Area", "Contents"},

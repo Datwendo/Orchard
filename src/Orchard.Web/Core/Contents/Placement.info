@@ -6,13 +6,22 @@
         Parts_Contents_Publish_SummaryAdmin
     -->
     <!-- edit "shape" -->
-    <Place Content_PublishButton="Sidebar:24"/>
-    <Place Content_SaveButton="Sidebar:23"/>
-    <Match DisplayType="Detail">
+  <Place Content_PublishButton="Sidebar:24"/>
+  <Place Content_SaveButton="Sidebar:23"/>
+  <!-- // CS 28/5 -->
+  <Place Content_PublishButton_FrontEdit="Content:after"/>
+  <Place Content_SaveButton_FrontEdit="Content:after"/>
+  
+  <Match DisplayType="Detail">
         <Place Parts_Contents_Publish="Content:5"/>
     </Match>
-    <Match DisplayType="SummaryAdmin">
-        <Place Parts_Contents_Publish_SummaryAdmin="Actions:5"
-               Parts_Contents_Clone_SummaryAdmin="Actions:6"/>
-    </Match>
+  <Match DisplayType="SummaryAdmin">
+    <Place Parts_Contents_Publish_SummaryAdmin="Actions:5"
+           Parts_Contents_Clone_SummaryAdmin="Actions:6"/>
+  </Match>
+  <!-- // CS 27/5 -->
+  <Match DisplayType="FrontAdminSummary">
+    <Place Parts_Contents_Publish_FrontAdminSummary="Actions:5"
+           Parts_Contents_Clone_FrontAdminSummary="Actions:6"/>
+  </Match>
 </Placement>

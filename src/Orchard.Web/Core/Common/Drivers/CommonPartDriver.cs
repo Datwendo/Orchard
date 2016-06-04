@@ -66,7 +66,34 @@ namespace Orchard.Core.Common.Drivers {
             return ContentShape("Parts_Common_Container_Edit",
                                 () => shapeHelper.EditorTemplate(TemplateName: "Parts.Common.Container", Model: model, Prefix: Prefix));
         }
+        // CS 3/6
+        protected override DriverResult FrontEditor(CommonPart part, string editType, dynamic shapeHelper) {
+            return FrontEditor(part, editType, null, shapeHelper);
+        }
+        // CS 3/6
+        protected override DriverResult FrontEditor(CommonPart part, string editType, IUpdateModel updater, dynamic shapeHelper) {
+            var model = new ContainerEditorViewModel();
+            if (part.Container != null)
+                model.ContainerId = part.Container.ContentItem.Id;
 
+            if (updater != null) {
+                var priorContainerId = model.ContainerId;
+                updater.TryUpdateModel(model, Prefix, null, null);
+
+                if (model.ContainerId != null && model.ContainerId != priorContainerId) {
+                    var newContainer = _contentManager.Get((int)model.ContainerId, VersionOptions.Latest);
+                    if (newContainer == null) {
+                        updater.AddModelError("CommonPart.ContainerId", T("Invalid container"));
+                    }
+                    else {
+                        part.Container = newContainer;
+                    }
+                }
+            }
+
+            return ContentShape("Parts_Common_Container_FrontEdit",
+                                () => shapeHelper.FrontEditorTemplate(TemplateName: "Parts.Common.Container", Model: model, Prefix: Prefix));
+        }
         protected override void Importing(CommonPart part, ImportContentContext context) {
             // Don't do anything if the tag is not specified.
             if (context.Data.Element(part.PartDefinition.Name) == null) {

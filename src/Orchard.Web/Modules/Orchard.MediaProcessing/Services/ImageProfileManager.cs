@@ -63,6 +63,7 @@ namespace Orchard.MediaProcessing.Services {
 
         public string GetImageProfileUrl(string path, string profileName, ContentItem contentItem, params FilterRecord[] customFilters) {
 
+            customFilters = (customFilters == null) ? null: customFilters.Where(f => f != null).ToArray();
             // path is the publicUrl of the media, so it might contain url-encoded chars
 
             // try to load the processed filename from cache

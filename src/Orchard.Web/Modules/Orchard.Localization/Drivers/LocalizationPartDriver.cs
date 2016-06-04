@@ -68,6 +68,37 @@ namespace Orchard.Localization.Drivers {
 
             return Editor(part, shapeHelper);
         }
+        // CS 3/6
+        protected override DriverResult FrontEditor(LocalizationPart part, string editType, dynamic shapeHelper) {
+            var localizations = GetEditorLocalizations(part).ToList();
+
+            var missingCultures = part.HasTranslationGroup ?
+                RetrieveMissingCultures(part.MasterContentItem.As<LocalizationPart>(), true) :
+                RetrieveMissingCultures(part, part.Culture != null);
+
+            var model = new EditLocalizationViewModel {
+                SelectedCulture = GetCulture(part),
+                MissingCultures = missingCultures,
+                ContentItem = part,
+                MasterContentItem = part.HasTranslationGroup ? part.MasterContentItem : null,
+                ContentLocalizations = new ContentLocalizationsViewModel(part) { Localizations = localizations }
+            };
+
+            return ContentShape("Parts_Localization_ContentTranslations_FrontEdit",
+                () => shapeHelper.FrontEditorTemplate(TemplateName: "Parts/Localization.ContentTranslations.Edit", Model: model, Prefix: TemplatePrefix));
+        }
+        // CS 3/6
+        protected override DriverResult FrontEditor(LocalizationPart part, string editType, IUpdateModel updater, dynamic shapeHelper) {
+            var model = new EditLocalizationViewModel();
+
+            // GetCulture(part) is checked against null value, because the content culture has to be set only if it's not set already.
+            // model.SelectedCulture is checked against null value, because the editor group may not contain LocalizationPart when the content item is saved for the first time.
+            if (updater != null && updater.TryUpdateModel(model, TemplatePrefix, null, null) && GetCulture(part) == null && !string.IsNullOrEmpty(model.SelectedCulture)) {
+                _localizationService.SetContentCulture(part, model.SelectedCulture);
+            }
+
+            return Editor(part, shapeHelper);
+        }
 
         private List<string> RetrieveMissingCultures(LocalizationPart part, bool excludePartCulture) {
             var editorLocalizations = GetEditorLocalizations(part);

@@ -422,7 +422,9 @@
     <Content Include="Settings\Styles\Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Containers\Placement.info" />
+    <Content Include="Containers\Placement.info">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Containers\Views\EditorTemplates\Container.cshtml" />
     <Content Include="Containers\Views\DefinitionTemplates\ContainerPartSettings.cshtml" />
     <Content Include="Containers\Views\DefinitionTemplates\ContainerTypePartSettingsViewModel.cshtml" />
@@ -601,6 +603,45 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Contents\Views\Content.FrontEdit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Common\Views\Body.FrontEditor.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Title\Views\FrontEditorTemplates\Parts.Title.TitlePart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Common\Views\FrontEditorTemplates\DateTimeEditor.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Common\Views\FrontEditorTemplates\Fields.Common.Text.FrontEdit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Common\Views\FrontEditorTemplates\Flavor.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Common\Views\FrontEditorTemplates\Parts.Common.Body.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Common\Views\FrontEditorTemplates\Parts.Common.Container.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Common\Views\Parts.Common.Date.FrontEdit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Common\Views\Parts.Common.Owner.FrontEdit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Containers\Views\FrontEditorTemplates\Containable.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Containers\Views\FrontEditorTemplates\Container.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Containers\Views\FrontEditorTemplates\ListViewPicker.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

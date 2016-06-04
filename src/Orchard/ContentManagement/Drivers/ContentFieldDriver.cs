@@ -66,7 +66,8 @@ namespace Orchard.ContentManagement.Drivers {
         // CS 25/5
         DriverResult IContentFieldDriver.BuildFrontEditorShape(BuildFrontEditorContext context) {
             return Process(context.ContentItem, (part, field) => {
-                DriverResult result = FrontEditor(part, field, context.New);
+                //CS 30/5
+                DriverResult result = FrontEditor(part, field,context.EditType, context.New);
 
                 if (result != null) {
                     result.ContentPart = part;
@@ -79,13 +80,14 @@ namespace Orchard.ContentManagement.Drivers {
         // CS 25/5
         DriverResult IContentFieldDriver.UpdateFrontEditorShape(UpdateFrontEditorContext context) {
             return Process(context.ContentItem, (part, field) => {
+                //CS 30/5
                 // Checking if the editor needs to be updated (e.g. if any of the shapes were not hidden).
-                DriverResult editor = FrontEditor(part, field, context.New);
+                DriverResult editor = FrontEditor(part, field, context.EditType, context.New);
                 IEnumerable<ContentShapeResult> contentShapeResults = editor.GetShapeResults();
 
                 if (contentShapeResults.Any(contentShapeResult =>
                     contentShapeResult == null || contentShapeResult.WasDisplayed(context))) {
-                    DriverResult result = FrontEditor(part, field, context.Updater, context.New);
+                    DriverResult result = FrontEditor(part, field, context.EditType, context.Updater, context.New);
 
                     if (result != null) {
                         result.ContentPart = part;
@@ -169,9 +171,9 @@ namespace Orchard.ContentManagement.Drivers {
         protected virtual DriverResult Editor(ContentPart part, TField field, dynamic shapeHelper) { return null; }
         protected virtual DriverResult Editor(ContentPart part, TField field, IUpdateModel updater, dynamic shapeHelper) { return null; }
         // CS 25/5 
-        protected virtual DriverResult FrontEditor(ContentPart part, TField field, dynamic shapeHelper) { return null; }
+        protected virtual DriverResult FrontEditor(ContentPart part, TField field, string editType, dynamic shapeHelper) { return null; }
         // CS 25/5 
-        protected virtual DriverResult FrontEditor(ContentPart part, TField field, IUpdateModel updater, dynamic shapeHelper) { return null; }
+        protected virtual DriverResult FrontEditor(ContentPart part, TField field, string editType, IUpdateModel updater, dynamic shapeHelper) { return null; }
         protected virtual void Importing(ContentPart part, TField field, ImportContentContext context) { }
         protected virtual void Imported(ContentPart part, TField field, ImportContentContext context) { }
         protected virtual void ImportCompleted(ContentPart part, TField field, ImportContentContext context) { }

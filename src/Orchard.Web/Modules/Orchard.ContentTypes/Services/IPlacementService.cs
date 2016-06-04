@@ -6,7 +6,7 @@ namespace Orchard.ContentTypes.Services {
         IEnumerable<DriverResultPlacement> GetDisplayPlacement(string contentType);
         IEnumerable<DriverResultPlacement> GetEditorPlacement(string contentType);
         // CS 25/5
-        IEnumerable<DriverResultPlacement> GetFrontEditorPlacement(string contentType);
+        IEnumerable<DriverResultPlacement> GetFrontEditorPlacement(string contentType,string editType);
         IEnumerable<string> GetZones();
         IEnumerable<string> GetZones(string layer);
     }
