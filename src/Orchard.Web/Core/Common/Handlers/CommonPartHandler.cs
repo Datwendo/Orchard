@@ -146,7 +146,8 @@ namespace Orchard.Core.Common.Handlers {
         protected void LazyLoadHandlers(CommonPart part) {
             // add handlers that will load content for id's just-in-time
             part.OwnerField.Loader(() => _contentManager.Get<IUser>(part.Record.OwnerId));
-            part.ContainerField.Loader(() => part.Record.Container == null ? null : _contentManager.Get(part.Record.Container.Id));
+            // CS 5/6 Bug when container is draft it is never loaded in the commonpart part.ContainerField.Loader(() => part.Record.Container == null ? null : _contentManager.Get(part.Record.Container.Id));
+            part.ContainerField.Loader(() => part.Record.Container == null ? null : _contentManager.GetLatest(part.Record.Container.Id));
         }
 
         protected static void PropertySetHandlers(ActivatedContentContext context, CommonPart part) {
