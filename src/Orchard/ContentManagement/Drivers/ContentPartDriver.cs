@@ -274,13 +274,25 @@ namespace Orchard.ContentManagement.Drivers {
             }
 
             var shapeType = metadata.Type;
-
             // [ShapeType]__[Id] e.g. Parts/Common.Metadata-42
             metadata.Alternates.Add(shapeType + "__" + ctx.ContentItem.Id.ToString(CultureInfo.InvariantCulture));
 
             // [ShapeType]__[ContentType] e.g. Parts/Common.Metadata-BlogPost
             metadata.Alternates.Add(shapeType + "__" + ctx.ContentItem.ContentType);
-
+            // CS 14/6
+            if (ctx is BuildDisplayContext) {
+                var displayType = ((BuildDisplayContext)ctx).DisplayType;
+                if (!string.IsNullOrEmpty(displayType) && !shapeType.Contains("_" + displayType)) {
+                    // [ShapeType]_[displayType] e.g. Parts/Common.Metadata.Summary
+                    var alterName = shapeType + "_" + displayType;
+                    if ( !metadata.Alternates.Contains(alterName))
+                        metadata.Alternates.Add(alterName);
+                    // [ShapeType]_[displayType]__[ContentType] e.g. Parts/Common.Metadata-BlogPost.Summary
+                    alterName = shapeType + "_" + displayType + "__" + ctx.ContentItem.ContentType;
+                    if (!metadata.Alternates.Contains(alterName))
+                        metadata.Alternates.Add(alterName);
+                }
+            }
             return shape;
         }
 
