@@ -82,7 +82,6 @@ namespace Orchard.Taxonomies.Drivers {
 
             return BuildEditorShape(part, field, shapeHelper, viewModel);
         }
-
         private ContentShapeResult BuildEditorShape(ContentPart part, TaxonomyField field, dynamic shapeHelper, TaxonomyFieldViewModel appliedViewModel = null) {
             return ContentShape("Fields_TaxonomyField_Edit", GetDifferentiator(field, part), () => {
                 var settings = field.PartFieldDefinition.Settings.GetModel<TaxonomyFieldSettings>();
@@ -115,6 +114,65 @@ namespace Orchard.Taxonomies.Drivers {
                 return shapeHelper.EditorTemplate(TemplateName: templateName, Model: viewModel, Prefix: GetPrefix(field, part));
             });
         }
+        protected override DriverResult FrontEditor(ContentPart part, TaxonomyField field, string editType, dynamic shapeHelper) {
+            return BuildFrontEditorShape(part, field, shapeHelper);
+
+        }
+        protected override DriverResult FrontEditor(ContentPart part, TaxonomyField field, string editType, IUpdateModel updater, dynamic shapeHelper) {
+            // Initializing viewmodel using the terms that are already selected to prevent loosing them when updating an editor group this field isn't displayed in.
+            var appliedTerms = GetAppliedTerms(part, field, VersionOptions.Latest).ToList();
+            var viewModel = new TaxonomyFieldViewModel { Terms = appliedTerms.Select(t => t.CreateTermEntry()).ToList() };
+            foreach (var item in viewModel.Terms) item.IsChecked = true;
+
+            if (updater.TryUpdateModel(viewModel, GetPrefix(field, part), null, null)) {
+                var checkedTerms = viewModel.Terms
+                    .Where(t => (t.IsChecked || t.Id == viewModel.SingleTermId))
+                    .Select(t => GetOrCreateTerm(t, viewModel.TaxonomyId, field))
+                    .Where(t => t != null).ToList();
+
+                var settings = field.PartFieldDefinition.Settings.GetModel<TaxonomyFieldSettings>();
+                if (settings.Required && !checkedTerms.Any()) {
+                    updater.AddModelError(GetPrefix(field, part), T("The field {0} is mandatory.", T(field.DisplayName)));
+                }
+                else
+                    _taxonomyService.UpdateTerms(part.ContentItem, checkedTerms, field.Name);
+            }
+
+            return BuildFrontEditorShape(part, field, shapeHelper, viewModel);
+        }
+        private ContentShapeResult BuildFrontEditorShape(ContentPart part, TaxonomyField field, dynamic shapeHelper, TaxonomyFieldViewModel appliedViewModel = null) {
+            return ContentShape("Fields_TaxonomyField_FrontEdit", GetDifferentiator(field, part), () => {
+                var settings = field.PartFieldDefinition.Settings.GetModel<TaxonomyFieldSettings>();
+                var appliedTerms = GetAppliedTerms(part, field, VersionOptions.Latest).ToDictionary(t => t.Id, t => t);
+                var taxonomy = _taxonomyService.GetTaxonomyByName(settings.Taxonomy);
+                var terms = taxonomy != null && !settings.Autocomplete
+                    ? _taxonomyService.GetTerms(taxonomy.Id).Where(t => !string.IsNullOrWhiteSpace(t.Name)).Select(t => t.CreateTermEntry()).ToList()
+                    : new List<TermEntry>(0);
+
+                // Ensure the modified taxonomy items are not lost if a model validation error occurs
+                if (appliedViewModel != null) {
+                    terms.ForEach(t => t.IsChecked = appliedViewModel.Terms.Any(at => at.Id == t.Id && at.IsChecked) || t.Id == appliedViewModel.SingleTermId);
+                }
+                else {
+                    terms.ForEach(t => t.IsChecked = appliedTerms.ContainsKey(t.Id));
+                }
+
+                var viewModel = new TaxonomyFieldViewModel {
+                    DisplayName = field.DisplayName,
+                    Name = field.Name,
+                    Terms = terms,
+                    SelectedTerms = appliedTerms.Select(t => t.Value),
+                    Settings = settings,
+                    SingleTermId = appliedTerms.Select(t => t.Key).FirstOrDefault(),
+                    TaxonomyId = taxonomy != null ? taxonomy.Id : 0,
+                    HasTerms = taxonomy != null && _taxonomyService.GetTermsCount(taxonomy.Id) > 0
+                };
+
+                var templateName = settings.Autocomplete ? "Fields/TaxonomyField.Autocomplete" : "Fields/TaxonomyField";
+                return shapeHelper.FrontEditorTemplate(TemplateName: templateName, Model: viewModel, Prefix: GetPrefix(field, part));
+            });
+        }
+
 
         protected override void Exporting(ContentPart part, TaxonomyField field, ExportContentContext context) {
             var appliedTerms = _taxonomyService.GetTermsForContentItem(part.ContentItem.Id, field.Name);

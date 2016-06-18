@@ -118,8 +118,8 @@ namespace Orchard.Layouts.Services {
             ((IShape)itemShape).Metadata.Alternates.Add(actualShapeType + "__" + content.ContentItem.ContentType);
             // Adding an alternate for [Stereotype]_FrontEdit_[EditType] e.g. Content.FrontEdit.Write
             ((IShape)itemShape).Metadata.Alternates.Add(actualShapeType + "_" + editType);
-            // Adding an alternate for [Stereotype]_FrontEdit__[ContentType]_[EditType] e.g. Content.FrontEdit-Menu.Write
-            ((IShape)itemShape).Metadata.Alternates.Add(actualShapeType + "__" + content.ContentItem.ContentType + "_" + editType);
+            // Adding an alternate for [Stereotype]_FrontEdit_[EditType]__[ContentType] e.g. Content.FrontEdit-Menu.Write
+            ((IShape)itemShape).Metadata.Alternates.Add(actualShapeType + "_" + editType + "__" + content.ContentItem.ContentType);
 
             var context = new BuildFrontEditorContext(itemShape, content, editType, groupId, _shapeFactory);
             BindPlacement(context, actualEditType, stereotype);
@@ -147,8 +147,8 @@ namespace Orchard.Layouts.Services {
             ((IShape)itemShape).Metadata.Alternates.Add(actualShapeType + "__" + content.ContentItem.ContentType);
             // Adding an alternate for [Stereotype]_FrontEdit_[EditType] e.g. Content.FrontEdit.Write
             ((IShape)itemShape).Metadata.Alternates.Add(actualShapeType + "_" + editType);
-            // Adding an alternate for [Stereotype]_FrontEdit__[ContentType]_[EditType] e.g. Content.FrontEdit-Menu.Write
-            ((IShape)itemShape).Metadata.Alternates.Add(actualShapeType + "__" + content.ContentItem.ContentType + "_" + editType);
+            // Adding an alternate for [Stereotype]_FrontEdit_[EditType]__[ContentType] e.g. Content.FrontEdit-Menu.Write
+            ((IShape)itemShape).Metadata.Alternates.Add(actualShapeType + "_" + editType + "__" + content.ContentItem.ContentType );
 
             var context = new UpdateFrontEditorContext(itemShape, content, updater, editType, groupInfoId, _shapeFactory, shapeTable, GetPath());
             BindPlacement(context, actualEditType, stereotype);

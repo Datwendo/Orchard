@@ -71,6 +71,41 @@ namespace Orchard.MediaLibrary.Drivers {
 
             return Editor(part, field, shapeHelper);
         }
+        protected override DriverResult FrontEditor(ContentPart part, Fields.MediaLibraryPickerField field, string editType, dynamic shapeHelper) {
+            return ContentShape("Fields_MediaLibraryPicker_FrontEdit", GetDifferentiator(field, part),
+                () => {
+                    var model = new MediaLibraryPickerFieldViewModel {
+                        Field = field,
+                        Part = part,
+                        ContentItems = _contentManager.GetMany<ContentItem>(field.Ids, VersionOptions.Published, QueryHints.Empty).ToList(),
+                    };
+
+                    model.SelectedIds = string.Concat(",", field.Ids);
+
+                    return shapeHelper.FrontEditorTemplate(TemplateName: "Fields/MediaLibraryPicker.FrontEdit", Model: model, Prefix: GetPrefix(field, part));
+                });
+        }
+
+        protected override DriverResult FrontEditor(ContentPart part, Fields.MediaLibraryPickerField field, string editType, IUpdateModel updater, dynamic shapeHelper) {
+            var model = new MediaLibraryPickerFieldViewModel { SelectedIds = string.Join(",", field.Ids) };
+
+            updater.TryUpdateModel(model, GetPrefix(field, part), null, null);
+
+            var settings = field.PartFieldDefinition.Settings.GetModel<MediaLibraryPickerFieldSettings>();
+
+            if (String.IsNullOrEmpty(model.SelectedIds)) {
+                field.Ids = new int[0];
+            }
+            else {
+                field.Ids = model.SelectedIds.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
+            }
+
+            if (settings.Required && field.Ids.Length == 0) {
+                updater.AddModelError("Id", T("The field {0} is mandatory", field.DisplayName));
+            }
+
+            return FrontEditor(part, field, editType, shapeHelper);
+        }
 
         protected override void Importing(ContentPart part, Fields.MediaLibraryPickerField field, ImportContentContext context) {
             var contentItemIds = context.Attribute(field.FieldDefinition.Name + "." + field.Name, "ContentItems");

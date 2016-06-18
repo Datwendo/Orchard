@@ -38,8 +38,10 @@ namespace Orchard.Core.Common.Services {
                 //}
 
                 var lst = flavors.ToList();
-                if ( flavors2.Any())
-                    lst.AddRange(flavors2);
+                foreach (var fl in flavors2) {
+                    if (!lst.Contains(fl) )
+                        lst.Add(fl);
+                }
                 return lst;
             });
         }

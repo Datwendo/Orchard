@@ -178,6 +178,30 @@ namespace Orchard.Mvc.Html {
                 metadata.FrontCreateRouteValues.Merge(additionalRouteValues),
                 new RouteValueDictionary(htmlAttributes));
         }
+        public static MvcHtmlString ItemFrontRemoveLink(this HtmlHelper html, IContent content) {
+            return ItemFrontRemoveLink(html, null, content, null);
+        }
+
+        public static MvcHtmlString ItemFrontRemoveLink(this HtmlHelper html, string linkText, IContent content, object additionalRouteValues) {
+            var metadata = content.ContentItem.ContentManager.GetItemMetadata(content);
+            if (metadata.FrontRemoveRouteValues == null)
+                return null;
+
+            return html.ActionLink(
+                NonNullOrEmpty(linkText, metadata.DisplayText, "remove"),
+                Convert.ToString(metadata.FrontRemoveRouteValues["action"]),
+                metadata.FrontRemoveRouteValues.Merge(additionalRouteValues));
+        }
+
+        public static string ItemFrontRemoveUrl(this UrlHelper urlHelper, IContent content, object additionalRouteValues) {
+            var metadata = content.ContentItem.ContentManager.GetItemMetadata(content);
+            if (metadata.FrontRemoveRouteValues == null)
+                return null;
+
+            return urlHelper.Action(
+                Convert.ToString(metadata.FrontRemoveRouteValues["action"]),
+                metadata.FrontRemoveRouteValues.Merge(additionalRouteValues));
+        }
 
         public static MvcHtmlString ItemAdminLink(this HtmlHelper html, IContent content) {
             return ItemAdminLink(html, null, content);

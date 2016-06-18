@@ -96,9 +96,10 @@
     </Match>
 
     <!-- Media Library Picker Field -->
-    <Place Fields_MediaLibraryPicker_Edit="Content:2.3"/>
+  <Place Fields_MediaLibraryPicker_Edit="Content:2.3"/>
+  <Place Fields_MediaLibraryPicker_FrontEdit="Content:2.3"/>
 
-    <Match DisplayType="Detail">
+  <Match DisplayType="Detail">
         <Place Fields_MediaLibraryPicker="Content:after"/>
     </Match>
 
