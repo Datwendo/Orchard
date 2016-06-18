@@ -13,9 +13,9 @@ namespace Orchard.Comments.Drivers {
 
         protected override DriverResult Display(CommentsContainerPart part, string displayType, dynamic shapeHelper) {
 
-            var commentsForCommentedContent = _commentService.GetCommentsForCommentedContent(part.ContentItem.Id);
-            Func<int> pendingCount = () => commentsForCommentedContent.Where(x => x.Status == CommentStatus.Pending).Count();
-            Func<int> approvedCount = () => commentsForCommentedContent.Where(x => x.Status == CommentStatus.Approved).Count();
+            var commentsForCommentedContainer = _commentService.GetCommentsForCommentedContainer(part.ContentItem.Id);
+            Func<int> pendingCount = () => commentsForCommentedContainer.Where(x => x.Status == CommentStatus.Pending).Count();
+            Func<int> approvedCount = () => commentsForCommentedContainer.Where(x => x.Status == CommentStatus.Approved).Count();
             
             return Combined(
                 ContentShape("Parts_Comments_Count",

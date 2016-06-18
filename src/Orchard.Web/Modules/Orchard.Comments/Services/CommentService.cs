@@ -83,6 +83,16 @@ namespace Orchard.Comments.Services {
             return GetCommentsForCommentedContent(id)
                        .Where(c => c.Status == status);
         }
+        // CS 16/6 bug fixed
+        public IContentQuery<CommentPart, CommentPartRecord> GetCommentsForCommentedContainer(int id) {
+            return GetComments()
+                       .Where(c => c.CommentedOnContainer == id);
+        }
+        // CS 16/6 bug fixed
+        public IContentQuery<CommentPart, CommentPartRecord> GetCommentsForCommentedContainer(int id, CommentStatus status) {
+            return GetCommentsForCommentedContainer(id)
+                       .Where(c => c.Status == status);
+        }
 
         public ContentItemMetadata GetDisplayForCommentedContent(int id) {
             var content = GetCommentedContent(id);
