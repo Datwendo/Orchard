@@ -67,7 +67,7 @@ namespace Orchard.Taxonomies.Drivers {
                                            !String.IsNullOrWhiteSpace(partSettings.ChildDisplayType)
                         ? partSettings.ChildDisplayType
                         : "Summary";
-                    // asign Taxonomy and Term to the content item shape (Content) in order to provide 
+                    // assign Taxonomy and Term to the content item shape (Content) in order to provide 
                     // alternates when those content items are displayed when they are listed on a term
                     var termContentItems = _taxonomyService.GetContentItems(part, pager.GetStartIndex(), pager.PageSize)
                         .Select(c => _contentManager.BuildDisplay(c, childDisplayType).Taxonomy(taxonomy).Term(part));
