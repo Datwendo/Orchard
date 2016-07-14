@@ -23,7 +23,7 @@ namespace Orchard.Azure.MediaServices.Services.Rendering {
             _shapeDisplay = shapeDisplay;
         }
 
-        public string ProcessContent(string text, string flavor) {
+        public string ProcessContent(string text, string flavor, ContentItem item) {
             return String.Equals(flavor, "html", StringComparison.OrdinalIgnoreCase) ? ReplaceVideoPlaceholder(text) : text;
         }
 

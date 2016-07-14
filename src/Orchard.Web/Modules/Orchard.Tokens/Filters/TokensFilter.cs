@@ -21,7 +21,7 @@ namespace Orchard.Tokens.Filters {
             _displayed = context.ContentItem;
         }
 
-        public string ProcessContent(string text, string flavor) {
+        public string ProcessContent(string text, string flavor,ContentItem item) {
             return TokensReplace(text);
         }
 

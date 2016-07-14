@@ -1,5 +1,9 @@
+using Orchard.ContentManagement;
+
 namespace Orchard.Services {
     public interface IHtmlFilter : IDependency {
-        string ProcessContent(string text, string flavor);
+        // CS 20/6
+        string ProcessContent(string text, string flavor, ContentItem Item=null);
+
     }
 }

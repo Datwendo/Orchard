@@ -3,6 +3,7 @@ using Orchard.Environment.Extensions;
 using Orchard.Layouts.Services;
 using Orchard.Tokens;
 using System.Collections.Generic;
+using Orchard.ContentManagement;
 
 namespace Orchard.Layouts.Filters {
     [OrchardFeature("Orchard.Layouts.Tokens")]
@@ -14,7 +15,7 @@ namespace Orchard.Layouts.Filters {
             _tokenizer = tokenizer;
         }
 
-        public string ProcessContent(string text, string flavor) {
+        public string ProcessContent(string text, string flavor,ContentItem item) {
             return ProcessContent(text, flavor, new Dictionary<string, object>());
         }
 
