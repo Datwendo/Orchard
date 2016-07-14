@@ -2,6 +2,7 @@
 using System.Web.Mvc.Filters;
 using System.Web.Routing;
 using Orchard.Mvc.Filters;
+using System;
 
 namespace Orchard.Users.Services {
 
@@ -16,6 +17,13 @@ namespace Orchard.Users.Services {
 
         public void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext) {
             if (filterContext.Result is HttpUnauthorizedResult) {
+                // CS 19/6
+                var statusDescription = ((HttpUnauthorizedResult)filterContext.Result).StatusDescription;
+                if (!string.IsNullOrEmpty(statusDescription)) {
+                    if ( string.Equals(statusDescription, "Not Member", StringComparison.InvariantCultureIgnoreCase) ||
+                        string.Equals(statusDescription, "Not Customer", StringComparison.InvariantCultureIgnoreCase))
+                        return;
+                }
                 filterContext.HttpContext.Response.SuppressFormsAuthenticationRedirect = true;
 
                 filterContext.Result = new RedirectToRouteResult(
