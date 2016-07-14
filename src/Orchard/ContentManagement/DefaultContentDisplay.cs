@@ -121,7 +121,7 @@ namespace Orchard.ContentManagement {
                 stereotype = "Content";
 
             var actualShapeType = stereotype + "_FrontEdit";
-            var actualEditType = string.IsNullOrWhiteSpace(editType) ? "" /*"Detail"*/ : editType;
+            var actualEditType = string.IsNullOrWhiteSpace(editType) ? /*""*/ "Detail" : editType;
 
             dynamic itemShape = CreateItemShape(actualShapeType);
             itemShape.ContentItem = content.ContentItem;
