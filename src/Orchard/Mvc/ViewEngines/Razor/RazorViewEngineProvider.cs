@@ -33,6 +33,7 @@ namespace Orchard.Mvc.ViewEngines.Razor {
             // enable /Views/{partialName}
             // enable /Views/"DisplayTemplates/"+{templateName}
             // enable /Views/"EditorTemplates/+{templateName}
+            // enable /Views/"FrontEditorTemplates/+{templateName}
             var partialViewLocationFormats = new[] {
                 parameters.VirtualPath + "/Views/{0}.cshtml",
                 parameters.VirtualPath + "/Views/{1}/{0}.cshtml",
@@ -68,6 +69,7 @@ namespace Orchard.Mvc.ViewEngines.Razor {
             var universalFormats = parameters.VirtualPaths
                 .SelectMany(x => new[] {
                                            x + "/Views/{0}.cshtml",
+                                           x + "/Views/{1}/{0}.cshtml" // CS 2/7 Missing /Views/"FrontEditorTemplates/+{templateName}
                                        })
                 .Concat(new[] { "~/Views/{1}/{0}.cshtml", "~/Views/{0}.cshtml" })
                 .ToArray();

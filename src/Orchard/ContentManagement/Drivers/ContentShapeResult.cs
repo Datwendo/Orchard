@@ -27,6 +27,11 @@ namespace Orchard.ContentManagement.Drivers {
             ApplyImplementation(context, null);
         }
 
+        // CS 25/5 puis 2/7 -> null remplacé par editType just to see if this enable somme alternates ?
+        public override void Apply(BuildFrontEditorContext context) {
+            ApplyImplementation(context, context.EditType);
+        }
+
         private void ApplyImplementation(BuildShapeContext context, string displayType) {
             var placement = context.FindPlacement(_shapeType, _differentiator, _defaultLocation);
             if (String.IsNullOrEmpty(placement.Location) || placement.Location == "-")
@@ -97,10 +102,6 @@ namespace Orchard.ContentManagement.Drivers {
             else {
                 parentShape.Zones[zone].Add(newShape, position);
             }
-        }
-        // CS 25/5
-        public override void Apply(BuildFrontEditorContext context) {
-            ApplyImplementation(context, null);
         }
 
         public ContentShapeResult Location(string zone) {

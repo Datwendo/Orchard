@@ -88,12 +88,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Less\orchard-tinymce.css">
-      <DependentUpon>orchard-tinymce.less</DependentUpon>
-    </Content>
-    <Content Include="Assets\Less\orchard-tinymce.min.css">
-      <DependentUpon>orchard-tinymce.css</DependentUpon>
-    </Content>
     <Content Include="Module.txt" />
     <Content Include="Scripts\langs\ar.js" />
     <Content Include="Scripts\langs\ar_SA.js" />
@@ -241,6 +235,7 @@
     <Content Include="Scripts\skins\orchardlightgray\content.min.css" />
     <Content Include="Scripts\skins\orchardlightgray\fonts\tinymce-small.svg" />
     <Content Include="Scripts\skins\orchardlightgray\fonts\tinymce.svg" />
+    <Content Include="Scripts\skins\orchardlightgray\img\image.gif" />
     <Content Include="Scripts\skins\orchardlightgray\img\anchor.gif" />
     <Content Include="Scripts\skins\orchardlightgray\img\loader.gif" />
     <Content Include="Scripts\skins\orchardlightgray\img\object.gif" />
@@ -266,7 +261,6 @@
     <Compile Include="Services\TinyMceShapeDisplayEvent.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Styles\orchard-tinymce.css" />
     <Content Include="Views\Body-Html.Editor.cshtml" />
   </ItemGroup>
   <ItemGroup>

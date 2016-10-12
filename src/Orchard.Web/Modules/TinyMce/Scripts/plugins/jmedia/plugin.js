@@ -15,7 +15,7 @@ tinymce.PluginManager.add('jmedia', function(editor) {
         editor.focus();
         var $ = editor.getWin().parent.jQuery;
         var rooturl = $("#" + editor.id).data("jmedia-url");
-        var url = rooturl + "/Admin/Orchard.MediaLibrary?dialog=true";
+        var url = rooturl + "Admin/Orchard.MediaLibrary?dialog=true";
         $.colorbox({
             href: url,
             iframe: true,
@@ -38,7 +38,7 @@ tinymce.PluginManager.add('jmedia', function(editor) {
 
                 var newContent = '';
                 for (var i = 0; i < selectedData.length; i++) {
-                    var renderMedia = rooturl + "/Admin/Orchard.MediaLibrary/MediaItem/" + selectedData[i].id + "?displayType=Raw";
+                    var renderMedia = rooturl + "Admin/Orchard.MediaLibrary/MediaItem/" + selectedData[i].id + "?displayType=Raw";
                     $.ajax({
                         async: false,
                         type: 'GET',
@@ -57,23 +57,13 @@ tinymce.PluginManager.add('jmedia', function(editor) {
 
     editor.addButton('jmedia', {
         icon: 'image',
-        title: 'Insert Media from Jingwei', //ed.getParam("mediapicker_title"),
+        title: 'Inserer des Media Jingwei',
         cmd: 'mceJMedia'
     });
     editor.addMenuItem('jmedia', {
         icon: 'image',
-        text: 'Anchor',
+        text: 'Inserer des Media Jingwei',
         context: 'insert',
         cmd: 'mceJMedia'
     });
-    /*
-    function getInfo() {
-        return {
-            longname: 'Dawtendo Media Library Plugin',
-            author: 'C.Surieux',
-            authorurl: 'https://datwendo.com',
-            infourl: 'https://datwendo.com',
-            version: '1.0'
-        };
-    }*/
 });

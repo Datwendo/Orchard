@@ -9,8 +9,8 @@
   <Place Content_PublishButton="Sidebar:24"/>
   <Place Content_SaveButton="Sidebar:23"/>
   <!-- // CS 28/5 -->
-  <Place Content_PublishButton_FrontEdit="Content:after"/>
-  <Place Content_SaveButton_FrontEdit="Content:after"/>
+  <!--Place Content_PublishButton_FrontEdit="Content:after"/>
+  <Place Content_SaveButton_FrontEdit="Content:after"/-->
   
   <Match DisplayType="Detail">
         <Place Parts_Contents_Publish="Content:5"/>

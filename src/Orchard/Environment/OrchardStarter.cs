@@ -37,6 +37,8 @@ using Orchard.WebApi;
 using Orchard.WebApi.Filters;
 using System.Linq;
 using System.Web.Configuration;
+using Orchard.Mvc.ModelMetadataProviders;
+using Orchard.Localization;
 
 namespace Orchard.Environment {
     public static class OrchardStarter {
@@ -173,6 +175,8 @@ namespace Orchard.Environment {
             //MvcServiceLocator.SetCurrent(hostContainer);
             OrchardHostContainerRegistry.RegisterHostContainer(hostContainer);
 
+            // CS 26/6 Harmony
+            ModelMetadataProviders.Current = new ModelMetadataProviderProxy(ModelMetadataProviders.Current);
             // Register localized data annotations
             ModelValidatorProviders.Providers.Clear();
             ModelValidatorProviders.Providers.Add(new LocalizedModelValidatorProvider());

@@ -278,10 +278,10 @@ namespace Orchard.ContentTypes.Services {
                     BindPlacement(newContext, "Detail",null, "Content");
                     contentShapeResult.Apply(newContext);
                 }
-                // CS 25/5
+                // CS 25/5 + 2/7
                 else if (context is BuildFrontEditorContext) {
                     var newContext = new BuildFrontEditorContext(itemShape, content, ((BuildFrontEditorContext)context).EditType, "", context.New);
-                    BindPlacement(newContext, null,string.Empty, "Content");
+                    BindPlacement(newContext, null,((BuildFrontEditorContext)context).EditType, "Content");
                     contentShapeResult.Apply(newContext);
                 }
                 else {

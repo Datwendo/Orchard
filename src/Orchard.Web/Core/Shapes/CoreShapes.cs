@@ -19,6 +19,7 @@ using Orchard.UI;
 using Orchard.UI.Resources;
 using Orchard.UI.Zones;
 using Orchard.Utility.Extensions;
+using Orchard.DisplayManagement.Shapes;
 
 // ReSharper disable InconsistentNaming
 

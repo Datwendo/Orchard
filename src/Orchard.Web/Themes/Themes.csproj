@@ -87,8 +87,41 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TheBootstrapMachine\ResourceManifest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Datwendo\Content\badge.png" />
+    <Content Include="Datwendo\Content\cielmairie.jpg" />
+    <Content Include="Datwendo\Content\contact_icos.png" />
+    <Content Include="Datwendo\Content\datwendogreylogo.png" />
+    <Content Include="Datwendo\Content\glyphicons-halflings-white.png" />
+    <Content Include="Datwendo\Content\glyphicons-halflings.png" />
+    <Content Include="Datwendo\Content\GrandMag.jpg" />
+    <Content Include="Datwendo\Content\Iledelacite.jpg" />
+    <Content Include="Datwendo\Content\OperaStatues.jpg" />
+    <Content Include="Datwendo\Content\Orsay-fiat-bus1920.jpg" />
+    <Content Include="Datwendo\Scripts\jquery.spin.js" />
+    <Content Include="Datwendo\Scripts\spin.js" />
+    <Content Include="Datwendo\Scripts\theme.js" />
+    <Content Include="Datwendo\Styles\article-features.css" />
+    <Content Include="Datwendo\Styles\defaultpage.css" />
+    <Content Include="Datwendo\Styles\fonts.css" />
+    <Content Include="Datwendo\Styles\lato-black-webfont.svg" />
+    <Content Include="Datwendo\Styles\lato-blackitalic-webfont.svg" />
+    <Content Include="Datwendo\Styles\lato-bold-webfont.svg" />
+    <Content Include="Datwendo\Styles\lato-bolditalic-webfont.svg" />
+    <Content Include="Datwendo\Styles\lato-hairline-webfont.svg" />
+    <Content Include="Datwendo\Styles\lato-hairlineitalic-webfont.svg" />
+    <Content Include="Datwendo\Styles\lato-italic-webfont.svg" />
+    <Content Include="Datwendo\Styles\lato-light-webfont.svg" />
+    <Content Include="Datwendo\Styles\lato-lightitalic-webfont.svg" />
+    <Content Include="Datwendo\Styles\lato-regular-webfont.svg" />
+    <Content Include="Datwendo\Styles\pricing.css" />
+    <Content Include="Datwendo\Styles\reset.css" />
+    <Content Include="Datwendo\Styles\shoppingcart.css" />
+    <Content Include="Datwendo\Styles\theme.css" />
+    <Content Include="Datwendo\Theme.png" />
+    <Content Include="Datwendo\Theme.txt" />
     <Content Include="TheAdmin\Scripts\admin.js" />
     <Content Include="TheAdmin\Styles\ie.css" />
     <Content Include="TheAdmin\Styles\ie7.css" />
@@ -112,7 +145,196 @@
     <Content Include="TheAdmin\Styles\images\menuOpenHover.gif" />
     <Content Include="TheAdmin\Styles\images\vinesBackgroundBottom.gif" />
     <Content Include="TheAdmin\Styles\images\menu-filter.png" />
+    <Content Include="TheBootstrapMachine\Content\badge.png" />
+    <Content Include="TheBootstrapMachine\Content\JLogo100.png" />
+    <Content Include="TheBootstrapMachine\Content\JLogo60.png" />
+    <Content Include="TheBootstrapMachine\Scripts\MenuScroll.min.js">
+      <DependentUpon>MenuScroll.js</DependentUpon>
+    </Content>
+    <Content Include="TheBootstrapMachine\Scripts\spin.js" />
+    <Content Include="TheBootstrapMachine\Scripts\theme.js" />
+    <Content Include="TheBootstrapMachine\Styles\JPad.css" />
+    <Content Include="TheBootstrapMachine\Styles\JPad.min.css" />
     <Content Include="TheThemeMachine\Styles\default-grid.css" />
+    <Content Include="TheBootstrapMachine\Content\barre-danger-page-1-1024.jpg" />
+    <Content Include="TheBootstrapMachine\Content\barre-danger-page-1-1200.jpg" />
+    <Content Include="TheBootstrapMachine\Content\barre-danger-page-1-1280.jpg" />
+    <Content Include="TheBootstrapMachine\Content\barre-danger-page-1-1366.jpg" />
+    <Content Include="TheBootstrapMachine\Content\barre-danger-page-1-768.jpg" />
+    <Content Include="TheBootstrapMachine\Content\barre-danger-page-1-992.jpg" />
+    <Content Include="TheBootstrapMachine\Content\barre-danger-page-1.jpg" />
+    <Content Include="TheBootstrapMachine\Content\barre-danger-page-2-1024.jpg" />
+    <Content Include="TheBootstrapMachine\Content\barre-danger-page-2-1200.jpg" />
+    <Content Include="TheBootstrapMachine\Content\barre-danger-page-2-1280.jpg" />
+    <Content Include="TheBootstrapMachine\Content\barre-danger-page-2-1366.jpg" />
+    <Content Include="TheBootstrapMachine\Content\barre-danger-page-2-768.jpg" />
+    <Content Include="TheBootstrapMachine\Content\barre-danger-page-2-992.jpg" />
+    <Content Include="TheBootstrapMachine\Content\barre-danger-page-2.jpg" />
+    <Content Include="TheBootstrapMachine\Content\blanc-1024.png" />
+    <Content Include="TheBootstrapMachine\Content\blanc-1200.png" />
+    <Content Include="TheBootstrapMachine\Content\blanc-1280.png" />
+    <Content Include="TheBootstrapMachine\Content\blanc-1366.png" />
+    <Content Include="TheBootstrapMachine\Content\blanc-768.png" />
+    <Content Include="TheBootstrapMachine\Content\blanc-992.png" />
+    <Content Include="TheBootstrapMachine\Content\blanc.png" />
+    <Content Include="TheBootstrapMachine\Content\header-1024.jpg" />
+    <Content Include="TheBootstrapMachine\Content\header-1200.jpg" />
+    <Content Include="TheBootstrapMachine\Content\header-1280.jpg" />
+    <Content Include="TheBootstrapMachine\Content\header-1366.jpg" />
+    <Content Include="TheBootstrapMachine\Content\header-1920.jpg" />
+    <Content Include="TheBootstrapMachine\Content\header-768.jpg" />
+    <Content Include="TheBootstrapMachine\Content\header-nude-1024.jpg" />
+    <Content Include="TheBootstrapMachine\Content\header-nude-1200.jpg" />
+    <Content Include="TheBootstrapMachine\Content\header-nude-1280.jpg" />
+    <Content Include="TheBootstrapMachine\Content\header-nude-1366.jpg" />
+    <Content Include="TheBootstrapMachine\Content\header-nude-1920.jpg" />
+    <Content Include="TheBootstrapMachine\Content\header-nude-768.jpg" />
+    <Content Include="TheBootstrapMachine\Content\header-nude-992.jpg" />
+    <Content Include="TheBootstrapMachine\Content\header.jpg" />
+    <Content Include="TheBootstrapMachine\Content\headerBlog.jpg" />
+    <Content Include="TheBootstrapMachine\Content\icon-jingwei-2.png" />
+    <Content Include="TheBootstrapMachine\Content\icon-jingwei-3.png" />
+    <Content Include="TheBootstrapMachine\Content\icon-jingwei.png" />
+    <Content Include="TheBootstrapMachine\Content\logo-menu-1024.png" />
+    <Content Include="TheBootstrapMachine\Content\logo-menu-1200.png" />
+    <Content Include="TheBootstrapMachine\Content\logo-menu-1280.png" />
+    <Content Include="TheBootstrapMachine\Content\logo-menu-1366.png" />
+    <Content Include="TheBootstrapMachine\Content\logo-menu-768.png" />
+    <Content Include="TheBootstrapMachine\Content\logo-menu-992.png" />
+    <Content Include="TheBootstrapMachine\Content\logo-menu.png" />
+    <Content Include="TheBootstrapMachine\Content\menu.png" />
+    <Content Include="TheBootstrapMachine\Content\newsletter.png" />
+    <Content Include="TheBootstrapMachine\Content\loginbkg.png" />
+    <Content Include="TheBootstrapMachine\Content\PORTE-VIDEO-DROITE.png" />
+    <Content Include="TheBootstrapMachine\Content\PORTE-VIDEO-GAUCHE.png" />
+    <Content Include="TheBootstrapMachine\Content\Page-2-1024.jpg" />
+    <Content Include="TheBootstrapMachine\Content\Page-2-1200.jpg" />
+    <Content Include="TheBootstrapMachine\Content\Page-2-1280.jpg" />
+    <Content Include="TheBootstrapMachine\Content\Page-2-1366.jpg" />
+    <Content Include="TheBootstrapMachine\Content\Page-2-768.jpg" />
+    <Content Include="TheBootstrapMachine\Content\Page-2-992.jpg" />
+    <Content Include="TheBootstrapMachine\Content\Page-2.jpg" />
+    <Content Include="TheBootstrapMachine\Content\Page-4-1024.jpg" />
+    <Content Include="TheBootstrapMachine\Content\Page-4-1200.jpg" />
+    <Content Include="TheBootstrapMachine\Content\Page-4-1280.jpg" />
+    <Content Include="TheBootstrapMachine\Content\Page-4-1366.jpg" />
+    <Content Include="TheBootstrapMachine\Content\Page-4-768.jpg" />
+    <Content Include="TheBootstrapMachine\Content\Page-4-992.jpg" />
+    <Content Include="TheBootstrapMachine\Content\Page-4.jpg" />
+    <Content Include="TheBootstrapMachine\Content\Page-6-1024.jpg" />
+    <Content Include="TheBootstrapMachine\Content\Page-6-1200.jpg" />
+    <Content Include="TheBootstrapMachine\Content\Page-6-1280.jpg" />
+    <Content Include="TheBootstrapMachine\Content\Page-6-1366.jpg" />
+    <Content Include="TheBootstrapMachine\Content\Page-6-768.jpg" />
+    <Content Include="TheBootstrapMachine\Content\Page-6-992.jpg" />
+    <Content Include="TheBootstrapMachine\Content\Page-6.jpg" />
+    <Content Include="TheBootstrapMachine\Content\rond-menu-1200.png" />
+    <Content Include="TheBootstrapMachine\Content\rond-menu-1920.png" />
+    <Content Include="TheBootstrapMachine\Content\rond-menu-768.png" />
+    <Content Include="TheBootstrapMachine\Content\rond-menu-992.png" />
+    <Content Include="TheBootstrapMachine\Content\separateur-pages-1024.jpg" />
+    <Content Include="TheBootstrapMachine\Content\separateur-pages-1200.jpg" />
+    <Content Include="TheBootstrapMachine\Content\separateur-pages-1280.jpg" />
+    <Content Include="TheBootstrapMachine\Content\separateur-pages-1366.jpg" />
+    <Content Include="TheBootstrapMachine\Content\separateur-pages-768.jpg" />
+    <Content Include="TheBootstrapMachine\Content\separateur-pages-992.jpg" />
+    <Content Include="TheBootstrapMachine\Content\separateur-pages.jpg" />
+    <Content Include="TheBootstrapMachine\Content\separateur-pages2.jpg" />
+    <Content Include="TheBootstrapMachine\Content\sigle-1920.png" />
+    <Content Include="TheBootstrapMachine\Content\souscrire-1024.png" />
+    <Content Include="TheBootstrapMachine\Content\souscrire-1200.png" />
+    <Content Include="TheBootstrapMachine\Content\souscrire-1280.png" />
+    <Content Include="TheBootstrapMachine\Content\souscrire-1366.png" />
+    <Content Include="TheBootstrapMachine\Content\souscrire-768.png" />
+    <Content Include="TheBootstrapMachine\Content\souscrire-992.png" />
+    <Content Include="TheBootstrapMachine\Content\souscrire.png" />
+    <Content Include="TheBootstrapMachine\Fonts\font-awesome.min.css" />
+    <Content Include="TheBootstrapMachine\Fonts\fontawesome-webfont.svg" />
+    <Content Include="TheBootstrapMachine\Fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="TheBootstrapMachine\Scripts\affix.js" />
+    <Content Include="TheBootstrapMachine\Scripts\alert.js" />
+    <Content Include="TheBootstrapMachine\Scripts\bootstrap.js" />
+    <Content Include="TheBootstrapMachine\Scripts\bootstrap.min.js" />
+    <Content Include="TheBootstrapMachine\Scripts\button.js" />
+    <Content Include="TheBootstrapMachine\Scripts\carousel.js" />
+    <Content Include="TheBootstrapMachine\Scripts\collapse.js" />
+    <Content Include="TheBootstrapMachine\Scripts\dropdown.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Easing\EasePack.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Easing\EasePack.min.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\jquery.gsap.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\jquery.gsap.min.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Plugins\AttrPlugin.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Plugins\AttrPlugin.min.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Plugins\BezierPlugin.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Plugins\BezierPlugin.min.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Plugins\ColorPropsPlugin.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Plugins\ColorPropsPlugin.min.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Plugins\CSSPlugin.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Plugins\CSSPlugin.min.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Plugins\CSSRulePlugin.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Plugins\CSSRulePlugin.min.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Plugins\DirectionalRotationPlugin.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Plugins\DirectionalRotationPlugin.min.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Plugins\DrawSVGPlugin.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Plugins\DrawSVGPlugin.min.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Plugins\EaselPlugin.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Plugins\EaselPlugin.min.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Plugins\EndArrayPlugin.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Plugins\EndArrayPlugin.min.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Plugins\KineticPlugin.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Plugins\KineticPlugin.min.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Plugins\MorphSVGPlugin.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Plugins\MorphSVGPlugin.min.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Plugins\Physics2DPlugin.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Plugins\Physics2DPlugin.min.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Plugins\PhysicsPropsPlugin.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Plugins\PhysicsPropsPlugin.min.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Plugins\RaphaelPlugin.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Plugins\RaphaelPlugin.min.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Plugins\RoundPropsPlugin.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Plugins\RoundPropsPlugin.min.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Plugins\ScrambleTextPlugin.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Plugins\ScrambleTextPlugin.min.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Plugins\ScrollToPlugin.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Plugins\ScrollToPlugin.min.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Plugins\TEMPLATE_Plugin.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Plugins\TextPlugin.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Plugins\TextPlugin.min.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Plugins\ThrowPropsPlugin.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Plugins\ThrowPropsPlugin.min.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\TimelineLite.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\TimelineLite.min.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\TimelineMax.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\TimelineMax.min.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\TweenLite.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\TweenLite.min.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\TweenMax.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\TweenMax.min.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Utils\CSSTransform.min.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Utils\Draggable.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Utils\Draggable.min.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Utils\SplitText.js" />
+    <Content Include="TheBootstrapMachine\Scripts\Greensocks\Utils\SplitText.min.js" />
+    <Content Include="TheBootstrapMachine\Scripts\MenuScroll.js" />
+    <Content Include="TheBootstrapMachine\Scripts\modal.js" />
+    <Content Include="TheBootstrapMachine\Scripts\popover.js" />
+    <Content Include="TheBootstrapMachine\Scripts\scrollspy.js" />
+    <Content Include="TheBootstrapMachine\Scripts\tab.js" />
+    <Content Include="TheBootstrapMachine\Scripts\tooltip.js" />
+    <Content Include="TheBootstrapMachine\Scripts\transition.js" />
+    <Content Include="TheBootstrapMachine\Styles\Blogs.css" />
+    <Content Include="TheBootstrapMachine\Styles\Blogs.min.css" />
+    <Content Include="TheBootstrapMachine\Styles\Home.css" />
+    <Content Include="TheBootstrapMachine\Styles\Home.min.css" />
+    <Content Include="TheBootstrapMachine\Styles\Lib.css" />
+    <Content Include="TheBootstrapMachine\Styles\Lib.min.css" />
+    <Content Include="TheBootstrapMachine\Styles\Logon.css" />
+    <Content Include="TheBootstrapMachine\Styles\Logon.min.css" />
+    <Content Include="TheBootstrapMachine\Styles\Site.css" />
+    <Content Include="TheBootstrapMachine\Styles\Site.min.css" />
+    <Content Include="TheBootstrapMachine\Theme.png" />
+    <Content Include="TheBootstrapMachine\Theme.txt" />
+    <Content Include="TheBootstrapMachine\ThemeZonePreview.png" />
     <Content Include="TheThemeMachine\Styles\Site.css" />
     <Content Include="TheThemeMachine\Theme.png" />
     <Content Include="TheThemeMachine\Theme.txt" />
@@ -188,6 +410,14 @@
       <Name>Orchard.Framework</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\Modules\Datwendo.Commerce\Datwendo.Commerce.csproj">
+      <Project>{86b86968-31c1-4d27-ba0b-ac10ada89aa5}</Project>
+      <Name>Datwendo.Commerce</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Modules\Datwendo.JPad\Datwendo.JPad.csproj">
+      <Project>{ffd53186-f9f0-412d-8b1c-902a429e22b1}</Project>
+      <Name>Datwendo.JPad</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Modules\Orchard.Layouts\Orchard.Layouts.csproj">
       <Project>{6bd8b2fa-f2e3-4ac8-a4c3-2925a653889a}</Project>
       <Name>Orchard.Layouts</Name>
@@ -206,6 +436,1105 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+    <Content Include="TheBootstrapMachine\Assets.json" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Layout.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\FontAwesome\animated.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\FontAwesome\bordered-pulled.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\FontAwesome\core.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\FontAwesome\fixed-width.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\FontAwesome\font-awesome.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\FontAwesome\icons.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\FontAwesome\larger.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\FontAwesome\list.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\FontAwesome\mixins.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\FontAwesome\path.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\FontAwesome\rotated-flipped.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\FontAwesome\stacked.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\FontAwesome\variables.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Site.less" />
+    <Content Include="TheBootstrapMachine\Content\Web.config" />
+    <Content Include="TheBootstrapMachine\Fonts\fontawesome-webfont.eot" />
+    <Content Include="TheBootstrapMachine\Fonts\fontawesome-webfont.ttf" />
+    <Content Include="TheBootstrapMachine\Fonts\fontawesome-webfont.woff" />
+    <Content Include="TheBootstrapMachine\Fonts\FontAwesome.otf" />
+    <Content Include="TheBootstrapMachine\Fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="TheBootstrapMachine\Fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="TheBootstrapMachine\Fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="TheBootstrapMachine\Fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="TheBootstrapMachine\Fonts\Web.config" />
+    <Content Include="TheBootstrapMachine\Placement.info">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="TheBootstrapMachine\Scripts\Web.config" />
+    <Content Include="TheBootstrapMachine\Styles\Web.config" />
+    <Content Include="TheBootstrapMachine\Views\BadgeOfHonor.cshtml" />
+    <Content Include="TheBootstrapMachine\Views\Branding.cshtml" />
+    <Content Include="TheBootstrapMachine\Views\CookieConsent.cshtml" />
+    <Content Include="TheBootstrapMachine\Views\Document.cshtml" />
+    <Content Include="TheBootstrapMachine\Views\Layout-url-homepage.cshtml" />
+    <Content Include="TheBootstrapMachine\Views\Layout.cshtml" />
+    <Content Include="TheBootstrapMachine\Views\Menu-url-homepage.cshtml" />
+    <Content Include="TheBootstrapMachine\Views\Menu.cshtml" />
+    <Content Include="TheBootstrapMachine\Views\MenuItem.cshtml" />
+    <Content Include="TheBootstrapMachine\Views\MenuItemLinkdd.cshtml" />
+    <Content Include="TheBootstrapMachine\Views\Pager.cshtml" />
+    <Content Include="TheBootstrapMachine\Views\Pager.First.cshtml" />
+    <Content Include="TheBootstrapMachine\Views\Pager.Last.cshtml" />
+    <Content Include="TheBootstrapMachine\Views\widget-navigation.cshtml" />
+    <Content Include="TheBootstrapMachine\Views\zone-navigation.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="TheBootstrapMachine\Assets\Javascript\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\CalendarWidget-url-homepage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\widget-calendar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\widget-actus.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\widget-catalogue.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\List-ProjectionWidget.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content.Summary-url-sujet.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\zone-catalogue.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\zone-calendar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\zone-actus.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Title.Summary4.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Fields\MediaLibraryPicker.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Media-Image.Thumbnail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\zone-partenaires.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\widget-partenaires.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Fields\MediaLibraryPicker.Summary-url-homepage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content.Summary-url-homepage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\MenuWidget.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Layout-layer-blogs-de-mo.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Layout-url-users.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\TagCloud.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Layout-layer-blogposts-de-mo.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Menu-layer-blogs-de-mo.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Assets\Less\Blogs.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\DocumentBlog.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Title.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Blogs.RecentBlogPosts-url-blogs.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\widget-carousel.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\zone-carousel.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\DocumentHome.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Assets\Less\Logon.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Assets\Less\Home.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\User.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Assets\Less\Common.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Assets\Less\Menu.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\widget-content.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content.Summary-blogpost-url-blogs.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Blogs.BlogArchives.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Blogs.BlogPost.List.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\List-ProjectionWidget-layer-thehomepage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content.carousel-blogpost.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content.Summary-url-blogs.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Common.Metadata.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\widget-tagcloud.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\widget-blogarchives.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\zone-asidesecond.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Blogs.Blog.BlogPostCount.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Comments.Count-BlogPost.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\ListOfComments.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Common.Body.Summary.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Common.Body.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Common.Body.carousel.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Title-Blog.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Tags.ShowTags-blogpost-carousel.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content-blog.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Contents.Publish.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Fields\MediaLibraryPicker.Summary-url-blogs.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Fields\TaxonomyField.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\TermPart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\List-SujetTerm.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Title-SujetTerm.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Orchard.Tags\Home\Search.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\List-Tags.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content-SujetTerm.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Fields\MediaLibraryPicker.Summary.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\MyTitle.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\EditoPart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\EditoWidget.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\EditoPart.Summary.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\zone-edito.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\widget-edito.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content-edito-url-homepage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Fields\Common.Text.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Fields\Common.Text-Edito.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\LogOn.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Register.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\ChallengeEmailFail.cshtml" />
+    <Content Include="TheBootstrapMachine\Views\ChallengeEmailSent.cshtml" />
+    <Content Include="TheBootstrapMachine\Views\ChallengeEmailSuccess.cshtml" />
+    <Content Include="TheBootstrapMachine\Views\ChangePassword.cshtml" />
+    <Content Include="TheBootstrapMachine\Views\ChangePasswordSuccess.cshtml" />
+    <Content Include="TheBootstrapMachine\Views\LostPassword.cshtml" />
+    <Content Include="TheBootstrapMachine\Views\RegistrationPending.cshtml" />
+    <Content Include="TheBootstrapMachine\Views\RequestLostPassword.cshtml" />
+    <Content Include="TheBootstrapMachine\Views\SearchNav.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Search.SearchForm.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\MenuItemLink-SearchMenuItem.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Datwendo.SearchMenu\Search\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\CloudVideoLinkPart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Comment.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\CommentForm.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Comments.Count.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\CommentAuthor.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\CommentMetadata.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\CommentReplyButton.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\CommentText.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\zone-featured.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\widget-featured.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\CloudVideoLinkPart-layer-logon.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\EditorTemplates\Parts.Comment.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Links.List.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\LinksPart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\LinksPart.Summary.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\LinksWidget.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\widget-linkswidget.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Common.BodySummary.Summary.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Orchard.Blogs\BlogPost\ListByArchive.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Fields\MediaLibraryPicker.Summary-url-tags.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Fields\MediaLibraryPicker.Summary-url-sujet.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content.Summary-url-tags.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content.Summary-url-recherche.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Media-Image.ListThumbnail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Media-Image.HomeThumbnail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Media-Image.BlogThumbnail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content-Type-de-PartenaireTerm.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content.Summary-url-type-de-partenaire.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Fields\MediaLibraryPicker.Summary-url-type-de-partenaire.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Title-TypeDePartenaireTerm.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Fields\MediaLibraryPicker2.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Media-Image.MicroThumbnail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Fields\MediaLibraryPicker.Summary-url-genre.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content.Summary-url-genre.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Title-GenreTerm.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\MyImg.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Orchard.Tags\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Title-Taxonomy.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content-Taxonomy.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Title-InMenu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Tags.ShowTags-std.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Fields\TaxonomyField-std.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Title-NavigationMeta.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Fields\MediaLibraryPickerNavigationMeta.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\zone-navigationmeta.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\zone-navigationtitle.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Fields\MediaLibraryPickerNavigationMetaBlog.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\CarouselImg.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Title-BlogPost.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\MyBlogPostTitle.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content-blogpost.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Blogs.Blog.Description.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Blogs.Blog.Description.Summary.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Blogs.Blog.Manage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\MyCarouselTitle.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Orchard.Blogs\Blog\List.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\List-Blogs.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content.Summary-blogpost.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\List-ProjectionPage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content.Summary-article.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Pager.Previous.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Pager.Next.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Pager.Page.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Pager.Gap.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Common.Metadata-std.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\List-Comments.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Datwendo.Twitter\TwitterWidget\Refresh.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\TwitterWidget.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Datwendo\App_Data\Localization\fr-FR\orchard.theme.po" />
+    <Content Include="Datwendo\Content\Web.config" />
+    <Content Include="Datwendo\LICENSE" />
+    <Content Include="Datwendo\Placement.info" />
+    <Content Include="Datwendo\Scripts\Web.config" />
+    <Content Include="Datwendo\Styles\lato-black-webfont.eot" />
+    <Content Include="Datwendo\Styles\lato-black-webfont.ttf" />
+    <Content Include="Datwendo\Styles\lato-black-webfont.woff" />
+    <Content Include="Datwendo\Styles\lato-blackitalic-webfont.eot" />
+    <Content Include="Datwendo\Styles\lato-blackitalic-webfont.ttf" />
+    <Content Include="Datwendo\Styles\lato-blackitalic-webfont.woff" />
+    <Content Include="Datwendo\Styles\lato-bold-webfont.eot" />
+    <Content Include="Datwendo\Styles\lato-bold-webfont.ttf" />
+    <Content Include="Datwendo\Styles\lato-bold-webfont.woff" />
+    <Content Include="Datwendo\Styles\lato-bolditalic-webfont.eot" />
+    <Content Include="Datwendo\Styles\lato-bolditalic-webfont.ttf" />
+    <Content Include="Datwendo\Styles\lato-bolditalic-webfont.woff" />
+    <Content Include="Datwendo\Styles\lato-hairline-webfont.eot" />
+    <Content Include="Datwendo\Styles\lato-hairline-webfont.ttf" />
+    <Content Include="Datwendo\Styles\lato-hairline-webfont.woff" />
+    <Content Include="Datwendo\Styles\lato-hairlineitalic-webfont.eot" />
+    <Content Include="Datwendo\Styles\lato-hairlineitalic-webfont.ttf" />
+    <Content Include="Datwendo\Styles\lato-hairlineitalic-webfont.woff" />
+    <Content Include="Datwendo\Styles\lato-italic-webfont.eot" />
+    <Content Include="Datwendo\Styles\lato-italic-webfont.ttf" />
+    <Content Include="Datwendo\Styles\lato-italic-webfont.woff" />
+    <Content Include="Datwendo\Styles\lato-light-webfont.eot" />
+    <Content Include="Datwendo\Styles\lato-light-webfont.ttf" />
+    <Content Include="Datwendo\Styles\lato-light-webfont.woff" />
+    <Content Include="Datwendo\Styles\lato-lightitalic-webfont.eot" />
+    <Content Include="Datwendo\Styles\lato-lightitalic-webfont.ttf" />
+    <Content Include="Datwendo\Styles\lato-lightitalic-webfont.woff" />
+    <Content Include="Datwendo\Styles\lato-regular-webfont.eot" />
+    <Content Include="Datwendo\Styles\lato-regular-webfont.ttf" />
+    <Content Include="Datwendo\Styles\lato-regular-webfont.woff" />
+    <Content Include="Datwendo\Styles\Web.config" />
+    <Content Include="Datwendo\Views\AccessDenied.cshtml" />
+    <Content Include="Datwendo\Views\Article.CurrencyPicker.cshtml" />
+    <Content Include="Datwendo\Views\Article.CurrencyPicker.Summary.cshtml" />
+    <Content Include="Datwendo\Views\BadgeOfHonor.cshtml" />
+    <Content Include="Datwendo\Views\Branding.cshtml" />
+    <Content Include="Datwendo\Views\Checkout.NoCheckOut.cshtml" />
+    <Content Include="Datwendo\Views\Checkout.Summary.cshtml" />
+    <Content Include="Datwendo\Views\CommentMetadata.cshtml" />
+    <Content Include="Datwendo\Views\Content-Article.cshtml" />
+    <Content Include="Datwendo\Views\Content-Article.MenuFooter.cshtml" />
+    <Content Include="Datwendo\Views\Content-Article.Thumbnail.cshtml" />
+    <Content Include="Datwendo\Views\Content-ArticleSummary.cshtml" />
+    <Content Include="Datwendo\Views\Content-Bundle.cshtml" />
+    <Content Include="Datwendo\Views\Content-Bundle.MenuFooter.cshtml" />
+    <Content Include="Datwendo\Views\Content-url-checkout.cshtml" />
+    <Content Include="Datwendo\Views\Content-url-cart.cshtml" />
+    <Content Include="Datwendo\Views\Content.cshtml" />
+    <Content Include="Datwendo\Views\Content.MenuFooter.cshtml" />
+    <Content Include="Datwendo\Views\Content.Summary.cshtml" />
+    <Content Include="Datwendo\Views\Document.cshtml" />
+    <Content Include="Datwendo\Views\Fields\MediaLibraryPicker-ArticleImage.cshtml" />
+    <Content Include="Datwendo\Views\Fields\MediaLibraryPicker-ArticleImage.Thumbnail.cshtml" />
+    <Content Include="Datwendo\Views\Fields\MediaLibraryPicker.cshtml" />
+    <Content Include="Datwendo\Views\Fields\MediaLibraryPicker.Thumbnail-Image.cshtml" />
+    <Content Include="Datwendo\Views\Layout-url-checkout.cshtml" />
+    <Content Include="Datwendo\Views\Layout-url-cart.cshtml" />
+    <Content Include="Datwendo\Views\Layout.cshtml" />
+    <Content Include="Datwendo\Views\LegalFooter.cshtml" />
+    <Content Include="Datwendo\Views\ListOfComments.cshtml" />
+    <Content Include="Datwendo\Views\LostPassword.cshtml" />
+    <Content Include="Datwendo\Views\Me.Account.cshtml" />
+    <Content Include="Datwendo\Views\Me.Addresses.cshtml" />
+    <Content Include="Datwendo\Views\Me.Invoices.cshtml" />
+    <Content Include="Datwendo\Views\Me.ListInvoices.cshtml" />
+    <Content Include="Datwendo\Views\Me.ListOrders.cshtml" />
+    <Content Include="Datwendo\Views\Me.Orders.cshtml" />
+    <Content Include="Datwendo\Views\Media-Document.Thumbnail.cshtml" />
+    <Content Include="Datwendo\Views\Media-Image.Thumbnail.cshtml" />
+    <Content Include="Datwendo\Views\Media-Video.Thumbnail.cshtml" />
+    <Content Include="Datwendo\Views\Media.cshtml" />
+    <Content Include="Datwendo\Views\Media.Raw.cshtml" />
+    <Content Include="Datwendo\Views\Media.Summary.cshtml" />
+    <Content Include="Datwendo\Views\Media.Thumbnail.cshtml" />
+    <Content Include="Datwendo\Views\Menu-main-menu.cshtml" />
+    <Content Include="Datwendo\Views\MenuItem.cshtml" />
+    <Content Include="Datwendo\Views\MenuItemLink-ContentMenuItem.cshtml" />
+    <Content Include="Datwendo\Views\MenuItemLinkdd.cshtml" />
+    <Content Include="Datwendo\Views\Message.cshtml" />
+    <Content Include="Datwendo\Views\Order.Invoiced.cshtml" />
+    <Content Include="Datwendo\Views\Order.PaymentResponse.cshtml" />
+    <Content Include="Datwendo\Views\Pager.CurrentPage.cshtml" />
+    <Content Include="Datwendo\Views\Pager.First.cshtml" />
+    <Content Include="Datwendo\Views\Pager.Last.cshtml" />
+    <Content Include="Datwendo\Views\Pager.Next.cshtml" />
+    <Content Include="Datwendo\Views\Parts\Article.AddButton.cshtml" />
+    <Content Include="Datwendo\Views\Parts\Article.AddButton.Summary.cshtml" />
+    <Content Include="Datwendo\Views\Parts\Article.cshtml" />
+    <Content Include="Datwendo\Views\Parts\Article.Summary.cshtml" />
+    <Content Include="Datwendo\Views\Parts\Article.Thumbnail.cshtml" />
+    <Content Include="Datwendo\Views\Parts\Bundle.cshtml" />
+    <Content Include="Datwendo\Views\Parts\Comments.Count.cshtml" />
+    <Content Include="Datwendo\Views\Parts\Comments.cshtml" />
+    <Content Include="Datwendo\Views\Parts\Common.Metadata.cshtml" />
+    <Content Include="Datwendo\Views\Parts\Common.Metadata.Summary.cshtml" />
+    <Content Include="Datwendo\Views\Parts\Pager.Previous.cshtml" />
+    <Content Include="Datwendo\Views\Parts\Tags.ShowTags.cshtml" />
+    <Content Include="Datwendo\Views\Parts\Title-Article.Summary.cshtml" />
+    <Content Include="Datwendo\Views\Parts\Title.cshtml" />
+    <Content Include="Datwendo\Views\Parts\Video.Metadata.cshtml" />
+    <Content Include="Datwendo\Views\Parts\Video.Summary.cshtml" />
+    <Content Include="Datwendo\Views\PayPalCheckout.cshtml" />
+    <Content Include="Datwendo\Views\PayPal\Canceled.cshtml" />
+    <Content Include="Datwendo\Views\PayPal\HandleIPN.cshtml" />
+    <Content Include="Datwendo\Views\PayPal\Returned.cshtml" />
+    <Content Include="Datwendo\Views\SearchNav.cshtml" />
+    <Content Include="Datwendo\Views\ShoppingCart.cshtml" />
+    <Content Include="Datwendo\Views\ShoppingCart.Summary.cshtml" />
+    <Content Include="Datwendo\Views\ShoppingCartWidget.cshtml" />
+    <Content Include="Datwendo\Views\TaxonomyItemLink.cshtml" />
+    <Content Include="Datwendo\Views\TitleFooter.cshtml" />
+    <Content Include="Datwendo\Views\TitleWithQuantity.cshtml" />
+    <Content Include="Datwendo\Views\Web.config" />
+    <Content Include="Datwendo\Views\Widget.Wrapper.cshtml" />
+    <Content Include="Datwendo\Views\zone-content.cshtml" />
+    <Content Include="Datwendo\Views\zone-footer.cshtml" />
+    <Content Include="Datwendo\Views\zone-navigation.cshtml" />
+    <Content Include="Datwendo\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content-Article.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content-Bundle.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Order.Invoiced.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Order.PaymentResponse.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\PayPalCheckout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\TitleWithQuantity.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Article.AddButton.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Article.AddButton.Summary.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Article.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Article.Summary.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Article.Thumbnail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Bundle.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\PayPal\Canceled.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\PayPal\HandleIPN.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\PayPal\Returned.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content.Summary-bundle.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Common.Body-article.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Fields\Common.Text-article.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Fields\Numeric-article.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content-ProjectionPage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content.Summary-partenaires.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\ServiceTerms.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content.Summary-manuscrit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content.Summary-call4.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content-call4.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Fields\Common.Text-call4.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Fields\Common.Text-partenaires-SiteWeb.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Fields\Common.Text-manuscrit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Fields\Numeric-call4.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Fields\Numeric-partenaires.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Fields\Numeric-manuscrit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Fields\DateTime-call4.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Fields\Boolean-call4.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Call4Part.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Call4Part.Summary.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Call4Widget.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\zone-appela.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\widget-appela.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\List-Call4Widget.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\List-Call4Widget-layer-thehomepage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Datwendo.Manuscrits\Media.Actions-manuscrit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Call4.AddButton.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Call4.AddButton.Summary.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Member.Signup.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\EditorTemplates\Address.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\EditorTemplates\Checkbox.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Apply4Call.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Datwendo\Views\Menu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Datwendo\Views\MenuItemLink-SearchMenuItem.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Media-manuscrit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Media.Summary-Manuscrit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Document-manuscrit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Document-manuscrit.Metadata.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Document-manuscrit.Summary.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Media.Actions.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\ManuscritPart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\ManuscritPart.FrontEditor.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\ManuscritPart.Summary.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\UpdateSubscription_FrontEditor.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content.FrontEditor-manuscrit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Media.FrontEditor-Manuscrit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Datwendo\Views\Customer.SelectAddress.cshtml" />
+    <Content Include="Datwendo\Views\Customer.Signup.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Datwendo\Views\Layout-url-customer.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content-GenreTerm.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\TaxonomyPart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Title-OnePage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content.Summary-edito.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\ComiteLecture.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\ReglesManuscrit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Legal1.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Legal2.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Legal3.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Legal4.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\CalendarEventPart.Summary.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\CalendarEventPart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Datwendo.Twitter\Story\Detail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Datwendo.Twitter\Story\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Template.Twitter.Wrapper.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Template.TwitterStoryAuthors.Wrapper.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Template.TwitterStoryChapter.Wrapper.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Template.TwitterStoryChapterTitle.Wrapper.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Template.TwitterStoryEnd.Wrapper.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Template.TwitterStoryTitle.Wrapper.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\TwitterStoryPart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\TwitterStoryPart.Summary.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content.Summary-twitterstory.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content-twitterstory.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Fields\Common.Text-twitterstory.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Fields\Common.Text.Summary-twitterstory.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Datwendo.Twitter\Story\DetailTweets.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\.csscomb.json" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\.csslintrc" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\alerts.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\badges.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\bootstrap.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\breadcrumbs.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\button-groups.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\buttons.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\carousel.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\close.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\code.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\component-animations.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\dropdowns.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\forms.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\glyphicons.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\grid.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\input-groups.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\jumbotron.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\labels.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\list-group.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\media.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\mixins.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\mixins\alerts.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\mixins\background-variant.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\mixins\border-radius.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\mixins\buttons.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\mixins\center-block.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\mixins\clearfix.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\mixins\forms.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\mixins\gradients.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\mixins\grid-framework.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\mixins\grid.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\mixins\hide-text.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\mixins\image.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\mixins\labels.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\mixins\list-group.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\mixins\nav-divider.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\mixins\nav-vertical-align.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\mixins\opacity.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\mixins\pagination.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\mixins\panels.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\mixins\progress-bar.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\mixins\reset-filter.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\mixins\reset-text.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\mixins\resize.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\mixins\responsive-visibility.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\mixins\size.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\mixins\tab-focus.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\mixins\table-row.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\mixins\text-emphasis.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\mixins\text-overflow.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\mixins\vendor-prefixes.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\modals.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\navbar.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\navs.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\normalize.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\pager.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\pagination.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\panels.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\popovers.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\print.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\progress-bars.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\responsive-embed.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\responsive-utilities.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\scaffolding.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\tables.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\theme.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\thumbnails.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\tooltip.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\type.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\utilities.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\variables.less" />
+    <Content Include="TheBootstrapMachine\Assets\Less\Lib\Bootstrap\wells.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Assets\Less\bootswatch.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content.Summary-links.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content-links.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content.Summary-links-url-blogs.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Fields\ContentPicker-links.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Datwendo\Views\Shipping.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\App_Data\Localization\fr-FR\orchard.theme.po" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content.Summary-calendarevent.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content-JChapter.cshtml" />
+    <Content Include="TheBootstrapMachine\Views\Content-JPadBook.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Assets\Less\JPad.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Assets\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\FrontEditorTemplates\Parts.Common.Body.cshtml" />
+    <Content Include="TheBootstrapMachine\Views\FrontEditorTemplates\Parts.Tags.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content.Summary-jchapter.cshtml" />
+    <Content Include="TheBootstrapMachine\Views\Content.Summary-jpadbook.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Layout-url-jpad.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Layout-layer-blogtech.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Layout-layer-blogposts-blogtech.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Media-Image.MicroThumbnail - Copy.cshtml" />
+    <Content Include="TheBootstrapMachine\Views\Menu-url-jpad.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\PagerNoSelect.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Common.BodySummary.Summary-url-jpad.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Menu-layer-blogs-menu-commun.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Common.BodySummary.Summary-jchapter-url-jpad.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Title-JPadbook.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content-JPadCategoryTerm.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Title-JPadCategoryTerm.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content-Address.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content-Member.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content-SalesContact.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content.Summary-Member.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content.Summary-Address.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Content.Summary-SalesContact.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\MemberPart.Summary.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\MemberPart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\UserLinkPart.Summary.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\UserLinkPart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\List-JChapters.Summary.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\OEmbed.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Video.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\VectorImage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Parts\Audio.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Layout-layer-blogposts-lhurlereve.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheBootstrapMachine\Views\Layout-layer-blog-lhurlereve.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

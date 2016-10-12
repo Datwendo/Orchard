@@ -74,7 +74,7 @@ namespace Orchard.DisplayManagement.Implementation {
 
         public IHtmlString ShapeExecute(Shape shape) {
             // disambiguates the call to ShapeExecute(object) as Shape also implements IEnumerable
-            return ShapeExecute((object) shape);
+            return ShapeExecute((object)shape);
         }
 
         public IHtmlString ShapeExecute(object shape) {

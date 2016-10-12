@@ -151,9 +151,13 @@ namespace Orchard.DisplayManagement.Descriptors.ShapePlacementStrategy {
                         return ctx => (ctx.EditType ?? "").StartsWith(prefix) && predicate(ctx);
                     }
                     // CS 6/6 trap the Detail descriptor for empty EditType
-                    return ctx => (ctx.EditType == expression || 
-                            (string.IsNullOrEmpty(ctx.EditType) && expression == "Detail" )) 
+                    return ctx => {
+                        var edt = ctx.EditType;
+                        bool result= (string.Equals(edt, expression, StringComparison.InvariantCulture) ||
+                            (string.IsNullOrEmpty(edt) && string.Equals(expression, "Detail", StringComparison.InvariantCulture)))
                             && predicate(ctx);
+                            return result;
+                            };
                 case "Path":
                     var normalizedPath = VirtualPathUtility.IsAbsolute(expression)
                                              ? VirtualPathUtility.ToAppRelative(expression)

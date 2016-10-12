@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Web;
 using Orchard.Services;
+using Orchard.ContentManagement;
 
 namespace Orchard.Core.Common.Services {
     public class BbcodeFilter : IHtmlFilter {
-        public string ProcessContent(string text, string flavor) {
+        public string ProcessContent(string text, string flavor, ContentItem item = null) {
             return BbcodeReplace(text);
         }
 

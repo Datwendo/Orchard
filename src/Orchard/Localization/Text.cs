@@ -33,7 +33,7 @@ namespace Orchard.Localization {
 
                 return args.Length == 0
                 ? new LocalizedString(localizedFormat, _scope, textHint, args)
-				: new LocalizedString(
+                : new LocalizedString(
                     String.Format(GetFormatProvider(currentCulture), localizedFormat, args.Select(Encode).ToArray()), 
                     _scope, 
                     textHint, 

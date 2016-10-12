@@ -128,10 +128,10 @@ namespace Orchard.ContentManagement {
 
             // adding an alternate for [Stereotype]_FrontEdit__[ContentType] e.g. Content.FrontEdit-Menu
             ((IShape)itemShape).Metadata.Alternates.Add(actualShapeType + "__" + content.ContentItem.ContentType);
-            // adding an alternate for [Stereotype]_FrontEdit_[EditType] e.g. Content.FrontEdit.Write
-            ((IShape)itemShape).Metadata.Alternates.Add(actualShapeType + "_" + actualEditType);
-            // adding an alternate for [Stereotype]_FrontEdit_[EditType]__[ContentType] e.g. Content.FrontEdit-Menu.Write
-            ((IShape)itemShape).Metadata.Alternates.Add(actualShapeType + "_" + actualEditType + "__" + content.ContentItem.ContentType );
+            // adding an alternate for [Stereotype]_FrontEdit__[EditType] e.g. Content.FrontEdit-Write
+            ((IShape)itemShape).Metadata.Alternates.Add(actualShapeType + "__" + actualEditType);
+            // adding an alternate for [Stereotype]_FrontEdit__[EditType]__[ContentType] e.g. Content.FrontEdit-Write-Menu
+            ((IShape)itemShape).Metadata.Alternates.Add(actualShapeType + "__" + actualEditType + "__" + content.ContentItem.ContentType );
 
             var context = new BuildFrontEditorContext(itemShape, content,actualEditType, groupId, _shapeFactory);
             var workContext = _workContextAccessor.GetContext(_requestContext.HttpContext);
@@ -150,7 +150,7 @@ namespace Orchard.ContentManagement {
                 stereotype = "Content";
 
             var actualShapeType = stereotype + "_FrontEdit";
-            var actualEditType = string.IsNullOrWhiteSpace(editType) ? "" /*"Detail"*/ : editType;
+            var actualEditType = string.IsNullOrWhiteSpace(editType) ? "Detail" : editType;
 
             dynamic itemShape = CreateItemShape(actualShapeType);
             itemShape.ContentItem = content.ContentItem;

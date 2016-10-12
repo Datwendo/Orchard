@@ -2,10 +2,11 @@
 using System.Web;
 using Orchard.Services;
 using Orchard.Utility.Extensions;
+using Orchard.ContentManagement;
 
 namespace Orchard.Core.Common.Services {
     public class TextFieldFilter : IHtmlFilter {
-        public string ProcessContent(string text, string flavor) {
+        public string ProcessContent(string text, string flavor,ContentItem item) {
             // Flavor is null for a normal input/text field
             return flavor == null || string.Equals(flavor, "textarea", StringComparison.OrdinalIgnoreCase) ? ReplaceNewLines(text) : text;
         }

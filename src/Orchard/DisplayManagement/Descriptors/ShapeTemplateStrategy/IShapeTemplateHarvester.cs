@@ -38,7 +38,6 @@ namespace Orchard.DisplayManagement.Descriptors.ShapeTemplateStrategy {
             if (subPath.StartsWith("Views/") && subPath != "Views/Items") {
                 leader = subPath.Substring("Views/".Length) + "_";
             }
-
             // canonical shape type names must not have - or . to be compatible 
             // with display and shape api calls)))
             var shapeType = leader + fileName.Replace("--", "__").Replace("-", "__").Replace('.', '_');

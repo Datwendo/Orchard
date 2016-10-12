@@ -2,11 +2,11 @@
   <Place Parts_Tags_Edit="Content:7"/>
   <Place Parts_Tags_FrontEdit="-"/>
   <Match DisplayType="Detail">
+    <Place Parts_Tags_ShowTags="Header:after.7"/>
+  </Match>
+  <Match DisplayType="Summary">
       <Place Parts_Tags_ShowTags="Header:after.7"/>
-    </Match>
-    <Match DisplayType="Summary">
-        <Place Parts_Tags_ShowTags="Header:after.7"/>
-    </Match>
+  </Match>
 
   <Place Parts_TagCloud="Content:5"/>
   <Place Parts_TagCloud_Edit="Content:7"/>
