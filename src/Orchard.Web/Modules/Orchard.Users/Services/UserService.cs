@@ -15,6 +15,8 @@ using System.Text;
 using Orchard.Messaging.Services;
 using Orchard.Environment.Configuration;
 using Orchard.Users.Events;
+using Orchard.Users.Constants;
+using System.Text.RegularExpressions;
 
 namespace Orchard.Users.Services {
     public class UserService : IUserService {
@@ -226,6 +228,43 @@ namespace Orchard.Users.Services {
                 return null;
 
             return user;
+        }
+
+        public bool PasswordMeetsPolicies(string password, out IDictionary<string, LocalizedString> validationErrors) {
+            validationErrors = new Dictionary<string, LocalizedString>();
+            var settings = _siteService.GetSiteSettings().As<RegistrationSettingsPart>();
+
+            if(string.IsNullOrEmpty(password)) {
+                validationErrors.Add(UserPasswordValidationResults.PasswordIsTooShort,
+                    T("The password can't be empty."));
+                return false;
+            }
+
+            if(password.Length < settings.GetMinimumPasswordLength()) {
+                validationErrors.Add(UserPasswordValidationResults.PasswordIsTooShort,
+                    T("You must specify a password of {0} or more characters.", settings.MinimumPasswordLength));
+            }
+
+            if(settings.EnableCustomPasswordPolicy) {
+                if(settings.EnablePasswordNumberRequirement && !Regex.Match(password, "[0-9]").Success) {
+                    validationErrors.Add(UserPasswordValidationResults.PasswordDoesNotContainNumbers,
+                        T("The password must contain at least one number."));
+                }
+                if(settings.EnablePasswordUppercaseRequirement && !password.Any(c => char.IsUpper(c))) {
+                    validationErrors.Add(UserPasswordValidationResults.PasswordDoesNotContainUppercase,
+                        T("The password must contain at least one uppercase letter."));
+                }
+                if(settings.EnablePasswordLowercaseRequirement && !password.Any(c => char.IsLower(c))) {
+                    validationErrors.Add(UserPasswordValidationResults.PasswordDoesNotContainLowercase,
+                        T("The password must contain at least one lowercase letter."));
+                }
+                if(settings.EnablePasswordSpecialRequirement && !Regex.Match(password, "[^a-zA-Z0-9]").Success) {
+                    validationErrors.Add(UserPasswordValidationResults.PasswordDoesNotContainSpecialCharacters,
+                        T("The password must contain at least one special character."));
+                }
+            }
+
+            return validationErrors.Count == 0;
         }
     }
 }

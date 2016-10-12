@@ -55,11 +55,8 @@ namespace Orchard.Users.Services {
 
         public ILogger Logger { get; set; }
         public Localizer T { get; set; }
-
-        public MembershipSettings GetSettings() {
-            var settings = new MembershipSettings();
-            // accepting defaults
-            return settings;
+        public IMembershipSettings GetSettings() {
+            return _orchardServices.WorkContext.CurrentSite.As<RegistrationSettingsPart>();
         }
         public bool IsMain { get { return true; } }
 
@@ -161,6 +158,9 @@ namespace Orchard.Users.Services {
                 return null;
 
             return user;
+        }
+        public bool PasswordIsExpired(IUser user, int days) {
+            return user.As<UserPart>().LastPasswordChangeUtc.Value.AddDays(days) < _clock.UtcNow;
         }
 
         public void SetPassword(IUser user, string password) {

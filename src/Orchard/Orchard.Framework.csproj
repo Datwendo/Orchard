@@ -215,6 +215,7 @@
     <Compile Include="Reports\Services\ReportsCoordinator.cs" />
     <Compile Include="Reports\Services\ReportsManager.cs" />
     <Compile Include="Reports\Services\ReportsPersister.cs" />
+    <Compile Include="Security\IMembershipSettings.cs" />
     <Compile Include="Security\ITeamMembers.cs" />
     <Compile Include="Security\IUserTeams.cs" />
     <Compile Include="Security\TeamUserParams.cs" />

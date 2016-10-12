@@ -12,7 +12,7 @@ namespace Orchard.Security {
         }
         public bool IsMain { get { return false; } }
 
-        public MembershipSettings GetSettings() {
+        public IMembershipSettings GetSettings() {
             throw new NotImplementedException();
         }
 
@@ -28,6 +28,9 @@ namespace Orchard.Security {
         }
 
         public IUser ValidateUser(string userNameOrEmail, string password) {
+            throw new NotImplementedException();
+        }
+        public bool PasswordIsExpired(IUser user, int weeks) {
             throw new NotImplementedException();
         }
     }

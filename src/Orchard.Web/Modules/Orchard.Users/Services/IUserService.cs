@@ -1,5 +1,8 @@
 using Orchard.Security;
 using System;
+using System.Collections.Generic;
+using Orchard.Localization;
+
 namespace Orchard.Users.Services {
     public interface IUserService : IDependency {
         // CS 17/7
@@ -15,5 +18,8 @@ namespace Orchard.Users.Services {
 
         string CreateNonce(IUser user, TimeSpan delay);
         bool DecryptNonce(string challengeToken, out string username, out DateTime validateByUtc);
+
+        bool PasswordMeetsPolicies(string password, out IDictionary<string, LocalizedString> validationErrors);
+
     }
 }

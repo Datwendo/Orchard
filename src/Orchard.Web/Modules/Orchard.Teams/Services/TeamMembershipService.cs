@@ -1,19 +1,20 @@
-﻿using Orchard.Security;
+﻿using Orchard.ContentManagement;
+using Orchard.Security;
+using Orchard.Users.Models;
 
 namespace Orchard.Teams.Services {
     public class TeamMembershipService : IMembershipService {
         private readonly ITeamService _teamService;
+        private readonly IOrchardServices _orchardServices;
 
-        public TeamMembershipService(ITeamService teamService) {
+        public TeamMembershipService(IOrchardServices orchardServices, ITeamService teamService) {
+            _orchardServices = orchardServices;
             _teamService = teamService;
         }
 
         public bool IsMain { get { return false; } }
-        public MembershipSettings GetSettings() {
-            var settings = new MembershipSettings();
-            // accepting defaults
-            return settings;
-
+        public IMembershipSettings GetSettings() {
+            return _orchardServices.WorkContext.CurrentSite.As<RegistrationSettingsPart>();
         }
 
         public IUser CreateUser(CreateUserParams createUserParams) {
@@ -31,6 +32,9 @@ namespace Orchard.Teams.Services {
 
         public IUser ValidateUser(string userNameOrEmail, string password) {
             return null;
+        }
+        public bool PasswordIsExpired(IUser user, int days) {
+            return false;
         }
         public void SetPassword(IUser user, string password) {
 

@@ -85,5 +85,9 @@ namespace Orchard.Users.Models {
             get { return Retrieve(x => x.LastLogoutUtc); }
             set { Store(x => x.LastLogoutUtc, value); }
         }
+        public DateTime? LastPasswordChangeUtc {
+            get { return Retrieve(x => x.LastPasswordChangeUtc); }
+            set { Store(x => x.LastPasswordChangeUtc, value); }
+        }
     }
 }
