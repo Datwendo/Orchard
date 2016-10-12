@@ -1,0 +1,22 @@
+@using Orchard.Teams.ViewModels
+@model TeamMembersViewModel
+
+<fieldset>
+    <legend>@T("Members")</legend>
+    @if (Model.Members.Count > 0) {
+        var index = 0;
+        foreach (TeamMemberEntry entry in Model.Members) {
+            @Html.Hidden("Members[" + index + "].Id", entry.Id)
+            @Html.Hidden("Members[" + index + "].Name", entry.Name)
+
+    <div>
+        @Html.CheckBox("Members[" + index + "].Checked", entry.Checked)
+        <label class="forcheckbox" for="@Html.FieldIdFor(m => m.Members[index].Checked)">@entry.Name</label>
+    </div>
+            index++;
+        }
+    }
+    else {
+    <p>@T("There are no members.")</p>
+    }
+</fieldset>

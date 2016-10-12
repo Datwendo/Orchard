@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Orchard.ContentManagement.Records;
+using Orchard.Security;
 
 namespace Orchard.ContentManagement {
     public static class ContentCreateExtensions {
@@ -222,6 +223,14 @@ namespace Orchard.ContentManagement {
         }
         public static T As<T>(this IContent content) where T : IContent {
             return content == null ? default(T) : (T)content.ContentItem.Get(typeof(T));
+        }
+        // CS 17/7
+        public static IUser WithIUser(this IContent content) {
+            return content == null ? null : (IUser)content.ContentItem.GetPartWithInterface(typeof(IUser));
+        }
+
+        public static T WithInterface<T>(this IContent content, Type MyInterface) {
+            return content == null ? default(T) : (T)content.ContentItem.GetPartWithInterface(MyInterface);
         }
 
         public static bool Has<T>(this IContent content) {

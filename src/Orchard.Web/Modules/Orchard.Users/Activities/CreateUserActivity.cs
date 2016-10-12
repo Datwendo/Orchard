@@ -6,6 +6,7 @@ using Orchard.Security;
 using Orchard.Users.Services;
 using Orchard.Workflows.Models;
 using Orchard.Workflows.Services;
+using System.Linq;
 
 namespace Orchard.Users.Activities {
     [OrchardFeature("Orchard.Users.Workflows")]
@@ -13,9 +14,9 @@ namespace Orchard.Users.Activities {
         private readonly IUserService _userService;
         private readonly IMembershipService _membershipService;
 
-        public CreateUserActivity(IUserService userService, IMembershipService membershipService) {
+        public CreateUserActivity(IUserService userService, IEnumerable<IMembershipService> membershipServices) {
             _userService = userService;
-            _membershipService = membershipService;
+            _membershipService = membershipServices.Where(m => m.IsMain).First();
             T = NullLocalizer.Instance;
         }
 
@@ -66,8 +67,6 @@ namespace Orchard.Users.Activities {
                 yield return T("UserNameOrEmailNotUnique");
                 yield break;
             }
-
-            userName = userName.Trim();
 
             var user = _membershipService.CreateUser(
                 new CreateUserParams(

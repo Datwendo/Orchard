@@ -10,12 +10,16 @@ namespace Orchard.Security {
         public IUser CreateUser(CreateUserParams createUserParams) {
             throw new NotImplementedException();
         }
+        public bool IsMain { get { return false; } }
 
-        public IMembershipSettings GetSettings() {
+        public MembershipSettings GetSettings() {
             throw new NotImplementedException();
         }
 
         public IUser GetUser(string username) {
+            throw new NotImplementedException();
+        }
+        public IUser GetUser(string username, bool isTeam = false) {
             throw new NotImplementedException();
         }
 
@@ -24,10 +28,6 @@ namespace Orchard.Security {
         }
 
         public IUser ValidateUser(string userNameOrEmail, string password) {
-            throw new NotImplementedException();
-        }
-
-        public bool PasswordIsExpired(IUser user, int weeks) {
             throw new NotImplementedException();
         }
     }

@@ -6,12 +6,21 @@ namespace Orchard.Users.Events {
         /// <summary>
         /// Called before a User is created
         /// </summary>
-        void Creating(UserContext context);
+        void Creating(CreateUserContext context);
 
         /// <summary>
         /// Called after a user has been created
         /// </summary>
-        void Created(UserContext context);
+        void Created(CreateUserContext context);
+
+        // CS 16/7
+        void Removing(RemoveUserContext context);
+        void Removed(RemoveUserContext context);
+        void Adding2Team(TeamUserContext context);
+        void Added2Team(TeamUserContext context);
+        void RemovingFromTeam(TeamUserContext context);
+        void RemovedFromTeam(TeamUserContext context);
+        // END CS 16/7
 
         /// <summary>
         /// Called before a user has logged in

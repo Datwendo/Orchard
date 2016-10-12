@@ -174,7 +174,7 @@ namespace Orchard.ImportExport.Commands {
 
         private void ImpersonateSuperUser() {
             var superUser = _siteService.GetSiteSettings().SuperUser;
-            var owner = _membershipService.GetUser(superUser);
+            var owner = _membershipService.GetUser(superUser,false);
             _authenticationService.SetAuthenticatedUserForRequest(owner);
         }
 

@@ -6,7 +6,6 @@ using Orchard.Environment.Extensions;
 using Orchard.Localization;
 using Orchard.Security;
 using Orchard.Users.Events;
-using Orchard.Users.Models;
 using Orchard.Workflows.Models;
 using Orchard.Workflows.Services;
 
@@ -17,8 +16,8 @@ namespace Orchard.Users.Activities {
         private readonly IAuthenticationService _authenticationService;
         private readonly IUserEventHandler _userEventHandler;
 
-        public SignInUserActivity(IMembershipService membershipService, IAuthenticationService authenticationService, IUserEventHandler userEventHandler) {
-            _membershipService = membershipService;
+        public SignInUserActivity(IEnumerable<IMembershipService> membershipServices, IAuthenticationService authenticationService, IUserEventHandler userEventHandler) {
+            _membershipService = membershipServices.Where(m => m.IsMain).First();
             _authenticationService = authenticationService;
             _userEventHandler = userEventHandler;
             T = NullLocalizer.Instance;

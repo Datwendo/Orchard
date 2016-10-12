@@ -1,0 +1,107 @@
+@using Orchard.ContentManagement
+@using Orchard.Teams.Models
+@using Orchard.Teams.ViewModels
+
+@model TeamsIndexViewModel
+
+
+@{
+    var teamIndex = 0;
+
+    Layout.Title = T("Teams").ToString();
+}
+
+@using (Html.BeginFormAntiForgeryPost()) { 
+    @Html.ValidationSummary()
+    <div class="manage">@Html.ActionLink(T("Add a new Team").ToString(), "Create", new { }, new { @class = "button primaryAction" })</div>
+
+    <fieldset class="bulk-actions">
+        <label for="publishActions">@T("Actions:")</label>
+        <select id="publishActions" name="@Html.NameOf(m => m.Options.BulkAction)">
+            @Html.SelectOption(Model.Options.BulkAction, TeamsBulkAction.None, T("Choose action...").ToString())
+            @Html.SelectOption(Model.Options.BulkAction, TeamsBulkAction.Delete, T("Delete").ToString())
+        </select>
+        <button type="submit" name="submit.BulkEdit" value="@T("Apply")">@T("Apply")</button>
+    </fieldset>
+    <fieldset class="bulk-actions">
+        @Html.TextBoxFor(m => m.Options.Search, new { @class = "text" })        
+        <label for="sortResults">@T("Sort by:")</label>
+        <select id="sortResults" name="@Html.NameOf(m => m.Options.Order)">
+            @Html.SelectOption(Model.Options.Order, TeamsOrder.Name, T("Name").ToString())
+            @Html.SelectOption(Model.Options.Order, TeamsOrder.Email, T("Email").ToString())
+            @Html.SelectOption(Model.Options.Order, TeamsOrder.CreatedUtc, T("Creation Time").ToString())
+            @Html.SelectOption(Model.Options.Order, TeamsOrder.LastLoginUtc, T("Last Login Time").ToString())
+        </select>
+
+        <button type="submit" name="submit.Filter" value="@T("Filter")">@T("Filter")</button>
+    </fieldset>
+    <fieldset>
+        <table class="items">
+            <thead>
+                <tr>
+                    <th scope="col"><input type="checkbox" class="check-all"/></th>
+                    <th scope="col">@T("Name")</th>
+                    <th scope="col">@T("Email")</th>
+                    <th scope="col">@T("Teams")</th>
+                    <th scope="col">@T("Members")</th>
+                    <th scope="col">@T("Actions")</th>
+                    <th scope="col">@T("Creation Time")</th>
+                    <th scope="col">@T("Last Login Time")</th>
+                </tr>
+            </thead>
+            @foreach(var entry in Model.Teams) {
+                var ctMnager = WorkContext.CurrentUser.ContentItem.ContentManager;
+                var teamUsersPart = ctMnager.Get(entry.Team.Id).As<TeamMembersPart>();
+                <tr>
+                    <td>
+                        <input type="hidden" value="@Model.Teams[teamIndex].Team.Id" name="@Html.NameOf(m => m.Teams[teamIndex].Team.Id)" />
+                        <input type="checkbox" value="true" name="@Html.NameOf(m => m.Teams[teamIndex].IsChecked)" />
+                    </td>
+                    <td>
+                        @Html.ActionLink(entry.Team.TeamName, "Edit", new { entry.Team.Id })
+                    </td>
+                    <td>
+                        @entry.Team.Email
+                    </td>
+                    <td>
+                        @foreach(var team in entry.Teams) {
+                            @team<br />
+                        }
+                    </td>
+                    <td>
+                        @foreach(var user in teamUsersPart.Members) {
+                            var wusr = ctMnager.Get(user.Item2).WithIUser();
+                            if(wusr != null) {
+                                @wusr.UserName<br />
+                            }
+                            else {
+                                @user.Item2<br />
+                            }
+                        }
+                    </td>
+
+
+                    <td>
+                        @Html.ActionLink(T("Edit").ToString(), "Edit", new { entry.Team.Id }) |
+                        @Html.ActionLink(T("Delete").ToString(), "Delete", new { entry.Team.Id }, new { itemprop = "RemoveUrl UnsafeUrl" }) |
+                    </td>
+                    <td>
+                        @if(entry.Team.CreatedUtc != null) {
+                            @Display(New.DateTimeRelative(dateTimeUtc: entry.Team.CreatedUtc))
+                        }
+                    </td>
+                    <td>
+                        @if(entry.Team.LastLoginUtc != null) {
+                            @Display(New.DateTimeRelative(dateTimeUtc: entry.Team.LastLoginUtc))
+                        }
+                    </td>
+
+                </tr>
+                teamIndex++;
+            }
+        </table>
+
+    @Display(Model.Pager)
+
+    </fieldset>
+} 

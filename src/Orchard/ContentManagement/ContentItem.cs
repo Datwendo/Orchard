@@ -38,6 +38,11 @@ namespace Orchard.ContentManagement {
                 return this;
             return _parts.FirstOrDefault(partType.IsInstanceOfType);
         }
+        // CS 17/7
+        public IContent GetPartWithInterface(Type MyInterface) {
+            return _parts.Where(p => MyInterface.IsAssignableFrom(p.GetType())).FirstOrDefault();
+        }
+
 
         public void Weld(ContentPart part) {
             part.ContentItem = this;

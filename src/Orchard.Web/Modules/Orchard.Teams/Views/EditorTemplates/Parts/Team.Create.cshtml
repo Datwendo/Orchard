@@ -1,0 +1,16 @@
+﻿@model Orchard.Teams.ViewModels.TeamCreateViewModel
+<fieldset>
+    @Html.LabelFor(m => m.TeamName, T("Team Name"))
+    @Html.TextBoxFor(m=>m.TeamName, new { @class = "text medium" })
+    @Html.ValidationMessageFor(m=>m.TeamName, "*")
+</fieldset>
+<fieldset>
+    @Html.LabelFor(m => m.Email, T("Email"))
+    @Html.TextBoxFor(m=>m.Email, new { @class = "text medium" })
+    @Html.ValidationMessageFor(m=>m.Email, "*")
+</fieldset>
+<fieldset>
+    @Html.LabelFor(m => m.UserName, T("User Name"))
+    @Html.TextBoxFor(m => m.UserName, new { @class = "text medium" })
+    @Html.ValidationMessageFor(m => m.UserName, "*")
+</fieldset>

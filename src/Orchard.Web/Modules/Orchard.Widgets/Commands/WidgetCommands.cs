@@ -10,12 +10,13 @@ using Orchard.Security;
 using Orchard.Settings;
 using Orchard.Widgets.Models;
 using Orchard.Widgets.Services;
+using System.Collections.Generic;
 
 namespace Orchard.Widgets.Commands {
     public class WidgetCommands : DefaultOrchardCommandHandler {
         private readonly IWidgetsService _widgetsService;
         private readonly ISiteService _siteService;
-        private readonly IMembershipService _membershipService;
+        private readonly IEnumerable<IMembershipService> _membershipServices;
         private readonly IMenuService _menuService;
         private readonly IContentManager _contentManager;
 
@@ -24,12 +25,12 @@ namespace Orchard.Widgets.Commands {
         public WidgetCommands(
             IWidgetsService widgetsService, 
             ISiteService siteService, 
-            IMembershipService membershipService,
+            IEnumerable<IMembershipService> membershipServices,
             IMenuService menuService,
             IContentManager contentManager) {
             _widgetsService = widgetsService;
             _siteService = siteService;
-            _membershipService = membershipService;
+            _membershipServices = membershipServices;
             _menuService = menuService;
             _contentManager = contentManager;
 
@@ -123,7 +124,12 @@ namespace Orchard.Widgets.Commands {
             if (String.IsNullOrEmpty(Owner)) {
                 Owner = _siteService.GetSiteSettings().SuperUser;
             }
-            var owner = _membershipService.GetUser(Owner);
+            IUser owner = null;
+            foreach (var membershipService in _membershipServices) {
+                owner = membershipService.GetUser(Owner,false);
+                if (owner != null)
+                    break;
+            }
             widget.As<ICommonPart>().Owner = owner;
 
             if (widget.Has<IdentityPart>() && !String.IsNullOrEmpty(Identity)) {

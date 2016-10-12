@@ -3,6 +3,7 @@ using Orchard.ContentManagement;
 using Orchard.ContentManagement.Aspects;
 using Orchard.Security;
 using Orchard.Security.Permissions;
+using System.Linq;
 
 namespace Orchard.Blogs.Security {
     public class BlogAuthorizationEventHandler : IAuthorizationServiceEventHandler {
@@ -37,7 +38,10 @@ namespace Orchard.Blogs.Security {
             if (common == null || common.Owner == null)
                 return false;
 
-            return user.Id == common.Owner.Id;
+            // CS 17/7 return user.Id == common.Owner.Id;
+            if (user.Id == common.Owner.Id)
+                return true;
+            return user.Teams.Contains(common.Owner.Id);
         }
 
         private static bool HasOwnershipOnContainer(IUser user, IContent content) {

@@ -1,0 +1,14 @@
+﻿<Placement>
+  <Place Parts_Teams_TeamMembers_Edit="Content:10"/>
+  <Place Parts_Users_Teams_Edit="Content:11"/>
+  <Match DisplayType="SummaryAdmin">
+    <Place Parts_TeamMembersPart="Content:3"
+           Parts_UserTeamsPart="Content:4"
+           Parts_TeamPart="Content:2" />
+  </Match>
+  <Match DisplayType="Summary">
+    <Place Parts_TeamMembersPart="Content:3"
+           Parts_UserTeamsPart="Content:4"
+           Parts_TeamPart="Content:2" />
+  </Match>
+</Placement>

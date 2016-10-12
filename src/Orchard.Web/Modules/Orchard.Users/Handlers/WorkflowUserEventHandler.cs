@@ -12,17 +12,23 @@ namespace Orchard.Users.Handlers {
             _workflowManager = workflowManager;
         }
 
-        public void Creating(UserContext context) {
+        public void Creating(CreateUserContext context) {
             _workflowManager.TriggerEvent("UserCreating",
                                          context.User,
                                          () => new Dictionary<string, object> {{"User", context}});
         }
 
-        public void Created(UserContext context) {
+        public void Created(CreateUserContext context) {
             _workflowManager.TriggerEvent("UserCreated",
                                          context.User,
                                          () => new Dictionary<string, object> {{"User", context}});
         }
+        public void Removing(RemoveUserContext context) { }
+        public void Removed(RemoveUserContext context) { }
+        public void Adding2Team(TeamUserContext context) { }
+        public void Added2Team(TeamUserContext context) { }
+        public void RemovingFromTeam(TeamUserContext context) { }
+        public void RemovedFromTeam(TeamUserContext context) { }
 
         public void LoggingIn(string userNameOrEmail, string password) {
             _workflowManager.TriggerEvent("UserLoggingIn",

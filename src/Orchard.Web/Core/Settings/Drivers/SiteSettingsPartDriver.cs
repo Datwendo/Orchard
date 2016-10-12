@@ -11,13 +11,14 @@ using Orchard.Security;
 using Orchard.Settings;
 using Orchard.UI.Notify;
 using Orchard.Exceptions;
+using System.Collections.Generic;
 
 namespace Orchard.Core.Settings.Drivers {
     public class SiteSettingsPartDriver : ContentPartDriver<SiteSettingsPart> {
         private readonly ISiteService _siteService;
         private readonly ICultureManager _cultureManager;
         private readonly ICalendarManager _calendarProvider;
-        private readonly IMembershipService _membershipService;
+        private readonly IEnumerable<IMembershipService> _membershipServices;
         private readonly INotifier _notifier;
         private readonly IAuthorizer _authorizer;
 
@@ -25,13 +26,13 @@ namespace Orchard.Core.Settings.Drivers {
             ISiteService siteService, 
             ICultureManager cultureManager,
             ICalendarManager calendarProvider,
-            IMembershipService membershipService, 
+            IEnumerable<IMembershipService> membershipServices, 
             INotifier notifier,
             IAuthorizer authorizer) {
             _siteService = siteService;
             _cultureManager = cultureManager;
             _calendarProvider = calendarProvider;
-            _membershipService = membershipService;
+            _membershipServices = membershipServices;
             _notifier = notifier;
             _authorizer = authorizer;
 
@@ -83,7 +84,13 @@ namespace Orchard.Core.Settings.Drivers {
                     // otherwise the super user must be a valid user, to prevent an external account to impersonate as this name
                     //the user management module ensures the super user can't be deleted, but it can be disabled
                 else {
-                    if (_membershipService.GetUser(model.SuperUser) == null) {
+                    IUser owner = null;
+                    foreach (var membershipService in _membershipServices) {
+                        owner = membershipService.GetUser(model.SuperUser,false);
+                        if (owner != null)
+                            break;
+                    }
+                    if (owner == null) {
                         updater.AddModelError("SuperUser", T("The user {0} was not found", model.SuperUser));
                     }
                 }

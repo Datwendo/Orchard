@@ -6,6 +6,7 @@ using Orchard.ContentManagement;
 using Orchard.Security;
 using Orchard.Settings;
 using System.Globalization;
+using System.Linq;
 
 namespace Orchard.Tokens.Tests {
     public class StubWorkContextAccessor : IWorkContextAccessor {
@@ -125,6 +126,11 @@ namespace Orchard.Tokens.Tests {
                 public string Email {
                     get { return "Fake@fake.com"; }
                 }
+                public TeamMemberType TeamMemberType { get { return TeamMemberType.user; } }
+                public IList<int> Teams {
+                    get { return new List<int>(); }
+                }
+
             }
 
             public override T Resolve<T>() {

@@ -146,11 +146,21 @@ namespace Orchard.Core.Tests.Common.Providers {
             public new int Id { get { return 6655321; } }
             public string UserName { get { return "x"; } }
             public string Email { get { return "y"; } }
+            public TeamMemberType TeamMemberType { get { return TeamMemberType.user; } }
+            public IList<int> Teams {
+                get { return new List<int>(); }
+            }
+
         }
         class AlternateTestUser : ContentPart, IUser {
             public new int Id { get { return 6655322; } }
             public string UserName { get { return "y"; } }
             public string Email { get { return "x"; } }
+            public TeamMemberType TeamMemberType { get { return TeamMemberType.user; } }
+            public IList<int> Teams {
+                get { return new List<int>(); }
+            }
+
         }
 
         [Test]

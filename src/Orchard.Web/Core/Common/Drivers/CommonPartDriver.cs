@@ -6,18 +6,19 @@ using Orchard.Core.Common.Models;
 using Orchard.Core.Common.ViewModels;
 using Orchard.Localization;
 using Orchard.Security;
+using System.Collections.Generic;
 
 namespace Orchard.Core.Common.Drivers {
     public class CommonPartDriver : ContentPartDriver<CommonPart> {
         private readonly IContentManager _contentManager;
-        private readonly IMembershipService _membershipService;
+        private readonly IEnumerable<IMembershipService> _membershipServices;
 
         public CommonPartDriver(
             IOrchardServices services,
             IContentManager contentManager,
-            IMembershipService membershipService) {
+            IEnumerable<IMembershipService> membershipServices) {
             _contentManager = contentManager;
-            _membershipService = membershipService;
+            _membershipServices = membershipServices;
             T = NullLocalizer.Instance;
             Services = services;
         }
@@ -102,11 +103,34 @@ namespace Orchard.Core.Common.Drivers {
 
             context.ImportAttribute(part.PartDefinition.Name, "Owner", owner => {
                 var contentIdentity = new ContentIdentity(owner);
-
-                // use the super user if the referenced one doesn't exist;
-                part.Owner =
-                    _membershipService.GetUser(contentIdentity.Get("User.UserName"))
-                    ?? _membershipService.GetUser(Services.WorkContext.CurrentSite.SuperUser);
+                IUser user = null;
+                bool isTeam = false;
+                var suser = contentIdentity.Get("User.UserName");
+                if (string.IsNullOrEmpty(suser)) {
+                    suser = contentIdentity.Get("Team.TeamName");
+                    isTeam = true;
+                }
+                foreach (var membershipService in _membershipServices) {
+                    user = membershipService.GetUser(suser,isTeam);
+                    if (user != null)
+                        break;
+                }
+                if (user != null) {
+                    // use the super user if the referenced one doesn't exist;
+                    part.Owner = user;
+                }
+                else {
+                    suser = Services.WorkContext.CurrentSite.SuperUser;
+                    foreach (var membershipService in _membershipServices) {
+                        user = membershipService.GetUser(suser,false);
+                        if (user != null)
+                            break;
+                    }
+                    if (user != null) {
+                        // use the super user if the referenced one doesn't exist;
+                        part.Owner = user;
+                    }
+                }
             });
 
             context.ImportAttribute(part.PartDefinition.Name, "Container", container =>

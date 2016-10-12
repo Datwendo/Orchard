@@ -8,6 +8,8 @@ using Orchard.Core.XmlRpc.Models;
 using Orchard.Localization;
 using Orchard.Mvc.Extensions;
 using Orchard.Security;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Orchard.Media.Services {
     public class XmlRpcHandler : IXmlRpcHandler {
@@ -17,11 +19,11 @@ namespace Orchard.Media.Services {
         private readonly RouteCollection _routeCollection;
 
         public XmlRpcHandler(
-            IMembershipService membershipService,
+            IEnumerable<IMembershipService> membershipServices,
             IAuthorizationService authorizationService,
             IMediaService mediaService,
             RouteCollection routeCollection) {
-            _membershipService = membershipService;
+            _membershipService = membershipServices.Where(m => m.IsMain).First();
             _authorizationService = authorizationService;
             _mediaService = mediaService;
             _routeCollection = routeCollection;

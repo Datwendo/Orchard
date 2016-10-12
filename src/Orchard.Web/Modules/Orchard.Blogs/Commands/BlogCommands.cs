@@ -14,11 +14,12 @@ using Orchard.Core.Navigation.Services;
 using Orchard.Settings;
 using Orchard.Core.Title.Models;
 using Orchard.UI.Navigation;
+using System.Collections.Generic;
 
 namespace Orchard.Blogs.Commands {
     public class BlogCommands : DefaultOrchardCommandHandler {
         private readonly IContentManager _contentManager;
-        private readonly IMembershipService _membershipService;
+        private readonly IEnumerable<IMembershipService> _membershipServices;
         private readonly IBlogService _blogService;
         private readonly IMenuService _menuService;
         private readonly ISiteService _siteService;
@@ -27,14 +28,14 @@ namespace Orchard.Blogs.Commands {
 
         public BlogCommands(
             IContentManager contentManager,
-            IMembershipService membershipService,
+            IEnumerable<IMembershipService> membershipServices,
             IBlogService blogService,
             IMenuService menuService,
             ISiteService siteService,
             INavigationManager navigationManager,
             IArchiveService archiveService) {
             _contentManager = contentManager;
-            _membershipService = membershipService;
+            _membershipServices = membershipServices;
             _blogService = blogService;
             _menuService = menuService;
             _siteService = siteService;
@@ -76,7 +77,12 @@ namespace Orchard.Blogs.Commands {
             if (String.IsNullOrEmpty(Owner)) {
                 Owner = _siteService.GetSiteSettings().SuperUser;
             }
-            var owner = _membershipService.GetUser(Owner);
+            IUser owner = null;
+            foreach (var membershipService in _membershipServices) {
+                owner = membershipService.GetUser(Owner);
+                if (owner != null)
+                    break;
+            }
 
             if (owner == null) {
                 Context.Output.WriteLine(T("Invalid username: {0}", Owner));
@@ -119,9 +125,13 @@ namespace Orchard.Blogs.Commands {
         [CommandHelp("blog import /BlogId:<id> /FeedUrl:<feed url> /Owner:<username>\r\n\t" + "Import all items from <feed url> into the blog specified by <id>")]
         [OrchardSwitches("FeedUrl,BlogId,Owner")]
         public void Import() {
-            var owner = _membershipService.GetUser(Owner);
-
-            if(owner == null) {
+            IUser owner = null;
+            foreach (var membershipService in _membershipServices) {
+                owner = membershipService.GetUser(Owner);
+                if (owner != null)
+                    break;
+            }
+            if (owner == null) {
                 Context.Output.WriteLine(T("Invalid username: {0}", Owner));
                 return;
             }
@@ -134,7 +144,7 @@ namespace Orchard.Blogs.Commands {
                 Context.Output.WriteLine(T("Found {0} items", doc.Descendants("item").Count()));
             }
             catch (Exception ex) {
-                throw new OrchardException(T("An error occurred while loading the feed at {0}.", FeedUrl), ex);
+                throw new OrchardException(T("An error occured while loading the feed at {0}.", FeedUrl), ex);
             }
 
             var blog = _blogService.Get(BlogId, VersionOptions.Latest);

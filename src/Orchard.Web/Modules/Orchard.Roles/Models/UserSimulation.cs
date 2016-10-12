@@ -3,6 +3,7 @@ using Orchard.ContentManagement;
 using Orchard.ContentManagement.Handlers;
 using Orchard.ContentManagement.MetaData.Builders;
 using Orchard.Security;
+using System.Linq;
 
 namespace Orchard.Roles.Models {
     public static class UserSimulation {
@@ -19,6 +20,11 @@ namespace Orchard.Roles.Models {
         class SimulatedUser : ContentPart, IUser {
             public string UserName { get { return null; } }
             public string Email { get { return null; } }
+            public TeamMemberType TeamMemberType { get { return TeamMemberType.user; } }
+            public IList<int> Teams {
+                get { return new List<int>(); }
+            }
+
         }
 
         class SimulatedUserRoles : ContentPart, IUserRoles {

@@ -1,5 +1,7 @@
 ﻿using Orchard.Localization;
 using Orchard.Security;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Orchard.Tokens.Providers {
     public class UserTokens : ITokenProvider {
@@ -41,10 +43,13 @@ namespace Orchard.Tokens.Providers {
                 get { return string.Empty; }
             }
 
+            public TeamMemberType TeamMemberType { get { return TeamMemberType.user; } }
+            public IList<int> Teams {
+                get { return new List<int>(); }
+            }
             public ContentManagement.ContentItem ContentItem {
                 get { return null; }
             }
-
             public int Id {
                 get { return -1; }
             }

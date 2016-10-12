@@ -1,7 +1,9 @@
-﻿using Orchard.ContentManagement;
-using Orchard.Security;
-using System;
+﻿using System;
 using System.Web.Security;
+using Orchard.ContentManagement;
+using Orchard.Security;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Orchard.Users.Models {
     public sealed class UserPart : ContentPart<UserPartRecord>, IUser {
@@ -46,6 +48,13 @@ namespace Orchard.Users.Models {
             get { return Retrieve(x => x.Email); }
             set { Store(x => x.Email, value); }
         }
+        public IList<int> Teams {
+            get {
+                var teamsofThisUser = this.ContentItem.As<ITeams>();
+                return teamsofThisUser?.Teams;
+            }
+        }
+        public TeamMemberType TeamMemberType { get { return TeamMemberType.user; } }
 
         public string NormalizedUserName {
             get { return Retrieve(x => x.NormalizedUserName); }
@@ -75,11 +84,6 @@ namespace Orchard.Users.Models {
         public DateTime? LastLogoutUtc {
             get { return Retrieve(x => x.LastLogoutUtc); }
             set { Store(x => x.LastLogoutUtc, value); }
-        }
-
-        public DateTime? LastPasswordChangeUtc {
-            get { return Retrieve(x => x.LastPasswordChangeUtc); }
-            set { Store(x => x.LastPasswordChangeUtc, value); }
         }
     }
 }

@@ -1,0 +1,6 @@
+﻿.navicon-teams {
+background-image:url(images/menu.teams.png) !important;
+}
+.navicon-teams:hover {
+background-position:0 -30px !important;
+}

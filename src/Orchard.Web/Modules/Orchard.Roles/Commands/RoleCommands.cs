@@ -10,17 +10,17 @@ using Orchard.Security;
 namespace Orchard.Roles.Commands {
     public class RoleCommands : DefaultOrchardCommandHandler {
         private readonly IRoleService _roleService;
-        private readonly IMembershipService _membershipService;
+        private readonly IEnumerable<IMembershipService> _membershipServices;
         private readonly IRepository<UserRolesPartRecord> _userRolesRepository;
         private readonly IContentManager _contentManager;
 
         public RoleCommands(
             IRoleService roleService, 
-            IMembershipService membershipService, 
+            IEnumerable<IMembershipService> membershipServices, 
             IRepository<UserRolesPartRecord> userRolesRepository,
             IContentManager contentManager) {
             _roleService = roleService;
-            _membershipService = membershipService;
+            _membershipServices = membershipServices;
             _userRolesRepository = userRolesRepository;
             _contentManager = contentManager;
         }
@@ -194,8 +194,12 @@ namespace Orchard.Roles.Commands {
         [CommandHelp("user roles <username>\r\n\t" + "Lists a User's Roles")]
         [CommandName("user roles")]
         public void GetUserRoles(string username) {
-            var user = _membershipService.GetUser(username);
-
+            IUser user = null;
+            foreach (var membershipService in _membershipServices) {
+                user = membershipService.GetUser(username);
+                if (user != null)
+                    break;
+            }
             if (user == null) {
                 Context.Output.WriteLine("Username not found");
                 return;
@@ -213,8 +217,12 @@ namespace Orchard.Roles.Commands {
         [CommandHelp("user add role <username> <role>\r\n\t" + "Adds a User to a Role")]
         [CommandName("user add role")]
         public void UserAddRole(string username, string role) {
-            var user = _membershipService.GetUser(username);
-
+            IUser user = null;
+            foreach (var membershipService in _membershipServices) {
+                user = membershipService.GetUser(username);
+                if (user != null)
+                    break;
+            }
             if (user == null) {
                 Context.Output.WriteLine("User not found");
                 return;
@@ -237,8 +245,12 @@ namespace Orchard.Roles.Commands {
         [CommandHelp("user remove role <username> <role>\r\n\t" + "Removes a User from a Role")]
         [CommandName("user remove role")]
         public void UserRemoveRole(string username, string role) {
-            var user = _membershipService.GetUser(username);
-
+            IUser user = null;
+            foreach (var membershipService in _membershipServices) {
+                user = membershipService.GetUser(username);
+                if (user != null)
+                    break;
+            }
             if (user == null) {
                 Context.Output.WriteLine("User not found");
                 return;

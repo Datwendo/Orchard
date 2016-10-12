@@ -11,6 +11,7 @@ namespace Orchard.Users.ViewModels {
 
     public class UserEntry {
         public UserPartRecord User { get; set; }
+        public IEnumerable<string> Teams { get; set; }
         public bool IsChecked { get; set; }
     }
 

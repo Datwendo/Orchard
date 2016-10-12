@@ -14,7 +14,12 @@ namespace Orchard.AuditTrail.Providers.Users {
             _auditTrailManager = auditTrailManager;
             _wca = wca;
         }
-
+        public void Removing(RemoveUserContext context) { }
+        public void Removed(RemoveUserContext context) { }
+        public void Adding2Team(TeamUserContext context) { }
+        public void Added2Team(TeamUserContext context) { }
+        public void RemovingFromTeam(TeamUserContext context) { }
+        public void RemovedFromTeam(TeamUserContext context) { }
         public void LoggedIn(IUser user) {
             RecordAuditTrail(UserAuditTrailEventProvider.LoggedIn, user);
         }
@@ -49,10 +54,10 @@ namespace Orchard.AuditTrail.Providers.Users {
             _auditTrailManager.CreateRecord<UserAuditTrailEventProvider>(eventName, _wca.GetContext().CurrentUser, properties, eventData, eventFilterKey: "user", eventFilterData: user.UserName);
         }
 
-        public void Creating(UserContext context) {
+        public void Creating(CreateUserContext context) {
         }
 
-        public void Created(UserContext context) {
+        public void Created(CreateUserContext context) {
         }
 
         public void LoggingIn(string userNameOrEmail, string password) {

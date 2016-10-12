@@ -20,16 +20,16 @@ namespace Orchard.Email.Rules {
     public class MailActions : IActionProvider {
         private readonly IMessageManager _messageManager;
         private readonly IOrchardServices _orchardServices;
-        private readonly IMembershipService _membershipService;
+        private readonly IEnumerable<IMembershipService> _membershipServices;
         public const string MessageType = "ActionEmail";
 
         public MailActions(
             IMessageManager messageManager,
             IOrchardServices orchardServices,
-            IMembershipService membershipService) {
+            IEnumerable<IMembershipService> membershipServices) {
             _messageManager = messageManager;
             _orchardServices = orchardServices;
-            _membershipService = membershipService;
+            _membershipServices = membershipServices;
             T = NullLocalizer.Instance;
         }
 
@@ -67,7 +67,12 @@ namespace Orchard.Email.Rules {
             }
             else if (recipient == "admin") {
                 var username = _orchardServices.WorkContext.CurrentSite.SuperUser;
-                var user = _membershipService.GetUser(username);
+                IUser user = null;
+                foreach(var membershipService in _membershipServices) {
+                    user = membershipService.GetUser(username);
+                    if (user != null)
+                        break;
+                }
 
                 // can be null if user is no super user is defined
                 if (user != null && !String.IsNullOrWhiteSpace(user.Email)) {

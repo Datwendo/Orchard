@@ -1,0 +1,17 @@
+﻿Name: Teams
+AntiForgery: enabled
+Author: C.Surieux
+Website: https://datwendo.com
+Version: 1.0
+OrchardVersion: 1.10
+Description: The Teams module enables teams management.
+Features:
+    Orchard.Teams:
+        Description: Standard Teams.
+        Category: Core
+        Dependencies: Settings, Orchard.Users
+    Orchard.Teams.Workflows:
+        Name: Teams Workflows Activities
+        Description: Provides Team based Workflow Activites.
+        Category: Workflows
+        Dependencies: Orchard.Workflows

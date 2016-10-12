@@ -3,21 +3,22 @@ using Orchard.ContentManagement.Drivers;
 using Orchard.Core.Common.Models;
 using Orchard.Localization;
 using Orchard.Security;
+using System.Collections.Generic;
 
 namespace Orchard.Core.Common.OwnerEditor {
     public class OwnerEditorDriver : ContentPartDriver<CommonPart> {
         private readonly IAuthenticationService _authenticationService;
         private readonly IAuthorizationService _authorizationService;
-        private readonly IMembershipService _membershipService;
+        private readonly IEnumerable<IMembershipService> _membershipServices;
 
         public OwnerEditorDriver(
             IOrchardServices services,
             IAuthenticationService authenticationService,
             IAuthorizationService authorizationService,
-            IMembershipService membershipService) {
+            IEnumerable<IMembershipService> membershipServices) {
             _authenticationService = authenticationService;
             _authorizationService = authorizationService;
-            _membershipService = membershipService;
+            _membershipServices = membershipServices;
             T = NullLocalizer.Instance;
             Services = services;
         }
@@ -62,7 +63,13 @@ namespace Orchard.Core.Common.OwnerEditor {
                         updater.TryUpdateModel(model, Prefix, null, null);
 
                         if (model.Owner != null && model.Owner != priorOwner) {
-                            var newOwner = _membershipService.GetUser(model.Owner);
+                            IUser newOwner = null;
+                            foreach (var membershipService in _membershipServices) {
+                                newOwner = membershipService.GetUser(model.Owner);
+                                if (newOwner != null)
+                                    break;
+                            }
+
                             if (newOwner == null) {
                                 updater.AddModelError("OwnerEditor.Owner", T("Invalid user name"));
                             }
@@ -108,7 +115,12 @@ namespace Orchard.Core.Common.OwnerEditor {
                         updater.TryUpdateModel(model, Prefix, null, null);
 
                         if (model.Owner != null && model.Owner != priorOwner) {
-                            var newOwner = _membershipService.GetUser(model.Owner);
+                            IUser newOwner = null;
+                            foreach (var membershipService in _membershipServices) {
+                                newOwner = membershipService.GetUser(model.Owner);
+                                if (newOwner != null)
+                                    break;
+                            }
                             if (newOwner == null) {
                                 updater.AddModelError("OwnerEditor.Owner", T("Invalid user name"));
                             }

@@ -13,11 +13,12 @@ using Orchard.Settings;
 using Orchard.Core.Title.Models;
 using Orchard.UI.Navigation;
 using Orchard.Utility;
+using System.Collections.Generic;
 
 namespace Orchard.Pages.Commands {
     public class PageCommands : DefaultOrchardCommandHandler {
         private readonly IContentManager _contentManager;
-        private readonly IMembershipService _membershipService;
+        private readonly IEnumerable<IMembershipService> _membershipServices;
         private readonly ISiteService _siteService;
         private readonly IMenuService _menuService;
         private readonly INavigationManager _navigationManager;
@@ -26,7 +27,7 @@ namespace Orchard.Pages.Commands {
 
         public PageCommands(
             IContentManager contentManager, 
-            IMembershipService membershipService, 
+            IEnumerable<IMembershipService> membershipServices, 
             IAuthenticationService authenticationService,
             ISiteService siteService,
             IMenuService menuService,
@@ -34,7 +35,7 @@ namespace Orchard.Pages.Commands {
             IHomeAliasService homeAliasService) {
 
             _contentManager = contentManager;
-            _membershipService = membershipService;
+            _membershipServices = membershipServices;
             _siteService = siteService;
             _menuService = menuService;
             _navigationManager = navigationManager;
@@ -80,7 +81,12 @@ namespace Orchard.Pages.Commands {
                 Owner = _siteService.GetSiteSettings().SuperUser;
             }
 
-            var owner = _membershipService.GetUser(Owner);
+            IUser owner = null;
+            foreach (var membershipService in _membershipServices) {
+                owner = membershipService.GetUser(Owner);
+                if (owner != null)
+                    break;
+            }
             _authenticationService.SetAuthenticatedUserForRequest(owner);
 
             var page = _contentManager.Create("Page", VersionOptions.Draft);

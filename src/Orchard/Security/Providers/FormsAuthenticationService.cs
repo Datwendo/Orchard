@@ -7,6 +7,7 @@ using Orchard.Mvc;
 using Orchard.Mvc.Extensions;
 using Orchard.Services;
 using Orchard.Utility.Extensions;
+using System.Collections.Generic;
 
 namespace Orchard.Security.Providers {
     public class FormsAuthenticationService : IAuthenticationService {
@@ -14,7 +15,7 @@ namespace Orchard.Security.Providers {
 
         private readonly ShellSettings _settings;
         private readonly IClock _clock;
-        private readonly IMembershipService _membershipService;
+        private readonly IEnumerable<IMembershipService> _membershipServices;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ISslSettingsProvider _sslSettingsProvider;
         private readonly IMembershipValidationService _membershipValidationService;
@@ -32,13 +33,13 @@ namespace Orchard.Security.Providers {
         public FormsAuthenticationService(
             ShellSettings settings,
             IClock clock,
-            IMembershipService membershipService,
+            IEnumerable<IMembershipService> membershipServices,
             IHttpContextAccessor httpContextAccessor,
             ISslSettingsProvider sslSettingsProvider,
             IMembershipValidationService membershipValidationService) {
             _settings = settings;
             _clock = clock;
-            _membershipService = membershipService;
+            _membershipServices = membershipServices;
             _httpContextAccessor = httpContextAccessor;
             _sslSettingsProvider = sslSettingsProvider;
             _membershipValidationService = membershipValidationService;
@@ -157,8 +158,11 @@ namespace Orchard.Security.Providers {
             if (!String.Equals(userDataTenant, _settings.Name, StringComparison.Ordinal)) {
                 return null;
             }
-
-            _signedInUser = _membershipService.GetUser(userDataName);
+            foreach (var membershipService in _membershipServices) {
+                _signedInUser = membershipService.GetUser(userDataName,false);
+                if (_signedInUser != null)
+                    break;
+            }
             if (_signedInUser == null || !_membershipValidationService.CanAuthenticateWithCookie(_signedInUser)) {
                 _isNonOrchardUser = true;
                 return null;

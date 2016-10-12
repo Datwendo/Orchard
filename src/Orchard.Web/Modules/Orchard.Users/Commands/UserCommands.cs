@@ -1,8 +1,8 @@
 ﻿using Orchard.Commands;
-using Orchard.Localization;
 using Orchard.Security;
 using Orchard.Users.Services;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Orchard.Users.Commands {
     public class UserCommands : DefaultOrchardCommandHandler {
@@ -10,9 +10,9 @@ namespace Orchard.Users.Commands {
         private readonly IUserService _userService;
 
         public UserCommands(
-            IMembershipService membershipService,
+            IEnumerable<IMembershipService> membershipServices,
             IUserService userService) {
-            _membershipService = membershipService;
+            _membershipService = membershipServices.Where(m => m.IsMain).First();
             _userService = userService;
         }
 
@@ -32,21 +32,18 @@ namespace Orchard.Users.Commands {
         [CommandHelp("user create /UserName:<username> /Password:<password> /Email:<email>\r\n\t" + "Creates a new User")]
         [OrchardSwitches("UserName,Password,Email")]
         public void Create() {
-	        if (string.IsNullOrWhiteSpace(UserName)) {
-		        Context.Output.WriteLine(T("Username cannot be empty."));
-		        return;
-	        }
+            if (string.IsNullOrWhiteSpace(UserName)) {
+                Context.Output.WriteLine(T("Username cannot be empty."));
+                return;
+            }
 
             if (!_userService.VerifyUserUnicity(UserName, Email)) {
                 Context.Output.WriteLine(T("User with that username and/or email already exists."));
                 return;
             }
 
-            IDictionary<string, LocalizedString> validationErrors;
-            if (!_userService.PasswordMeetsPolicies(Password, out validationErrors)) {
-                foreach (var error in validationErrors) {
-                    Context.Output.WriteLine(error.Value);
-                }
+            if (Password == null || Password.Length < MinPasswordLength) {
+                Context.Output.WriteLine(T("You must specify a password of {0} or more characters.", MinPasswordLength));
                 return;
             }
 
@@ -57,6 +54,12 @@ namespace Orchard.Users.Commands {
             }
 
             Context.Output.WriteLine(T("User created successfully"));
+        }
+
+        int MinPasswordLength {
+            get {
+                return _membershipService.GetSettings().MinRequiredPasswordLength;
+            }
         }
     }
 }

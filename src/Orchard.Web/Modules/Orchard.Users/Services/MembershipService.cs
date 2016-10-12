@@ -1,21 +1,21 @@
-﻿using Orchard.ContentManagement;
-using Orchard.DisplayManagement;
-using Orchard.Environment.Configuration;
-using Orchard.Environment.Extensions;
-using Orchard.Localization;
-using Orchard.Logging;
-using Orchard.Messaging.Services;
-using Orchard.Security;
-using Orchard.Services;
-using Orchard.Users.Events;
-using Orchard.Users.Models;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Web.Helpers;
 using System.Web.Security;
+using Orchard.DisplayManagement;
+using Orchard.Localization;
+using Orchard.Logging;
+using Orchard.ContentManagement;
+using Orchard.Security;
+using Orchard.Users.Events;
+using Orchard.Users.Models;
+using Orchard.Messaging.Services;
+using System.Collections.Generic;
+using Orchard.Services;
+using System.Web.Helpers;
+using Orchard.Environment.Configuration;
+using Orchard.Environment.Extensions;
 
 namespace Orchard.Users.Services {
     [OrchardSuppressDependency("Orchard.Security.NullMembershipService")]
@@ -56,9 +56,12 @@ namespace Orchard.Users.Services {
         public ILogger Logger { get; set; }
         public Localizer T { get; set; }
 
-        public IMembershipSettings GetSettings(){
-            return _orchardServices.WorkContext.CurrentSite.As<RegistrationSettingsPart>();
-         }
+        public MembershipSettings GetSettings() {
+            var settings = new MembershipSettings();
+            // accepting defaults
+            return settings;
+        }
+        public bool IsMain { get { return true; } }
 
         public IUser CreateUser(CreateUserParams createUserParams) {
             Logger.Information("CreateUser {0} {1}", createUserParams.Username, createUserParams.Email);
@@ -84,7 +87,7 @@ namespace Orchard.Users.Services {
                 user.EmailStatus = UserStatus.Approved;
             }
 
-            var userContext = new UserContext {User = user, Cancel = false, UserParameters = createUserParams};
+            var userContext = new CreateUserContext {User = user, Cancel = false, UserParameters = createUserParams};
             _userEventHandlers.Creating(userContext);
 
             if(userContext.Cancel) {
@@ -131,8 +134,13 @@ namespace Orchard.Users.Services {
 
         public IUser GetUser(string username) {
             var lowerName = username == null ? "" : username.ToLowerInvariant();
-
             return _orchardServices.ContentManager.Query<UserPart, UserPartRecord>().Where(u => u.NormalizedUserName == lowerName).List().FirstOrDefault();
+        }
+
+        public IUser GetUser(string username, bool isTeam = false) {
+            if (isTeam)
+                return null;
+            return GetUser(username);
         }
 
         public IUser ValidateUser(string userNameOrEmail, string password) {
@@ -155,10 +163,6 @@ namespace Orchard.Users.Services {
             return user;
         }
 
-        public bool PasswordIsExpired(IUser user, int days){
-            return user.As<UserPart>().LastPasswordChangeUtc.Value.AddDays(days) < _clock.UtcNow;
-        }
-
         public void SetPassword(IUser user, string password) {
             if (!user.Is<UserPart>())
                 throw new InvalidCastException();
@@ -178,7 +182,6 @@ namespace Orchard.Users.Services {
                 default:
                     throw new ApplicationException(T("Unexpected password format value").ToString());
             }
-            userPart.LastPasswordChangeUtc = _clock.UtcNow;
         }
 
         private bool ValidatePassword(UserPart userPart, string password) {

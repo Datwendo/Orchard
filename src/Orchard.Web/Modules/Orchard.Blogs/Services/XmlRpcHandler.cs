@@ -18,6 +18,7 @@ using Orchard.Security;
 using Orchard.Blogs.Extensions;
 using Orchard.Mvc.Html;
 using Orchard.Core.Title.Models;
+using System.Linq;
 
 namespace Orchard.Blogs.Services {
     [OrchardFeature("Orchard.Blogs.RemotePublishing")]
@@ -29,14 +30,17 @@ namespace Orchard.Blogs.Services {
         private readonly IMembershipService _membershipService;
         private readonly RouteCollection _routeCollection;
 
-        public XmlRpcHandler(IBlogService blogService, IBlogPostService blogPostService, IContentManager contentManager,
-            IAuthorizationService authorizationService, IMembershipService membershipService, 
-            RouteCollection routeCollection) {
+        public XmlRpcHandler(IBlogService blogService
+            , IBlogPostService blogPostService
+            , IContentManager contentManager
+            , IAuthorizationService authorizationService
+            , IEnumerable<IMembershipService> membershipServices 
+            , RouteCollection routeCollection) {
             _blogService = blogService;
             _blogPostService = blogPostService;
             _contentManager = contentManager;
             _authorizationService = authorizationService;
-            _membershipService = membershipService;
+            _membershipService = membershipServices.Where(m => m.IsMain).First();
             _routeCollection = routeCollection;
             Logger = NullLogger.Instance;
             T = NullLocalizer.Instance;

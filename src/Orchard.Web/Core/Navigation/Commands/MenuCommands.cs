@@ -1,37 +1,34 @@
-using System;
+﻿using System;
 using Orchard.Commands;
 using Orchard.ContentManagement;
 using Orchard.ContentManagement.Aspects;
-using Orchard.Core.Common.Models;
 using Orchard.Core.Navigation.Models;
 using Orchard.Core.Navigation.Services;
 using Orchard.Security;
 using Orchard.Settings;
+using System.Collections.Generic;
 
 namespace Orchard.Core.Navigation.Commands {
     public class MenuCommands : DefaultOrchardCommandHandler {
         private readonly IContentManager _contentManager;
         private readonly IMenuService _menuService;
         private readonly ISiteService _siteService;
-        private readonly IMembershipService _membershipService;
+        private readonly IEnumerable<IMembershipService> _membershipServices;
 
         public MenuCommands(
-            IContentManager contentManager,
+            IContentManager contentManager, 
             IMenuService menuService,
             ISiteService siteService,
-            IMembershipService membershipService) {
+            IEnumerable<IMembershipService> membershipServices) {
             _contentManager = contentManager;
             _menuService = menuService;
             _siteService = siteService;
-            _membershipService = membershipService;
+            _membershipServices = membershipServices;
         }
 
         [OrchardSwitch]
         public string MenuPosition { get; set; }
-
-        [OrchardSwitch]
-        public string Identity { get; set; }
-
+        
         [OrchardSwitch]
         public string Owner { get; set; }
 
@@ -45,7 +42,7 @@ namespace Orchard.Core.Navigation.Commands {
         public string MenuName { get; set; }
 
         [CommandName("menuitem create")]
-        [CommandHelp("menuitem create /MenuPosition:<position> /MenuText:<text> /Url:<url> /MenuName:<name> [/Owner:<username>]\r\n\t" + "Creates a new menu item")]
+        [CommandHelp("menuitem create /MenuPosition:<position> /MenuText:<text> /Url:<url> /MenuName:<name> [/Owner:<username>] \r\n\t" + "Creates a new menu item")]
         [OrchardSwitches("MenuPosition,MenuText,Url,MenuName,Owner")]
         public void Create() {
             // flushes before doing a query in case a previous command created the menu
@@ -66,7 +63,12 @@ namespace Orchard.Core.Navigation.Commands {
             if (String.IsNullOrEmpty(Owner)) {
                 Owner = _siteService.GetSiteSettings().SuperUser;
             }
-            var owner = _membershipService.GetUser(Owner);
+            IUser owner = null;
+            foreach (var membershipService in _membershipServices) {
+                owner = membershipService.GetUser(Owner,false);
+                if (owner != null)
+                    break;
+            }
 
             if (owner == null) {
                 Context.Output.WriteLine(T("Invalid username: {0}", Owner));
@@ -79,18 +81,15 @@ namespace Orchard.Core.Navigation.Commands {
         }
 
         [CommandName("menu create")]
-        [CommandHelp("menu create /MenuName:<name> [/Identity:<identity>] \r\n\t" + "Creates a new menu")]
-        [OrchardSwitches("MenuName,Identity")]
+        [CommandHelp("menu create /MenuName:<name>\r\n\t" + "Creates a new menu")]
+        [OrchardSwitches("MenuName")]
         public void CreateMenu() {
             if (string.IsNullOrWhiteSpace(MenuName)) {
                 Context.Output.WriteLine(T("Menu name can't be empty.").Text);
                 return;
             }
 
-            var menuItem = _menuService.Create(MenuName);
-            if (menuItem.Has<IdentityPart>() && !String.IsNullOrEmpty(Identity)) {
-                menuItem.As<IdentityPart>().Identifier = Identity;
-            }
+            _menuService.Create(MenuName);
 
             Context.Output.WriteLine(T("Menu created successfully.").Text);
         }

@@ -7,6 +7,7 @@ using Orchard.Localization;
 using Orchard.Security;
 using Orchard.Settings;
 using Orchard.ContentManagement.FieldStorage;
+using System.Collections.Generic;
 
 namespace Orchard.Core.Settings.Tokens {
     public interface ITokenProvider : IEventHandler {
@@ -22,10 +23,10 @@ namespace Orchard.Core.Settings.Tokens {
         public SettingsTokens(
             IOrchardServices orchardServices, 
             IContentDefinitionManager contentDefinitionManager,
-            IMembershipService membershipService) {
+            IEnumerable<IMembershipService> membershipServices) {
             _orchardServices = orchardServices;
             _contentDefinitionManager = contentDefinitionManager;
-            _membershipService = membershipService;
+            _membershipService = membershipServices.Where(m => m.IsMain).First();
         }
 
         public Localizer T { get; set; }
@@ -62,7 +63,7 @@ namespace Orchard.Core.Settings.Tokens {
                 .Token("SiteName", (Func<ISite, object>)(content => content.SiteName))
                 .Chain("SiteName", "Text", (Func<ISite, object>)(content => content.SiteName))
                 .Token("SuperUser", (Func<ISite, object>)(content => content.SuperUser))
-                .Chain("SuperUser", "User", (Func<ISite, object>)(content => _membershipService.GetUser(content.SuperUser)))
+                .Chain("SuperUser", "User", (Func<ISite, object>)(content => _membershipService.GetUser(content.SuperUser,false)))
                 .Token("Culture", (Func<ISite, object>)(content => content.SiteCulture))
                 .Chain("Culture", "Text", (Func<ISite, object>)(content => content.SiteCulture))
                 .Token("BaseUrl", (Func<ISite, object>)(content => content.BaseUrl))

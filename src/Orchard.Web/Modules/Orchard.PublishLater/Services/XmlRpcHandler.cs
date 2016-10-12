@@ -9,6 +9,7 @@ using Orchard.Localization;
 using Orchard.PublishLater.Models;
 using Orchard.Security;
 using Orchard.Tasks.Scheduling;
+using System.Linq;
 
 namespace Orchard.PublishLater.Services {
     public class XmlRpcHandler : IXmlRpcHandler {
@@ -19,11 +20,11 @@ namespace Orchard.PublishLater.Services {
 
         public XmlRpcHandler(IContentManager contentManager,
             IPublishingTaskManager publishingTaskManager,
-            IMembershipService membershipService,
+            IEnumerable<IMembershipService> membershipServices,
             IAuthorizationService authorizationService) {
             _contentManager = contentManager;
             _publishingTaskManager = publishingTaskManager;
-            _membershipService = membershipService;
+            _membershipService = membershipServices.Where(m => m.IsMain).First();
             _authorizationService = authorizationService;
             T = NullLocalizer.Instance;
         }

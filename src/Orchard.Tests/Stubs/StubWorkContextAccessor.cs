@@ -5,6 +5,7 @@ using Autofac;
 using Orchard.ContentManagement;
 using Orchard.Security;
 using Orchard.Settings;
+using System.Linq;
 
 namespace Orchard.Tests.Stubs {
     public class StubWorkContextAccessor : IWorkContextAccessor {
@@ -117,6 +118,11 @@ namespace Orchard.Tests.Stubs {
                 public string Email {
                     get { return "Fake@fake.com"; }
                 }
+                public TeamMemberType TeamMemberType { get { return TeamMemberType.user; } }
+                public IList<int> Teams {
+                    get { return new List<int>(); }
+                }
+
             }
 
             public override T Resolve<T>() {

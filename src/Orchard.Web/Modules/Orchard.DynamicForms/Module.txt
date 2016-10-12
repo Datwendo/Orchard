@@ -35,4 +35,4 @@ Features:
         Name: Dynamic Forms User Bindings
         Description: Adds bindings for Users.
         Category: Forms
-        Dependencies: Orchard.DynamicForms, Orchard.Users
+        Dependencies: Orchard.DynamicForms, Orchard.Users, Orchard.Teams

@@ -5,17 +5,18 @@ using Orchard.ContentManagement.Aspects;
 using Orchard.Security;
 using Orchard.Settings;
 using Orchard.Widgets.Models;
+using System.Collections.Generic;
 
 namespace Orchard.Widgets.Commands {
     public class LayerCommands : DefaultOrchardCommandHandler {
         private readonly IContentManager _contentManager;
         private readonly ISiteService _siteService;
-        private readonly IMembershipService _membershipService;
+        private readonly IEnumerable<IMembershipService> _membershipServices;
 
-        public LayerCommands(IContentManager contentManager, ISiteService siteService, IMembershipService membershipService) {
+        public LayerCommands(IContentManager contentManager, ISiteService siteService, IEnumerable<IMembershipService> membershipServices) {
             _contentManager = contentManager;
             _siteService = siteService;
-            _membershipService = membershipService;
+            _membershipServices = membershipServices;
         }
 
         [OrchardSwitch]
@@ -43,7 +44,12 @@ namespace Orchard.Widgets.Commands {
             if (String.IsNullOrEmpty(Owner)) {
                 Owner = _siteService.GetSiteSettings().SuperUser;
             }
-            var owner = _membershipService.GetUser(Owner);
+            IUser owner = null;
+            foreach (var membershipService in _membershipServices) {
+                owner = membershipService.GetUser(Owner,false);
+                if (owner != null)
+                    break;
+            }
             layer.As<ICommonPart>().Owner = owner;
 
             Context.Output.WriteLine(T("Layer created successfully.").Text);

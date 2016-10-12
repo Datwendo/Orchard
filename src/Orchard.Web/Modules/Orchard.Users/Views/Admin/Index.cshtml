@@ -52,6 +52,7 @@
                     <th scope="col"><input type="checkbox" class="check-all"/></th>
                     <th scope="col">@T("Name")</th>
                     <th scope="col">@T("Email")</th>
+                    <th scope="col">@T("Teams")</th>
                     <th scope="col">@T("Actions")</th>
                     <th scope="col">@T("Creation Time")</th>
                     <th scope="col">@T("Last Login Time")</th>
@@ -73,6 +74,11 @@
                 </td>
                 <td>
                     @entry.User.Email 
+                </td>
+                <td>
+                    @foreach(var team in entry.Teams) {
+                        @team<br />
+                    }
                 </td>
                 <td>
                     @Html.ActionLink(T("Edit").ToString(), "Edit", new { entry.User.Id }) |

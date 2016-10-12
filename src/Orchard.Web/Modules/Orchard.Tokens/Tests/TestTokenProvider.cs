@@ -3,6 +3,7 @@ using System.Linq;
 using Orchard.ContentManagement;
 using Orchard.Localization;
 using Orchard.Security;
+using System.Collections.Generic;
 
 namespace Orchard.Tokens.Tests {
     public class TestTokenProvider : ITokenProvider {
@@ -83,6 +84,9 @@ namespace Orchard.Tokens.Tests {
     public class TestUser : IUser {
         public string UserName { get; set; }
         public string Email { get; set; }
+        public TeamMemberType TeamMemberType { get { return TeamMemberType.user; } }
+        public IList<int> Teams { get; set; }
+
         public ContentItem ContentItem { get; set; }
         public int Id { get; set; }
     }

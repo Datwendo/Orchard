@@ -4,26 +4,20 @@ using Orchard.Environment.Extensions;
 using Orchard.Localization;
 using Orchard.Security;
 using Orchard.Users.Models;
-using Orchard.Users.Services;
 using Orchard.Users.ViewModels;
 using System.Collections.Generic;
-using System.Web.Mvc;
+using System.Linq;
 
 namespace Orchard.Users.Drivers{
 
     [OrchardFeature("Orchard.Users.PasswordEditor")]
     public class UserPartPasswordDriver : ContentPartDriver<UserPart> {
         private readonly IMembershipService _membershipService;
-        private readonly IUserService _userService;
-
+        
         public Localizer T { get; set; }
         
-        public UserPartPasswordDriver(
-            MembershipService membershipService,
-            IUserService userService) {
-
-            _membershipService = membershipService;
-            _userService = userService;
+        public UserPartPasswordDriver(IEnumerable<IMembershipService> membershipServices) {
+            _membershipService = membershipServices.Where(m => m.IsMain).First() ;
             T = NullLocalizer.Instance;
         }
 
@@ -47,14 +41,9 @@ namespace Orchard.Users.Drivers{
                             if (editModel.Password != editModel.ConfirmPassword){
                                 updater.AddModelError("ConfirmPassword", T("Password confirmation must match."));
                             }
-                            var actUser = _membershipService.GetUser(part.UserName);
+                            var actUser = _membershipService.GetUser(part.UserName,false);
                             _membershipService.SetPassword(actUser, editModel.Password);
                         }
-                    }
-
-                    IDictionary<string, LocalizedString> validationErrors;
-                    if (!_userService.PasswordMeetsPolicies(editModel.Password, out validationErrors)) {
-                        updater.AddModelErrors(validationErrors);
                     }
                 }
             }

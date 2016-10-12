@@ -1,10 +1,9 @@
-using Orchard.Localization;
 using Orchard.Security;
 using System;
-using System.Collections.Generic;
-
 namespace Orchard.Users.Services {
     public interface IUserService : IDependency {
+        // CS 17/7
+        bool DeleteUser(int id);
         bool VerifyUserUnicity(string userName, string email);
         bool VerifyUserUnicity(int id, string userName, string email);
 
@@ -16,7 +15,5 @@ namespace Orchard.Users.Services {
 
         string CreateNonce(IUser user, TimeSpan delay);
         bool DecryptNonce(string challengeToken, out string username, out DateTime validateByUtc);
-
-        bool PasswordMeetsPolicies(string password, out IDictionary<string, LocalizedString> validationErrors);
     }
 }

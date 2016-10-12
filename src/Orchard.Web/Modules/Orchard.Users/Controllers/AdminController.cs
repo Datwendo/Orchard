@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -9,15 +8,16 @@ using Orchard.Core.Settings.Models;
 using Orchard.DisplayManagement;
 using Orchard.Localization;
 using Orchard.Mvc;
-using Orchard.Mvc.Extensions;
 using Orchard.Security;
-using Orchard.Settings;
-using Orchard.UI.Navigation;
 using Orchard.UI.Notify;
 using Orchard.Users.Events;
 using Orchard.Users.Models;
 using Orchard.Users.Services;
 using Orchard.Users.ViewModels;
+using Orchard.Mvc.Extensions;
+using System;
+using Orchard.Settings;
+using Orchard.UI.Navigation;
 using Orchard.Utility.Extensions;
 
 namespace Orchard.Users.Controllers {
@@ -30,14 +30,13 @@ namespace Orchard.Users.Controllers {
 
         public AdminController(
             IOrchardServices services,
-            IMembershipService membershipService,
+            IEnumerable<IMembershipService> membershipServices,
             IUserService userService,
             IShapeFactory shapeFactory,
             IUserEventHandler userEventHandlers,
             ISiteService siteService) {
-
             Services = services;
-            _membershipService = membershipService;
+            _membershipService = membershipServices.Where(m => m.IsMain).First();
             _userService = userService;
             _userEventHandlers = userEventHandlers;
             _siteService = siteService;
@@ -102,7 +101,8 @@ namespace Orchard.Users.Controllers {
 
             var model = new UsersIndexViewModel {
                 Users = results
-                    .Select(x => new UserEntry { User = x.Record })
+                    .Select(x => new UserEntry { User = x.Record,
+                        Teams = x.As<ITeams>().Teams.Select(tId => Services.ContentManager.Get<IUser>(tId).UserName) })
                     .ToList(),
                     Options = options,
                     Pager = pagerShape
@@ -188,12 +188,6 @@ namespace Orchard.Users.Controllers {
             
             if (createModel.Password != createModel.ConfirmPassword) {
                 AddModelError("ConfirmPassword", T("Password confirmation must match"));
-            }
-
-            IDictionary<string, LocalizedString> validationErrors;
-
-            if (!_userService.PasswordMeetsPolicies(createModel.Password, out validationErrors)) {
-                ModelState.AddModelErrors(validationErrors);
             }
 
             var user = Services.ContentManager.New<IUser>("User");
@@ -304,8 +298,12 @@ namespace Orchard.Users.Controllers {
                 Services.Notifier.Error(T("You can't remove your own account. Please log in with another account."));
             }
             else {
-                Services.ContentManager.Remove(user.ContentItem);
+                if (_userService.DeleteUser(user.Id)) {
                     Services.Notifier.Success(T("User {0} deleted", user.UserName));
+                }
+                else {
+                    Services.Notifier.Success(T("Can't delete User {0}", user.UserName));
+                }
             }
 
             return RedirectToAction("Index");
