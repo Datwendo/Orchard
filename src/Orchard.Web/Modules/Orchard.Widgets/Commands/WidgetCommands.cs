@@ -1,19 +1,10 @@
-﻿using System;
-using System.Linq;
-using Orchard.Commands;
-using Orchard.ContentManagement;
-using Orchard.ContentManagement.Aspects;
-using Orchard.Core.Common.Models;
-using Orchard.Core.Navigation.Models;
-using Orchard.Core.Navigation.Services;
-using Orchard.Security;
-using Orchard.Settings;
-using Orchard.Widgets.Models;
+﻿using Orchard.Commands;
 using Orchard.Widgets.Services;
 using System.Collections.Generic;
 
 namespace Orchard.Widgets.Commands {
     public class WidgetCommands : DefaultOrchardCommandHandler {
+        private readonly IWidgetCommandsService _widgetCommandsService;
         private readonly IWidgetsService _widgetsService;
         private readonly ISiteService _siteService;
         private readonly IEnumerable<IMembershipService> _membershipServices;
@@ -23,8 +14,8 @@ namespace Orchard.Widgets.Commands {
         private const string LoremIpsum = "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a nibh ut tortor dapibus vestibulum. Aliquam vel sem nibh. Suspendisse vel condimentum tellus.</p>";
 
         public WidgetCommands(
-            IWidgetsService widgetsService, 
-            ISiteService siteService, 
+            IWidgetCommandsService widgetCommandsService) {
+            _widgetCommandsService = widgetCommandsService;            
             IEnumerable<IMembershipService> membershipServices,
             IMenuService menuService,
             IContentManager contentManager) {
@@ -77,6 +68,9 @@ namespace Orchard.Widgets.Commands {
         [CommandHelp("widget create <type> /Title:<title> /Name:<name> /Zone:<zone> /Position:<position> /Layer:<layer> [/Identity:<identity>] [/RenderTitle:true|false] [/Owner:<owner>] [/Text:<text>] [/UseLoremIpsumText:true|false] [/MenuName:<name>]\r\n\t" + "Creates a new widget")]
         [OrchardSwitches("Title,Name,Zone,Position,Layer,Identity,Owner,Text,UseLoremIpsumText,MenuName,RenderTitle")]
         public void Create(string type) {
+            var widget = _widgetCommandsService.CreateBaseWidget(
+                Context, type, Title, Name, Zone, Position, Layer, Identity, RenderTitle, Owner, Text, UseLoremIpsumText, MenuName);
+                // Old code
             var widgetTypeNames = _widgetsService.GetWidgetTypeNames().ToList();
             if (!widgetTypeNames.Contains(type)) {
                 Context.Output.WriteLine(T("Creating widget failed : type {0} was not found. Supported widget types are: {1}.", 
@@ -85,12 +79,18 @@ namespace Orchard.Widgets.Commands {
                 return;
             }
 
+            if (widget == null) {
+            return;
+            }
+            // OLD CODE
             var layer = GetLayer(Layer);
             if (layer == null) {
                 Context.Output.WriteLine(T("Creating widget failed : layer {0} was not found.", Layer));
                 return;
             }
 
+            _widgetCommandsService.Publish(widget);
+            // Old code
             var widget = _widgetsService.CreateWidget(layer.ContentItem.Id, type, T(Title).Text, Position, Zone);
 
             if (!String.IsNullOrWhiteSpace(Name)) {

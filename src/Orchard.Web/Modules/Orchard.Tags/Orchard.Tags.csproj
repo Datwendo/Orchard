@@ -99,6 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminMenu.cs" />
+    <Compile Include="Commands\TagsWidgetCommands.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Drivers\TagCloudDriver.cs" />
     <Compile Include="Feeds\TagFeedQuery.cs" />

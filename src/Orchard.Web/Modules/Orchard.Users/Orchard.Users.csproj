@@ -109,12 +109,12 @@
     <Compile Include="Events\LoginUserEventHandler.cs" />
     <Compile Include="Events\RemoveUserContext.cs" />
     <Compile Include="Extensions\MembershipSettingsExtensions.cs" />
-    <Compile Include="Extensions\ModelStateDistionaryExtensions.cs" />
     <Compile Include="Extensions\UpdateModelExtensions.cs" />
     <Compile Include="Forms\SignInUserForm.cs" />
     <Compile Include="Forms\VerifyUserUnicityForm.cs" />
     <Compile Include="Forms\CreateUserForm.cs" />
     <Compile Include="Handlers\WorkflowUserEventHandler.cs" />
+    <Compile Include="Extensions\ModelStateDictionaryExtensions.cs" />
     <Compile Include="Migrations.cs" />
     <Compile Include="Events\CreateUserContext.cs" />
     <Compile Include="Handlers\RegistrationSettingsPartHandler.cs" />
@@ -218,7 +218,9 @@
     <Content Include="Views\LogOn.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Styles\Web.config">
@@ -242,6 +244,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\ChangeExpiredPassword.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
