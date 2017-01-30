@@ -182,6 +182,7 @@ namespace Orchard.Users.Services {
                 default:
                     throw new ApplicationException(T("Unexpected password format value").ToString());
             }
+            userPart.LastPasswordChangeUtc = _clock.UtcNow;
         }
 
         private bool ValidatePassword(UserPart userPart, string password) {
